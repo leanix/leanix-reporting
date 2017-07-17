@@ -48,4 +48,4 @@ As a report developer you do not have to know about the messages. This library t
 ### Config object
 The config object which has to be passed to `lx.ready()` acts as an interface between your report code and the reporting library. It allows you to define the requirements for your report, such as which data you want to fetch from LeanIX backend. In addition to that you have to register callback functions in the config object, which are called by the reporting library once certain events occur (for example when data has been fetched from the backend).
 
-You can find the interface definition of the config object here: https://leanix.github.io/leanix-reporting/interfaces/_lx_.lxr.reportconfiguration.html
+You can find the interface definition of the config object here: https://leanix.github.io/leanix-reporting/interfaces/lxr.reportconfiguration.html
