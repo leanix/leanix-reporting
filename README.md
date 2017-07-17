@@ -18,7 +18,7 @@ npm install @leanix/reporting --save
 </script>
 ```
 
-### With a bundler such as Webpack
+### Using ES6 Module syntax
 ```js
 import '@leanix/reporting';
 
@@ -32,6 +32,10 @@ lx.init()
 });
 ```
 
+### Typedoc
+Since the reporting library is created using TypeScript we are able to provide documentation of the typings that you can find here:
+https://leanix.github.io/leanix-reporting/
+
 ## Basic concept of the LeanIX reporting framework
 A report for LeanIX consists of HTML, JavaScript and CSS files, which are loaded into an iframe inside of the application. The report which is running within the iframe and the host application that contains the iframe communicate via a predefined set of messages (see: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
@@ -43,3 +47,5 @@ As a report developer you do not have to know about the messages. This library t
 
 ### Config object
 The config object which has to be passed to `lx.ready()` acts as an interface between your report code and the reporting library. It allows you to define the requirements for your report, such as which data you want to fetch from LeanIX backend. In addition to that you have to register callback functions in the config object, which are called by the reporting library once certain events occur (for example when data has been fetched from the backend).
+
+You can find the interface definition of the config object here: https://leanix.github.io/leanix-reporting/interfaces/_lx_.lxr.reportconfiguration.html
