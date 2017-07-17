@@ -1036,8 +1036,17 @@ img { max-width: 100%; }
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p>Main Class</p>
+					<p>Entry class of the LeanIX Reporting Library.
+					An instance of this class is globally available as <code>lx</code> variable.</p>
 				</div>
+				<p>The sequence to initialise the library for a report looks like this:</p>
+				<pre><code class="lang-js">lx.init()
+.then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">setupInfo</span>) </span>{
+  <span class="hljs-comment">// Process setupInfo and create config object</span>
+  <span class="hljs-keyword">var</span> config = {};
+ lx.ready(config);
+});
+</code></pre>
 			</div>
 		</section>
 		<section class="tsd-panel tsd-hierarchy">
@@ -1121,7 +1130,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:15</li>
+								<li>Defined in lx.ts:26</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <a href="lxr.lxcustomreportlib.html" class="tsd-signature-type">LxCustomReportLib</a></h4>
@@ -1137,7 +1146,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">_latest<wbr>Published<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:14</li>
+						<li>Defined in lx.ts:25</li>
 					</ul>
 				</aside>
 			</section>
@@ -1147,7 +1156,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">current<wbr>Setup<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:12</li>
+						<li>Defined in lx.ts:23</li>
 					</ul>
 				</aside>
 			</section>
@@ -1157,7 +1166,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">custom<wbr>Dropdown<wbr>Callbacks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:15</li>
+						<li>Defined in lx.ts:26</li>
 					</ul>
 				</aside>
 			</section>
@@ -1167,7 +1176,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">:</span> <a href="lxr.reportlibfilter.html" class="tsd-signature-type">ReportLibFilter</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:8</li>
+						<li>Defined in lx.ts:19</li>
 					</ul>
 				</aside>
 			</section>
@@ -1177,7 +1186,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">latest<wbr>Facets<wbr>Results<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:13</li>
+						<li>Defined in lx.ts:24</li>
 					</ul>
 				</aside>
 			</section>
@@ -1187,7 +1196,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">latest<wbr>Published<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:10</li>
+						<li>Defined in lx.ts:21</li>
 					</ul>
 				</aside>
 			</section>
@@ -1197,7 +1206,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">messenger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:11</li>
+						<li>Defined in lx.ts:22</li>
 					</ul>
 				</aside>
 			</section>
@@ -1207,7 +1216,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">table<span class="tsd-signature-symbol">:</span> <a href="lxr.reportlibtable.html" class="tsd-signature-type">ReportLibTable</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:9</li>
+						<li>Defined in lx.ts:20</li>
 					</ul>
 				</aside>
 			</section>
@@ -1224,7 +1233,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:86</li>
+								<li>Defined in lx.ts:138</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1250,7 +1259,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:75</li>
+								<li>Defined in lx.ts:127</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1273,7 +1282,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:88</li>
+								<li>Defined in lx.ts:140</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1299,7 +1308,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:89</li>
+								<li>Defined in lx.ts:141</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1322,7 +1331,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:90</li>
+								<li>Defined in lx.ts:142</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1345,12 +1354,12 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:38</li>
+								<li>Defined in lx.ts:73</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Execute a custom GraphQL query.</p>
+								<p>Execute a custom GraphQL query to the LeanIX GraphQL API.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>example</dt>
@@ -1395,12 +1404,12 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:42</li>
+								<li>Defined in lx.ts:77</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Allows to make a XHR requests on the parents origin.</p>
+								<p>Allows to make a XHR requests through the parents origin.</p>
 							</div>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1426,7 +1435,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:87</li>
+								<li>Defined in lx.ts:139</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1443,7 +1452,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:46</li>
+								<li>Defined in lx.ts:81</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1465,7 +1474,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:85</li>
+								<li>Defined in lx.ts:137</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1482,7 +1491,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:74</li>
+								<li>Defined in lx.ts:126</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1499,9 +1508,15 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:72</li>
+								<li>Defined in lx.ts:124</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Tells the framework to hide a spinner
+								that was previously shown via <a href="lxr.lxcustomreportlib.html#showspinner">LxCustomReportLib.showSpinner</a></p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
@@ -1516,9 +1531,20 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:17</li>
+								<li>Defined in lx.ts:37</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Starts initialisation of the reporting framework. Returns a promise
+									which is resolved once initialisation with the framework is finished. The
+									resolved promise contains a <a href="../interfaces/lxr.reportsetup.html">ReportSetup</a> instance with information
+									provided to you through the framework.
+									With that information you should be able to setup your report properly. Once
+									that is done the <a href="lxr.lxcustomreportlib.html#ready">LxCustomReportLib.ready</a> function should be called to signal
+								that the report is ready to receive and process data and user events.</p>
+							</div>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.reportsetup.html" class="tsd-signature-type">ReportSetup</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
@@ -1533,7 +1559,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:84</li>
+								<li>Defined in lx.ts:136</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1562,7 +1588,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:76</li>
+								<li>Defined in lx.ts:128</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1585,7 +1611,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:81</li>
+								<li>Defined in lx.ts:133</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1608,7 +1634,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:82</li>
+								<li>Defined in lx.ts:134</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1631,7 +1657,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:77</li>
+								<li>Defined in lx.ts:129</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1657,7 +1683,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:80</li>
+								<li>Defined in lx.ts:132</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1680,7 +1706,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:79</li>
+								<li>Defined in lx.ts:131</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1697,7 +1723,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:83</li>
+								<li>Defined in lx.ts:135</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1720,7 +1746,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:68</li>
+								<li>Defined in lx.ts:103</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1761,7 +1787,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:69</li>
+								<li>Defined in lx.ts:104</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1784,9 +1810,18 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:70</li>
+								<li>Defined in lx.ts:112</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>In case the report has some sort of internal state it should be published
+									to the framework. The state will be persisted when the user saves a certain
+									report configuration. Once that report configuration is restored the framework
+									will pass the saved state to the report on initialisation
+								(<a href="lxr.lxcustomreportlib.html#init">LxCustomReportLib.init</a> and <a href="../interfaces/lxr.reportsetup.html#savedstate">ReportSetup.savedState</a>)</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -1807,13 +1842,23 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:18</li>
+								<li>Defined in lx.ts:46</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Signals that the custom report is ready. A configuration must be provided
+									to tell the framework about the requirements of the report (most importantly which data it needs).
+									The provided configuration acts as an interface between the report code
+								and the report framework.</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>configuration: <a href="../interfaces/lxr.reportconfiguration.html" class="tsd-signature-type">ReportConfiguration</a></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1830,7 +1875,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:54</li>
+								<li>Defined in lx.ts:89</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1863,7 +1908,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:73</li>
+								<li>Defined in lx.ts:125</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1880,9 +1925,15 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:71</li>
+								<li>Defined in lx.ts:119</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Tells the framework to show a spinner on top of the report.
+								In order to hide the spinner call <a href="lxr.lxcustomreportlib.html#hidespinner">LxCustomReportLib.hideSpinner</a></p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -1903,13 +1954,21 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:19</li>
+								<li>Defined in lx.ts:53</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>In case the report has new requirements towards the report framework it can
+								update the configuration that was initially passed to <a href="lxr.lxcustomreportlib.html#ready">LxCustomReportLib.ready</a>.</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>configuration: <a href="../interfaces/lxr.reportconfiguration.html" class="tsd-signature-type">ReportConfiguration</a></h5>
+								<div class="tsd-comment tsd-typography">
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1926,7 +1985,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:78</li>
+								<li>Defined in lx.ts:130</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
