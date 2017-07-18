@@ -40,7 +40,7 @@ https://leanix.github.io/leanix-reporting/
 Sometimes its easier to look at a few code examples than read through lines of documentation. Therefore we provide some snippets with code examples in the `examples` folder.
 
 ## Features
-To get an overview of all the features that the LeanIX reporting framework offers see: [features.md]
+To get an overview of all the features that the LeanIX reporting framework offers see: [Features Overview](features.md)
 
 ## Basic concept of the LeanIX reporting framework
 A report for LeanIX consists of HTML, JavaScript and CSS files, which are loaded into an iframe inside of the application. The report which is running within the iframe and the host application that contains the iframe communicate via a predefined set of messages (see: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
