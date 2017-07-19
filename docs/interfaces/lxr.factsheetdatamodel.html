@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MtmAccount | @leanix/reporting</title>
+	<title>FactSheetDataModel | @leanix/reporting</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -908,28 +908,16 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface tsd-parent-kind-module">
-			<a href="lxr.mtmaccount.html" class="tsd-kind-icon">Mtm<wbr>Account</a>
+			<a href="lxr.factsheetdatamodel.html" class="tsd-kind-icon">Fact<wbr>Sheet<wbr>Data<wbr>Model</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#customfeatures" class="tsd-kind-icon">custom<wbr>Features</a>
+					<a href="lxr.factsheetdatamodel.html#config" class="tsd-kind-icon">config</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#fromaddress" class="tsd-kind-icon">from<wbr>Address</a>
+					<a href="lxr.factsheetdatamodel.html#fields" class="tsd-kind-icon">fields</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#id" class="tsd-kind-icon">id</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#links" class="tsd-kind-icon">links</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#name" class="tsd-kind-icon">name</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#passwordpolicy" class="tsd-kind-icon">password<wbr>Policy</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.mtmaccount.html#responsibleuser" class="tsd-kind-icon">responsible<wbr>User</a>
+					<a href="lxr.factsheetdatamodel.html#namingrule" class="tsd-kind-icon">naming<wbr>Rule</a>
 				</li>
 			</ul>
 		</li>
@@ -937,11 +925,18 @@ img { max-width: 100%; }
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Fact Sheet definition in basic (non-enriched) data model</p>
+				</div>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">MtmAccount</span>
+					<span class="target">FactSheetDataModel</span>
 				</li>
 			</ul>
 		</section>
@@ -952,13 +947,9 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#customfeatures" class="tsd-kind-icon">custom<wbr>Features</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#fromaddress" class="tsd-kind-icon">from<wbr>Address</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#id" class="tsd-kind-icon">id</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#links" class="tsd-kind-icon">links</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#name" class="tsd-kind-icon">name</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#passwordpolicy" class="tsd-kind-icon">password<wbr>Policy</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.mtmaccount.html#responsibleuser" class="tsd-kind-icon">responsible<wbr>User</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.factsheetdatamodel.html#config" class="tsd-kind-icon">config</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.factsheetdatamodel.html#fields" class="tsd-kind-icon">fields</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.factsheetdatamodel.html#namingrule" class="tsd-kind-icon">naming<wbr>Rule</a></li>
 						</ul>
 					</section>
 				</div>
@@ -967,72 +958,32 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="customfeatures" class="tsd-anchor"></a>
-				<h3>custom<wbr>Features</h3>
-				<div class="tsd-signature tsd-kind-icon">custom<wbr>Features<span class="tsd-signature-symbol">:</span> <a href="lxr.mtmfeature.html" class="tsd-signature-type">MtmFeature</a><span class="tsd-signature-symbol">[]</span></div>
+				<a name="config" class="tsd-anchor"></a>
+				<h3>config</h3>
+				<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="lxr.factsheetconfig.html" class="tsd-signature-type">FactSheetConfig</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:853</li>
+						<li>Defined in lx.ts:1060</li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="fromaddress" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> from<wbr>Address</h3>
-				<div class="tsd-signature tsd-kind-icon">from<wbr>Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="fields" class="tsd-anchor"></a>
+				<h3>fields</h3>
+				<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <a href="lxr.datamodelfieldsdefinition.html" class="tsd-signature-type">DataModelFieldsDefinition</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:854</li>
+						<li>Defined in lx.ts:1059</li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="id" class="tsd-anchor"></a>
-				<h3>id</h3>
-				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="namingrule" class="tsd-anchor"></a>
+				<h3>naming<wbr>Rule</h3>
+				<div class="tsd-signature tsd-kind-icon">naming<wbr>Rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:851</li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="links" class="tsd-anchor"></a>
-				<h3>links</h3>
-				<div class="tsd-signature tsd-kind-icon">links<span class="tsd-signature-symbol">:</span> <a href="lxr.mtmlink.html" class="tsd-signature-type">MtmLink</a><span class="tsd-signature-symbol">[]</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in lx.ts:855</li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="name" class="tsd-anchor"></a>
-				<h3>name</h3>
-				<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in lx.ts:852</li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="passwordpolicy" class="tsd-anchor"></a>
-				<h3>password<wbr>Policy</h3>
-				<div class="tsd-signature tsd-kind-icon">password<wbr>Policy<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#mtmpasswordpolicy" class="tsd-signature-type">MtmPasswordPolicy</a></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in lx.ts:857</li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="responsibleuser" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> responsible<wbr>User</h3>
-				<div class="tsd-signature tsd-kind-icon">responsible<wbr>User<span class="tsd-signature-symbol">:</span> <a href="lxr.mtmuser.html" class="tsd-signature-type">MtmUser</a></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in lx.ts:856</li>
+						<li>Defined in lx.ts:1061</li>
 					</ul>
 				</aside>
 			</section>
