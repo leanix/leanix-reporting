@@ -1,5 +1,8 @@
 # leanix-reporting
+[![npm version](https://badge.fury.io/js/%40leanix%2Freporting.svg)](https://badge.fury.io/js/%40leanix%2Freporting)
+
 This library allows you to develop your own custom reports for LeanIX EAM Tool (https://www.leanix.net).
+We also provide a command line interface (CLI) that helps you to develop, test and upload your reports easily, see https://github.com/leanix/leanix-reporting-cli.
 
 ## Installation
 Simply install the library via npm:
