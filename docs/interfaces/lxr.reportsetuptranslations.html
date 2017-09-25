@@ -911,7 +911,13 @@ img { max-width: 100%; }
 			<a href="lxr.reportsetuptranslations.html" class="tsd-kind-icon">Report<wbr>Setup<wbr>Translations</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.reportsetuptranslations.html#custom" class="tsd-kind-icon">custom</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.reportsetuptranslations.html#factsheettypes" class="tsd-kind-icon">fact<wbr>Sheet<wbr>Types</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.reportsetuptranslations.html#fields" class="tsd-kind-icon">fields</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.reportsetuptranslations.html#relations" class="tsd-kind-icon">relations</a>
@@ -937,7 +943,9 @@ img { max-width: 100%; }
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportsetuptranslations.html#custom" class="tsd-kind-icon">custom</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportsetuptranslations.html#factsheettypes" class="tsd-kind-icon">fact<wbr>Sheet<wbr>Types</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportsetuptranslations.html#fields" class="tsd-kind-icon">fields</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportsetuptranslations.html#relations" class="tsd-kind-icon">relations</a></li>
 						</ul>
 					</section>
@@ -947,12 +955,38 @@ img { max-width: 100%; }
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="custom" class="tsd-anchor"></a>
+				<h3>custom</h3>
+				<div class="tsd-signature tsd-kind-icon">custom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:638</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The reports custom translation for the current language.</p>
+					</div>
+				</div>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-index-signature">
+							<h5><span class="tsd-signature-symbol">[</span>customKeys: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></h5>
+						</li>
+						<li class="tsd-parameter">
+							<h5>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="factsheettypes" class="tsd-anchor"></a>
 				<h3>fact<wbr>Sheet<wbr>Types</h3>
 				<div class="tsd-signature tsd-kind-icon">fact<wbr>Sheet<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:609</li>
+						<li>Defined in lx.ts:617</li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -965,12 +999,53 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="fields" class="tsd-anchor"></a>
+				<h3>fields</h3>
+				<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:623</li>
+					</ul>
+				</aside>
+				<div class="tsd-type-declaration">
+					<h4>Type declaration</h4>
+					<ul class="tsd-parameters">
+						<li class="tsd-parameter-index-signature">
+							<h5><span class="tsd-signature-symbol">[</span>factSheetType: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">object</span></h5>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-index-signature">
+									<h5><span class="tsd-signature-symbol">[</span>fieldName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+											<ul class="tsd-parameters">
+												<li class="tsd-parameter-index-signature">
+													<h5><span class="tsd-signature-symbol">[</span>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">object</span></h5>
+													<ul class="tsd-parameters">
+														<li class="tsd-parameter">
+															<h5>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="relations" class="tsd-anchor"></a>
 				<h3>relations</h3>
 				<div class="tsd-signature tsd-kind-icon">relations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:612</li>
+						<li>Defined in lx.ts:620</li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
