@@ -51,8 +51,8 @@ A report for LeanIX consists of HTML, JavaScript and CSS files, which are loaded
 As a report developer you do not have to know about the messages. This library takes care of the communication with the host application and provides a simple API that you can use to request data, send commands to the host application or be informed about events happening outside of your report.
 
 ### Init sequence
-* `lx.init()`: Notifies the host application that the report wants to initialise. It returns a promise that is fullfilled with setup information that is provided by the host app.
-* `lx.ready(config)`: Notify the host application that the report is ready to start processing data. You have to provide a configuration object that specifies the requirements of your report to the host (see TODO - Describe config object).
+* `lx.init()`: Notifies the host application that the report wants to initialise. It returns a promise that is fullfilled with setup information that is provided by the host app (see: https://leanix.github.io/leanix-reporting/classes/lxr.lxcustomreportlib.html#init).
+* `lx.ready(config)`: Notify the host application that the report is ready to start processing data. You have to provide a configuration object that specifies the requirements of your report to the host (see: https://leanix.github.io/leanix-reporting/classes/lxr.lxcustomreportlib.html#ready).
 
 ### Config object
 The config object which has to be passed to `lx.ready()` acts as an interface between your report code and the reporting library. It allows you to define the requirements for your report, such as which data you want to fetch from LeanIX backend. In addition to that you have to register callback functions in the config object, which are called by the reporting library once certain events occur (for example when data has been fetched from the backend).
