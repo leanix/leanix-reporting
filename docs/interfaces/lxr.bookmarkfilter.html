@@ -914,7 +914,7 @@ img { max-width: 100%; }
 					<a href="lxr.bookmarkfilter.html#facetfilter" class="tsd-kind-icon">facet<wbr>Filter</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.bookmarkfilter.html#fstype" class="tsd-kind-icon">fs<wbr>Type</a>
+					<a href="lxr.bookmarkfilter.html#factsheetids" class="tsd-kind-icon">fact<wbr>Sheet<wbr>Ids</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.bookmarkfilter.html#fulltextsearchterm" class="tsd-kind-icon">full<wbr>Text<wbr>Search<wbr>Term</a>
@@ -944,7 +944,7 @@ img { max-width: 100%; }
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.bookmarkfilter.html#facetfilter" class="tsd-kind-icon">facet<wbr>Filter</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.bookmarkfilter.html#fstype" class="tsd-kind-icon">fs<wbr>Type</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.bookmarkfilter.html#factsheetids" class="tsd-kind-icon">fact<wbr>Sheet<wbr>Ids</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.bookmarkfilter.html#fulltextsearchterm" class="tsd-kind-icon">full<wbr>Text<wbr>Search<wbr>Term</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.bookmarkfilter.html#sorting" class="tsd-kind-icon">sorting</a></li>
 						</ul>
@@ -960,17 +960,27 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">facet<wbr>Filter<span class="tsd-signature-symbol">:</span> <a href="../classes/lxr.facetfilter.html" class="tsd-signature-type">FacetFilter</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:673</li>
+						<li>Defined in lx.ts:698</li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>DEPRECATED! Use of fsType is deprecated. It will be removed soon due to the duplication in facetFilter.
+						The FactSheet type can be get and set with:</p>
+						<ul>
+							<li>FacetsService.getSelectedFactSheetTypeFromFilters(facetFilter)</li>
+							<li>FacetsService.updateFactSheetTypeInFilters(facetFilter, newFactSheetType)</li>
+						</ul>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="fstype" class="tsd-anchor"></a>
-				<h3>fs<wbr>Type</h3>
-				<div class="tsd-signature tsd-kind-icon">fs<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="factsheetids" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> fact<wbr>Sheet<wbr>Ids</h3>
+				<div class="tsd-signature tsd-kind-icon">fact<wbr>Sheet<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:672</li>
+						<li>Defined in lx.ts:700</li>
 					</ul>
 				</aside>
 			</section>
@@ -980,7 +990,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">full<wbr>Text<wbr>Search<wbr>Term<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:675</li>
+						<li>Defined in lx.ts:699</li>
 					</ul>
 				</aside>
 			</section>
@@ -990,7 +1000,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">sorting<span class="tsd-signature-symbol">:</span> <a href="lxr.sorting.html" class="tsd-signature-type">Sorting</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:674</li>
+						<li>Defined in lx.ts:701</li>
 					</ul>
 				</aside>
 			</section>
