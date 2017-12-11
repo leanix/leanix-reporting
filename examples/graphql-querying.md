@@ -1,5 +1,5 @@
 # Fetching custom report data via GraphQL API
-This example shows how fetch data from the LeanIX GraphQL API via the custom reporting framework. The shown example can be easily extrapolated for mutations.
+This example shows how fetch data from the LeanIX GraphQL API via custom reporting framework.
 
 ```js
 import '@leanix/reporting';
