@@ -914,6 +914,9 @@ img { max-width: 100%; }
 					<a href="lxr.reportconfiguration.html#allowediting" class="tsd-kind-icon">allow<wbr>Editing</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.reportconfiguration.html#allowtableview" class="tsd-kind-icon">allow<wbr>Table<wbr>View</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.reportconfiguration.html#export" class="tsd-kind-icon">export</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -971,6 +974,7 @@ img { max-width: 100%; }
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportconfiguration.html#allowediting" class="tsd-kind-icon">allow<wbr>Editing</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportconfiguration.html#allowtableview" class="tsd-kind-icon">allow<wbr>Table<wbr>View</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportconfiguration.html#export" class="tsd-kind-icon">export</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportconfiguration.html#facets" class="tsd-kind-icon">facets</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportconfiguration.html#menuactions" class="tsd-kind-icon">menu<wbr>Actions</a></li>
@@ -992,13 +996,36 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">allow<wbr>Editing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:260</li>
+						<li>Defined in lx.ts:803</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Specifiy whether the user shall be able to edit the report</p>
+						<p>Specifiy whether the user shall be able to edit the report.
+							If the user toggles the editing mode the reporting framework
+							calls <a href="lxr.reportconfiguration.html#toggleeditingcallback">ReportConfiguration.toggleEditingCallback</a> to inform
+						you about enabled or disabled edit mode.</p>
 					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="allowtableview" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> allow<wbr>Table<wbr>View</h3>
+				<div class="tsd-signature tsd-kind-icon">allow<wbr>Table<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:791</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Defines whether the reporting framework should allow the user to switch
+							into a table view that shows the data of the report.
+							If not specified the default value is <code>true</code>, so the table view will be
+						allowed if not explicitly disabled.</p>
+					</div>
+					<p>Hint: In order to configure the table (e.g. initially visible columns)
+					for the report use <a href="lxr.reportconfiguration.html#tableconfigcallback">ReportConfiguration.tableConfigCallback</a></p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -1007,7 +1034,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">export<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:270</li>
+						<li>Defined in lx.ts:813</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1098,7 +1125,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">facets<span class="tsd-signature-symbol">:</span> <a href="lxr.reportfacetsconfig.html" class="tsd-signature-type">ReportFacetsConfig</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:215</li>
+						<li>Defined in lx.ts:745</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1114,7 +1141,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">menu<wbr>Actions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:216</li>
+						<li>Defined in lx.ts:746</li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1171,7 +1198,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">report<wbr>View<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:243</li>
+						<li>Defined in lx.ts:773</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1209,7 +1236,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">report<wbr>View<wbr>Option<span class="tsd-signature-symbol">:</span> <a href="lxr.reportviewoption.html" class="tsd-signature-type">ReportViewOption</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:247</li>
+						<li>Defined in lx.ts:777</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1224,7 +1251,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">restore<wbr>State<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:251</li>
+						<li>Defined in lx.ts:781</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1260,7 +1287,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">table<wbr>Config<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:256</li>
+						<li>Defined in lx.ts:796</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1291,7 +1318,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">toggle<wbr>Editing<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:266</li>
+						<li>Defined in lx.ts:809</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
