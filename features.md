@@ -35,3 +35,7 @@ The framework provides you with functionality to translate any Fact Sheet type, 
 
 ### Formatting of numeric values as currency
 The framework provides you with functionality to format a numeric value as a currency value related to the users current locale settings.
+
+
+### Get configured meta data for fields (incl. icons and colors)
+The framework allows you to get the configured meta data for fields at Fact Sheets or relations (e.g. for fields that are of type single select). This allows you to reuse the same colors and icons in the report visualisation and makes the integration into LeanIX look more seemless to the users.
