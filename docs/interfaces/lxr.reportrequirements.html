@@ -929,6 +929,9 @@ img { max-width: 100%; }
 					<a href="lxr.reportrequirements.html#reportviewcallback" class="tsd-kind-icon">report<wbr>View<wbr>Callback</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a href="lxr.reportrequirements.html#reportviewfactsheettype" class="tsd-kind-icon">report<wbr>View<wbr>Fact<wbr>Sheet<wbr>Type</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a href="lxr.reportrequirements.html#reportviewoption" class="tsd-kind-icon">report<wbr>View<wbr>Option</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -985,6 +988,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.reportrequirements.html#facets" class="tsd-kind-icon">facets</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.reportrequirements.html#menuactions" class="tsd-kind-icon">menu<wbr>Actions</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.reportrequirements.html#reportviewcallback" class="tsd-kind-icon">report<wbr>View<wbr>Callback</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.reportrequirements.html#reportviewfactsheettype" class="tsd-kind-icon">report<wbr>View<wbr>Fact<wbr>Sheet<wbr>Type</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.reportrequirements.html#reportviewoption" class="tsd-kind-icon">report<wbr>View<wbr>Option</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.reportrequirements.html#restorestatecallback" class="tsd-kind-icon">restore<wbr>State<wbr>Callback</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportrequirements.html#showview" class="tsd-kind-icon">show<wbr>View</a></li>
@@ -1004,7 +1008,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#allowediting">allowEditing</a></p>
 					<ul>
-						<li>Defined in lx.ts:804</li>
+						<li>Defined in lx.ts:893</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1023,7 +1027,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#allowtableview">allowTableView</a></p>
 					<ul>
-						<li>Defined in lx.ts:792</li>
+						<li>Defined in lx.ts:881</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1044,7 +1048,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#export">export</a></p>
 					<ul>
-						<li>Defined in lx.ts:814</li>
+						<li>Defined in lx.ts:903</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1136,7 +1140,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#facets">facets</a></p>
 					<ul>
-						<li>Defined in lx.ts:746</li>
+						<li>Defined in lx.ts:825</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1153,7 +1157,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#menuactions">menuActions</a></p>
 					<ul>
-						<li>Defined in lx.ts:747</li>
+						<li>Defined in lx.ts:826</li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -1211,7 +1215,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#reportviewcallback">reportViewCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:774</li>
+						<li>Defined in lx.ts:856</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1220,20 +1224,22 @@ img { max-width: 100%; }
 							It is also invoked, once the report view results are loaded during
 						initialization.</p>
 					</div>
+					<p>In order to define which views should be available to the user, you can
+					specify a Fact Sheet type via <a href="lxr.reportconfiguration.html#reportviewfactsheettype">ReportConfiguration.reportViewFactSheetType</a>.</p>
 				</div>
 				<div class="tsd-type-declaration">
 					<h4>Type declaration</h4>
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>view<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>view<span class="tsd-signature-symbol">: </span><a href="lxr.reportviewresult.html" class="tsd-signature-type">ReportViewResult</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
 									<h4 class="tsd-parameters-title">Parameters</h4>
 									<ul class="tsd-parameters">
 										<li>
-											<h5>view: <span class="tsd-signature-type">any</span></h5>
+											<h5>view: <a href="lxr.reportviewresult.html" class="tsd-signature-type">ReportViewResult</a></h5>
 										</li>
 									</ul>
 									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1244,13 +1250,32 @@ img { max-width: 100%; }
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<a name="reportviewfactsheettype" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> report<wbr>View<wbr>Fact<wbr>Sheet<wbr>Type</h3>
+				<div class="tsd-signature tsd-kind-icon">report<wbr>View<wbr>Fact<wbr>Sheet<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#reportviewfactsheettype">reportViewFactSheetType</a></p>
+					<ul>
+						<li>Defined in lx.ts:863</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>If defined the views that are applicable for this Fact Sheet type will be
+							available for the user to be selected from a dropdown.
+							Whenever the view is fetched from the backend the view data will be
+						provided via <a href="lxr.reportconfiguration.html#reportviewcallback">ReportConfiguration.reportViewCallback</a>.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="reportviewoption" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> report<wbr>View<wbr>Option</h3>
 				<div class="tsd-signature tsd-kind-icon">report<wbr>View<wbr>Option<span class="tsd-signature-symbol">:</span> <a href="lxr.reportviewoption.html" class="tsd-signature-type">ReportViewOption</a></div>
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#reportviewoption">reportViewOption</a></p>
 					<ul>
-						<li>Defined in lx.ts:778</li>
+						<li>Defined in lx.ts:867</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1266,7 +1291,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#restorestatecallback">restoreStateCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:782</li>
+						<li>Defined in lx.ts:871</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1302,7 +1327,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">show<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:897</li>
+						<li>Defined in lx.ts:1019</li>
 					</ul>
 				</aside>
 			</section>
@@ -1313,7 +1338,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#tableconfigcallback">tableConfigCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:797</li>
+						<li>Defined in lx.ts:886</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1345,7 +1370,7 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#toggleeditingcallback">toggleEditingCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:810</li>
+						<li>Defined in lx.ts:899</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

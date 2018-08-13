@@ -968,6 +968,12 @@ img { max-width: 100%; }
 					<a href="lxr.lxcustomreportlib.html#getcurrentstyles" class="tsd-kind-icon">get<wbr>Current<wbr>Styles</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#getfactsheetfieldmetadata" class="tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Field<wbr>Meta<wbr>Data</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#getfactsheetrelationfieldmetadata" class="tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Relation<wbr>Field<wbr>Meta<wbr>Data</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#getfilterresult" class="tsd-kind-icon">get<wbr>Filter<wbr>Result</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -1129,6 +1135,8 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#executeparentoriginxhr" class="tsd-kind-icon">execute<wbr>Parent<wbr>OriginXHR</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#formatcurrency" class="tsd-kind-icon">format<wbr>Currency</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="lxr.lxcustomreportlib.html#getcurrentstyles" class="tsd-kind-icon">get<wbr>Current<wbr>Styles</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getfactsheetfieldmetadata" class="tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Field<wbr>Meta<wbr>Data</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getfactsheetrelationfieldmetadata" class="tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Relation<wbr>Field<wbr>Meta<wbr>Data</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getfilterresult" class="tsd-kind-icon">get<wbr>Filter<wbr>Result</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="lxr.lxcustomreportlib.html#getlocationquery" class="tsd-kind-icon">get<wbr>Location<wbr>Query</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hideedittoggle" class="tsd-kind-icon">hide<wbr>Edit<wbr>Toggle</a></li>
@@ -1291,7 +1299,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:168</li>
+								<li>Defined in lx.ts:247</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1314,7 +1322,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:156</li>
+								<li>Defined in lx.ts:235</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1337,7 +1345,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:170</li>
+								<li>Defined in lx.ts:249</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1363,7 +1371,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:171</li>
+								<li>Defined in lx.ts:250</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1386,7 +1394,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:172</li>
+								<li>Defined in lx.ts:251</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1493,9 +1501,16 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:155</li>
+								<li>Defined in lx.ts:190</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns formated a currency number according to the users currency settings.</p>
+							</div>
+							<p>Example:
+							lx.formatCurrency(123.50, 2) =&gt; Returns &#39;€123.50&#39;</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -1519,9 +1534,109 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:169</li>
+								<li>Defined in lx.ts:248</li>
 							</ul>
 						</aside>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getfactsheetfieldmetadata" class="tsd-anchor"></a>
+				<h3>get<wbr>Fact<wbr>Sheet<wbr>Field<wbr>Meta<wbr>Data</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Field<wbr>Meta<wbr>Data<span class="tsd-signature-symbol">(</span>fsType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, fieldName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.viewmodelsinglefieldmetadata.html" class="tsd-signature-type">ViewModelSingleFieldMetaData</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/lxr.viewmodelrelationmetadata.html" class="tsd-signature-type">ViewModelRelationMetaData</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:210</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the configured or default meta data for a field at a Fact Sheet.</p>
+							</div>
+							<p>Example:
+								lx.getFactSheetFieldMetaData(&#39;Application&#39;, &#39;functionalSuitability&#39;)
+								=&gt; Returns
+								{
+								values: {
+								perfect: {
+								bgColor: &#39;#fff&#39;,
+								color: &#39;#000&#39;
+								}
+								//...
+								}
+							}</p>
+							<p>Getting the actual background color for a field value:
+							lx.getFactSheetFieldMetaData(&#39;Application&#39;, &#39;functionalSuitability&#39;).values[&#39;perfect&#39;].bgColor</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>fsType: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>fieldName: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="../interfaces/lxr.viewmodelsinglefieldmetadata.html" class="tsd-signature-type">ViewModelSingleFieldMetaData</a>
+							<span class="tsd-signature-symbol"> | </span>
+							<a href="../interfaces/lxr.viewmodelrelationmetadata.html" class="tsd-signature-type">ViewModelRelationMetaData</a>
+						</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getfactsheetrelationfieldmetadata" class="tsd-anchor"></a>
+				<h3>get<wbr>Fact<wbr>Sheet<wbr>Relation<wbr>Field<wbr>Meta<wbr>Data</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Relation<wbr>Field<wbr>Meta<wbr>Data<span class="tsd-signature-symbol">(</span>fsType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, relationName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, fieldName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:234</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the configured or default meta data for a field at a Fact Sheet relation.</p>
+							</div>
+							<p>Example:
+								lx.getFactSheetRelationFieldMetaData(&#39;Application&#39;, &#39;relApplicationToITComponent&#39;, &#39;technicalSuitability&#39;)
+								=&gt; Returns
+								{
+								values: {
+								fullyAppropriate: {
+								bgColor: &#39;#fff&#39;,
+								color: &#39;#000&#39;
+								}
+								//...
+								}
+							}</p>
+							<p>Getting the actual background color for a field value:
+								lx.getFactSheetRelationFieldMetaData(
+								&#39;Application&#39;,
+								&#39;relApplicationToITComponent&#39;,
+								&#39;technicalSuitability&#39;
+							).values[&#39;perfect&#39;].bgColor</p>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>fsType: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>relationName: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>fieldName: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 					</li>
 				</ul>
@@ -1558,7 +1673,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:167</li>
+								<li>Defined in lx.ts:246</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1643,7 +1758,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:166</li>
+								<li>Defined in lx.ts:245</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1672,7 +1787,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:157</li>
+								<li>Defined in lx.ts:236</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1695,7 +1810,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:163</li>
+								<li>Defined in lx.ts:242</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1718,7 +1833,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:175</li>
+								<li>Defined in lx.ts:254</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1735,7 +1850,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:164</li>
+								<li>Defined in lx.ts:243</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1758,7 +1873,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:158</li>
+								<li>Defined in lx.ts:237</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1784,7 +1899,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:159</li>
+								<li>Defined in lx.ts:238</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1810,7 +1925,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:162</li>
+								<li>Defined in lx.ts:241</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1833,7 +1948,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:161</li>
+								<li>Defined in lx.ts:240</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -1850,7 +1965,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:165</li>
+								<li>Defined in lx.ts:244</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2002,7 +2117,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:174</li>
+								<li>Defined in lx.ts:253</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2131,25 +2246,27 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:150</li>
+								<li>Defined in lx.ts:152</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Returns the translation of custom translation key according to the users current language.
+								<p>Returns the translation of a custom translation key according to the users current language.
 									If the translation key can be resolved to a translated string interpolation will be applied.
-								If the translation key resolves to a object the object will be returned.</p>
+								If the translation key resolves to an object the object will be returned.</p>
 							</div>
-							<p>Example
+							<p>Example:
 								Given the following custom translation json
 								{
 								&quot;header&quot;: {
 								&quot;title&quot;: &quot;The title&quot;,
-								&quot;subtitle&quot;: &quot;Subtitle&quot;
+								&quot;subtitle&quot;: &quot;Subtitle&quot;,
+								&quot;description&quot;: &quot;Hello {{name}}&quot;
 								}
 							}</p>
 							<p>lx.translateCustomKey(&#39;header.title&#39;) =&gt; Returns &#39;The title&#39;
-							lx.translateCustomKey(&#39;header&#39;) =&gt; Returns { &quot;title&quot;: &quot;The title&quot;, &quot;subtitle&quot;: &quot;Subtitle&quot; }</p>
+								lx.translateCustomKey(&#39;header&#39;) =&gt; Returns { &quot;title&quot;: &quot;The title&quot;, &quot;subtitle&quot;: &quot;Subtitle&quot; }
+							lx.translateCustomKey(&#39;header.description&#39;, { name: &#39;John&#39; }) =&gt; Returns &#39;Hello John&#39;</p>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
@@ -2177,9 +2294,18 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:151</li>
+								<li>Defined in lx.ts:161</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the translation of a LeanIX Fact Sheet type in singular or plural form.
+								If multiplicity is not provided the singular version will be returned.</p>
+							</div>
+							<p>Example:
+								lx.translateFactSheetType(&#39;BusinessCapability&#39;) =&gt; Returns &#39;Business Capability&#39;
+							lx.translateFactSheetType(&#39;BusinessCapability&#39;, &#39;plural&#39;) =&gt; Returns &#39;Business Capabilities&#39;</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -2203,9 +2329,16 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:152</li>
+								<li>Defined in lx.ts:168</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the translation of a field on a LeanIX Fact Sheet.</p>
+							</div>
+							<p>Example:
+							lx.translateField(&#39;Application&#39;, &#39;release&#39;) =&gt; Returns &#39;Release&#39;</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -2229,9 +2362,16 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:153</li>
+								<li>Defined in lx.ts:175</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the translation of a field value for fields with predefined set of values (e.g. Single Select).</p>
+							</div>
+							<p>Example:
+							lx.translateFieldValue(&#39;Application&#39;, &#39;functionalSuitability&#39;, &#39;appropriate&#39;) =&gt; Returns &#39;Appropriate&#39;</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -2258,7 +2398,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:173</li>
+								<li>Defined in lx.ts:252</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -2275,9 +2415,17 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:154</li>
+								<li>Defined in lx.ts:183</li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the translation of a LeanIX Fact Sheet relation.</p>
+							</div>
+							<p>Example:
+								lx.translateRelation(&#39;relApplicationToDataObject&#39;) =&gt; Returns &#39;Data Objects&#39;
+							lx.translateRelation(&#39;relDataObjectToApplication&#39;) =&gt; Returns &#39;Applications&#39;</p>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -2329,7 +2477,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:160</li>
+								<li>Defined in lx.ts:239</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
