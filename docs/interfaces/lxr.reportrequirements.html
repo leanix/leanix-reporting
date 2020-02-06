@@ -2476,7 +2476,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#allowediting">allowEditing</a></p>
 					<ul>
-						<li>Defined in lx.ts:582</li>
+						<li>Defined in lx.ts:838</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2495,7 +2495,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#allowtableview">allowTableView</a></p>
 					<ul>
-						<li>Defined in lx.ts:570</li>
+						<li>Defined in lx.ts:826</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2516,7 +2516,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#export">export</a></p>
 					<ul>
-						<li>Defined in lx.ts:592</li>
+						<li>Defined in lx.ts:848</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2531,8 +2531,16 @@ img {
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> auto<wbr>Scale<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Default = true</p>
+									<p>autoScale has been renamed to <a href="lxr.pdfexportdata.html#fithorizontally">fitHorizontally</a> and will be
+									removed in the near future.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>default</dt>
+									<dd><p>false</p>
+									</dd>
+									<dt>deprecated</dt>
+									<dd></dd>
+								</dl>
 							</div>
 						</li>
 						<li class="tsd-parameter">
@@ -2570,35 +2578,74 @@ img {
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> export<wbr>Element<wbr>Selector<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>CSS selector which specifies the DOM element whoes contents should be
+									<p>CSS selector which specifies the DOM element whose contents should be
 									extracted for export to PDF or image.</p>
 								</div>
+							</div>
+						</li>
+						<li class="tsd-parameter">
+							<h5><span class="tsd-flag ts-flagOptional">Optional</span> fit<wbr>Horizontally<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>fitHorizontally scales the content for PDF exports to fit it to the
+										page width so that no content is cut off.
+									It should not be enabled if the content is already responsive HTML.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>default</dt>
+									<dd><p>true</p>
+									</dd>
+								</dl>
+							</div>
+						</li>
+						<li class="tsd-parameter">
+							<h5><span class="tsd-flag ts-flagOptional">Optional</span> fit<wbr>Vertically<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span></h5>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>fitVertically scales the content for PDF exports to fit it to the
+									page height so that the content fits on a single page.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>default</dt>
+									<dd><p>true</p>
+									</dd>
+								</dl>
 							</div>
 						</li>
 						<li class="tsd-parameter">
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> format<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">"a0"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"a1"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"a2"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"a3"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"a4"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"letter"</span></h5>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Default = &#39;a4&#39;</p>
+									<p>Paper format for PDF exports.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>default</dt>
+									<dd><p>&#39;a4&#39;</p>
+									</dd>
+								</dl>
 							</div>
 						</li>
 						<li class="tsd-parameter">
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> input<wbr>Type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">"HTML"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"SVG"</span></h5>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Which type of content is extracted from DOM and used
+									<p>The type of content that is extracted from the DOM
 									to be exported. Default is HTML.</p>
 								</div>
-								<p>Specify SVG if your report uses svg elements for visualization.</p>
+								<p>Specify SVG if your report uses SVG elements for visualization.</p>
 							</div>
 						</li>
 						<li class="tsd-parameter">
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> orientation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">"portrait"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"landscape"</span></h5>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Default = &#39;portrait&#39;</p>
+									<p>Paper orientation for PDF exports.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>default</dt>
+									<dd><p>&#39;portrait&#39;</p>
+									</dd>
+								</dl>
 							</div>
 						</li>
 					</ul>
@@ -2611,7 +2658,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#facets">facets</a></p>
 					<ul>
-						<li>Defined in lx.ts:514</li>
+						<li>Defined in lx.ts:770</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2628,7 +2675,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#menuactions">menuActions</a></p>
 					<ul>
-						<li>Defined in lx.ts:515</li>
+						<li>Defined in lx.ts:771</li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -2673,7 +2720,11 @@ img {
 										If true: There will be a configuration action shown to the user,
 									that triggers [[ReportConfiguration.configureCallback]].</p>
 								</div>
-								<p>Default: false.</p>
+								<dl class="tsd-comment-tags">
+									<dt>default</dt>
+									<dd><p>false.</p>
+									</dd>
+								</dl>
 							</div>
 						</li>
 					</ul>
@@ -2686,7 +2737,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#reportviewcallback">reportViewCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:545</li>
+						<li>Defined in lx.ts:801</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2727,7 +2778,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#reportviewfactsheettype">reportViewFactSheetType</a></p>
 					<ul>
-						<li>Defined in lx.ts:552</li>
+						<li>Defined in lx.ts:808</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2746,7 +2797,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#reportviewoption">reportViewOption</a></p>
 					<ul>
-						<li>Defined in lx.ts:556</li>
+						<li>Defined in lx.ts:812</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2762,7 +2813,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#restorestatecallback">restoreStateCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:560</li>
+						<li>Defined in lx.ts:816</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2798,7 +2849,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">show<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1267</li>
+						<li>Defined in lx.ts:1351</li>
 					</ul>
 				</aside>
 			</section>
@@ -2809,7 +2860,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#tableconfigcallback">tableConfigCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:575</li>
+						<li>Defined in lx.ts:831</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2841,7 +2892,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#toggleeditingcallback">toggleEditingCallback</a></p>
 					<ul>
-						<li>Defined in lx.ts:588</li>
+						<li>Defined in lx.ts:844</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
