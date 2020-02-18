@@ -24,7 +24,7 @@ For each report the user can switch to a tabluar view of the data that is curren
 ![Table View](feature-images/table-view.png)
 
 ### Save and restore of filters and internal state
-The framework provides an infrastructure to save the state of a report. This includes the currently applied fitlers (in case your report uses the filterable Fact Sheet feature) and potential internal state that the user can change within your report. The internal state is represented as a simple JSON. An example for internal state is, that the user can toggle between a barchart and a piechart representation.
+The framework provides an infrastructure to save the state of a report. This includes the currently applied filters (in case your report uses the filterable Fact Sheet feature) and potential internal state that the user can change within your report. The internal state is represented as a simple JSON. An example for internal state is, that the user can toggle between a barchart and a piechart representation.
 
 ![Save Report](feature-images/save-reports.png)
 
