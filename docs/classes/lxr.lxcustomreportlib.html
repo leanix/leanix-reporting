@@ -2708,7 +2708,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:275</li>
+								<li>Defined in lx.ts:303</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2751,7 +2751,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:299</li>
+								<li>Defined in lx.ts:327</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2806,7 +2806,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:329</li>
+								<li>Defined in lx.ts:357</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2895,7 +2895,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:166</li>
+								<li>Defined in lx.ts:194</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2917,7 +2917,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:156</li>
+								<li>Defined in lx.ts:184</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2968,13 +2968,42 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:112</li>
+								<li>Defined in lx.ts:140</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Show a customisable configuration dialog to the user, in which the user can adjust report settings.</p>
 							</div>
+							<dl class="tsd-comment-tags">
+								<dt>example</dt>
+								<dd><pre><code class="language-js"><span class="hljs-keyword">const</span> fields = {
+  <span class="hljs-attr">level</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'SingleSelect'</span>,
+    <span class="hljs-attr">label</span>: <span class="hljs-string">'Level to be displayed'</span>,
+    <span class="hljs-attr">options</span>: [
+      { <span class="hljs-attr">value</span>: <span class="hljs-string">'1'</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">'First level'</span> },
+      { <span class="hljs-attr">value</span>: <span class="hljs-string">'2'</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">'Both levels'</span> }
+    ]
+  },
+  <span class="hljs-attr">hideEmpty</span>: {
+   <span class="hljs-attr">type</span>: <span class="hljs-string">'Checkbox'</span>,
+   <span class="hljs-attr">label</span>: <span class="hljs-string">'Hide empty elements'</span>
+  }
+};
+<span class="hljs-keyword">const</span> initialValues = {
+  <span class="hljs-attr">level</span>: <span class="hljs-string">'2'</span>,
+  <span class="hljs-attr">hideEmpty</span>: <span class="hljs-literal">false</span>
+};
+lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span class="hljs-params">values</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (values) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Selection:'</span>, values.level, values.hideEmpty);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Selection cancelled'</span>);
+  }
+});</code></pre>
+								</dd>
+							</dl>
 						</div>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
 						<ul class="tsd-type-parameters">
@@ -2987,16 +3016,18 @@ lx.getFactSheetRelationFieldMetaData(
 							<li>
 								<h5>fields: <span class="tsd-signature-type">T</span></h5>
 								<div class="tsd-comment tsd-typography">
-									<p>Report configuration options to be shown in the dialog.</p>
+									<p>An object containing the form fields to be displayed in this dialog.</p>
 								</div>
 							</li>
 							<li>
 								<h5>values: <a href="../modules/lxr.html#formmodalvalues" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>An object with the same keys as [[fields]] containing the initial values of those fields.</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/lxr.html#formmodalvalues" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						<p>A promise that resolves to the configuration
-						confirmed by the user or to <code>false</code> if the user cancelled the configuration</p>
+						<p>A promise that resolves to the configuration confirmed by the user or to <code>false</code> if the user canceled the configuration</p>
 					</li>
 				</ul>
 			</section>
@@ -3010,7 +3041,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:132</li>
+								<li>Defined in lx.ts:160</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3057,7 +3088,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:138</li>
+								<li>Defined in lx.ts:166</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3088,7 +3119,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:148</li>
+								<li>Defined in lx.ts:176</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3189,7 +3220,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:173</li>
+								<li>Defined in lx.ts:201</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3221,7 +3252,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:162</li>
+								<li>Defined in lx.ts:190</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3245,7 +3276,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:187</li>
+								<li>Defined in lx.ts:215</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3285,7 +3316,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:152</li>
+								<li>Defined in lx.ts:180</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3307,7 +3338,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:212</li>
+								<li>Defined in lx.ts:240</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3363,7 +3394,7 @@ lx.translateCustomKey(<span class="hljs-string">'header.description'</span>, { <
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:226</li>
+								<li>Defined in lx.ts:254</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3408,7 +3439,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:238</li>
+								<li>Defined in lx.ts:266</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3451,7 +3482,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:251</li>
+								<li>Defined in lx.ts:279</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3500,7 +3531,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:263</li>
+								<li>Defined in lx.ts:291</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
