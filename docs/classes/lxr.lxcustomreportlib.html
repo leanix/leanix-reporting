@@ -2717,13 +2717,13 @@ lx.init()
 				<a name="formatcurrency" class="tsd-anchor"></a>
 				<h3>format<wbr>Currency</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">format<wbr>Currency<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, minimumFractionDigits<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					<li class="tsd-signature tsd-kind-icon">format<wbr>Currency<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, minimumFractionDigits<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, compact<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, locale<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:303</li>
+								<li>Defined in lx.ts:307</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2732,7 +2732,9 @@ lx.init()
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>example</dt>
-								<dd><pre><code class="language-js">lx.formatCurrency(<span class="hljs-number">123.50</span>, <span class="hljs-number">2</span>) =&gt; <span class="hljs-string">'€123.50'</span></code></pre>
+								<dd><pre><code class="language-js">lx.formatCurrency(<span class="hljs-number">123.50</span>, <span class="hljs-number">2</span>) =&gt; <span class="hljs-string">'€123.50'</span>
+lx.formatCurrency(<span class="hljs-number">12333.50</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-string">'€12K'</span>
+lx.formatCurrency(<span class="hljs-number">1288893.50</span>, <span class="hljs-number">2</span>, <span class="hljs-literal">true</span>, <span class="hljs-string">'de-DE'</span>) =&gt; <span class="hljs-string">'1,29 Mio. €'</span></code></pre>
 								</dd>
 							</dl>
 						</div>
@@ -2748,6 +2750,18 @@ lx.init()
 								<h5><span class="tsd-flag ts-flagOptional">Optional</span> minimumFractionDigits: <span class="tsd-signature-type">number</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>Minimum number of digits to use for the fraction</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> compact: <span class="tsd-signature-type">boolean</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Defines whether to show compact display</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> locale: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Defines locale info &#39;de-DE&#39;, &#39;en-EN&#39;</p>
 								</div>
 							</li>
 						</ul>
@@ -2766,7 +2780,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:327</li>
+								<li>Defined in lx.ts:331</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2821,7 +2835,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:357</li>
+								<li>Defined in lx.ts:361</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
