@@ -2400,6 +2400,9 @@ img {
 					<a href="lxr.lxcustomreportlib.html#getfilterresult" class="tsd-kind-icon">get<wbr>Filter<wbr>Result</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#getprojections" class="tsd-kind-icon">get<wbr>Projections</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#hideedittoggle" class="tsd-kind-icon">hide<wbr>Edit<wbr>Toggle</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -2522,6 +2525,7 @@ lx.init()
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getfactsheetfieldmetadata" class="tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Field<wbr>Meta<wbr>Data</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getfactsheetrelationfieldmetadata" class="tsd-kind-icon">get<wbr>Fact<wbr>Sheet<wbr>Relation<wbr>Field<wbr>Meta<wbr>Data</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getfilterresult" class="tsd-kind-icon">get<wbr>Filter<wbr>Result</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#getprojections" class="tsd-kind-icon">get<wbr>Projections</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hideedittoggle" class="tsd-kind-icon">hide<wbr>Edit<wbr>Toggle</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hidespinner" class="tsd-kind-icon">hide<wbr>Spinner</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#init" class="tsd-kind-icon">init</a></li>
@@ -2685,7 +2689,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:90</li>
+								<li>Defined in lx.ts:100</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2723,7 +2727,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:307</li>
+								<li>Defined in lx.ts:317</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2780,7 +2784,7 @@ lx.formatCurrency(<span class="hljs-number">1288893.50</span>, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:331</li>
+								<li>Defined in lx.ts:341</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2835,7 +2839,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:361</li>
+								<li>Defined in lx.ts:371</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2901,7 +2905,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:96</li>
+								<li>Defined in lx.ts:106</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2915,6 +2919,53 @@ lx.getFactSheetRelationFieldMetaData(
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="getprojections" class="tsd-anchor"></a>
+				<h3>get<wbr>Projections</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Projections<span class="tsd-signature-symbol">(</span>attributes<span class="tsd-signature-symbol">: </span><a href="../modules/lxr.html#projectionattribute" class="tsd-signature-type">ProjectionAttribute</a><span class="tsd-signature-symbol">[]</span>, filters<span class="tsd-signature-symbol">: </span><a href="../modules/lxr.html#projectionfilter" class="tsd-signature-type">ProjectionFilter</a><span class="tsd-signature-symbol">[]</span>, pointsOfView<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.pointofviewinput.html" class="tsd-signature-type">PointOfViewInput</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.projection.html" class="tsd-signature-type">Projection</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:91</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get projections from the impact service.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>beta</dt>
+								<dd></dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>attributes: <a href="../modules/lxr.html#projectionattribute" class="tsd-signature-type">ProjectionAttribute</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Fact Sheet attributes that the projection items should include.</p>
+								</div>
+							</li>
+							<li>
+								<h5>filters: <a href="../modules/lxr.html#projectionfilter" class="tsd-signature-type">ProjectionFilter</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Filter definition for the projection items</p>
+								</div>
+							</li>
+							<li>
+								<h5>pointsOfView: <a href="../interfaces/lxr.pointofviewinput.html" class="tsd-signature-type">PointOfViewInput</a><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Amount of different point of views that the projection should include.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.projection.html" class="tsd-signature-type">Projection</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="hideedittoggle" class="tsd-anchor"></a>
 				<h3>hide<wbr>Edit<wbr>Toggle</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -2924,7 +2975,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:194</li>
+								<li>Defined in lx.ts:204</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2946,7 +2997,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:184</li>
+								<li>Defined in lx.ts:194</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2997,7 +3048,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:140</li>
+								<li>Defined in lx.ts:150</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3091,7 +3142,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:160</li>
+								<li>Defined in lx.ts:170</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3138,7 +3189,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:166</li>
+								<li>Defined in lx.ts:176</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3169,7 +3220,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:176</li>
+								<li>Defined in lx.ts:186</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3237,7 +3288,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:104</li>
+								<li>Defined in lx.ts:114</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3270,7 +3321,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:201</li>
+								<li>Defined in lx.ts:211</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3302,7 +3353,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:190</li>
+								<li>Defined in lx.ts:200</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3326,7 +3377,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:215</li>
+								<li>Defined in lx.ts:225</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3366,7 +3417,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:180</li>
+								<li>Defined in lx.ts:190</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3388,7 +3439,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:240</li>
+								<li>Defined in lx.ts:250</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3444,7 +3495,7 @@ lx.translateCustomKey(<span class="hljs-string">'header.description'</span>, { <
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:254</li>
+								<li>Defined in lx.ts:264</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3489,7 +3540,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:266</li>
+								<li>Defined in lx.ts:276</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3532,7 +3583,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:279</li>
+								<li>Defined in lx.ts:289</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3581,7 +3632,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:291</li>
+								<li>Defined in lx.ts:301</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
