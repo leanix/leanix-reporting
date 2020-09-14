@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ReportLibFilter | @leanix/reporting</title>
+	<title>ReportFacetsSelection | @leanix/reporting</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2363,11 +2363,17 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class="current tsd-kind-class tsd-parent-kind-module">
-			<a href="lxr.reportlibfilter.html" class="tsd-kind-icon">Report<wbr>Lib<wbr>Filter</a>
+		<li class="current tsd-kind-interface tsd-parent-kind-module">
+			<a href="lxr.reportfacetsselection.html" class="tsd-kind-icon">Report<wbr>Facets<wbr>Selection</a>
 			<ul>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="lxr.reportlibfilter.html#getselectedfilters" class="tsd-kind-icon">get<wbr>Selected<wbr>Filters</a>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.reportfacetsselection.html#directhits" class="tsd-kind-icon">direct<wbr>Hits</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.reportfacetsselection.html#facets" class="tsd-kind-icon">facets</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.reportfacetsselection.html#fulltextsearchterm" class="tsd-kind-icon">full<wbr>Text<wbr>Search<wbr>Term</a>
 				</li>
 			</ul>
 		</li>
@@ -2379,7 +2385,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">ReportLibFilter</span>
+					<span class="target">ReportFacetsSelection</span>
 				</li>
 			</ul>
 		</section>
@@ -2388,32 +2394,47 @@ img {
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Methods</h3>
+						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.reportlibfilter.html#getselectedfilters" class="tsd-kind-icon">get<wbr>Selected<wbr>Filters</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportfacetsselection.html#directhits" class="tsd-kind-icon">direct<wbr>Hits</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportfacetsselection.html#facets" class="tsd-kind-icon">facets</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.reportfacetsselection.html#fulltextsearchterm" class="tsd-kind-icon">full<wbr>Text<wbr>Search<wbr>Term</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Methods</h2>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="getselectedfilters" class="tsd-anchor"></a>
-				<h3>get<wbr>Selected<wbr>Filters</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Selected<wbr>Filters<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.facetgroup.html" class="tsd-signature-type">FacetGroup</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in lx.ts:1899</li>
-							</ul>
-						</aside>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.facetgroup.html" class="tsd-signature-type">FacetGroup</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="directhits" class="tsd-anchor"></a>
+				<h3>direct<wbr>Hits</h3>
+				<div class="tsd-signature tsd-kind-icon">direct<wbr>Hits<span class="tsd-signature-symbol">:</span> <a href="lxr.directhit.html" class="tsd-signature-type">DirectHit</a><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1746</li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="facets" class="tsd-anchor"></a>
+				<h3>facets</h3>
+				<div class="tsd-signature tsd-kind-icon">facets<span class="tsd-signature-symbol">:</span> <a href="lxr.facetfilter.html" class="tsd-signature-type">FacetFilter</a><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1745</li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="fulltextsearchterm" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> full<wbr>Text<wbr>Search<wbr>Term</h3>
+				<div class="tsd-signature tsd-kind-icon">full<wbr>Text<wbr>Search<wbr>Term<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1747</li>
+					</ul>
+				</aside>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
