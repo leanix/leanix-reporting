@@ -2797,7 +2797,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">show<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1512</li>
+						<li>Defined in lx.ts:1545</li>
 					</ul>
 				</aside>
 			</section>
@@ -2875,7 +2875,7 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="ui" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> ui</h3>
-				<div class="tsd-signature tsd-kind-icon">ui<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>fields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>transformation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>picker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>update<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> }</span></div>
+				<div class="tsd-signature tsd-kind-icon">ui<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>elements<span class="tsd-signature-symbol">?: </span><a href="lxr.uielements.html" class="tsd-signature-type">UIElements</a><span class="tsd-signature-symbol">; </span>fields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>transformation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>picker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>update<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.reportconfiguration.html">ReportConfiguration</a>.<a href="lxr.reportconfiguration.html#ui">ui</a></p>
 					<ul>
@@ -2895,10 +2895,18 @@ img {
 					<h4>Type declaration</h4>
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter">
+							<h5><span class="tsd-flag ts-flagOptional">Optional</span> elements<span class="tsd-signature-symbol">?: </span><a href="lxr.uielements.html" class="tsd-signature-type">UIElements</a></h5>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><code>elements</code> defines the configuration of each UI element.</p>
+								</div>
+							</div>
+						</li>
+						<li class="tsd-parameter">
 							<h5><span class="tsd-flag ts-flagOptional">Optional</span> fields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>transformation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>picker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>timeline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></h5>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p><code>fields</code> defines the configuration of each UI element.</p>
+									<p><code>fields</code> defines the configuration of each UI field.</p>
 								</div>
 							</div>
 							<ul class="tsd-parameters">
