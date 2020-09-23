@@ -2408,7 +2408,7 @@ img {
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#init" class="tsd-kind-icon">init</a>
 				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#openformmodal" class="tsd-kind-icon">open<wbr>Form<wbr>Modal</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -2525,7 +2525,7 @@ lx.init()
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hideedittoggle" class="tsd-kind-icon">hide<wbr>Edit<wbr>Toggle</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hidespinner" class="tsd-kind-icon">hide<wbr>Spinner</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#init" class="tsd-kind-icon">init</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="lxr.lxcustomreportlib.html#openformmodal" class="tsd-kind-icon">open<wbr>Form<wbr>Modal</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#openformmodal" class="tsd-kind-icon">open<wbr>Form<wbr>Modal</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#openlink" class="tsd-kind-icon">open<wbr>Link</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#openrouterlink" class="tsd-kind-icon">open<wbr>Router<wbr>Link</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#publishstate" class="tsd-kind-icon">publish<wbr>State</a></li>
@@ -3024,11 +3024,11 @@ lx.getFactSheetRelationFieldMetaData(
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="openformmodal" class="tsd-anchor"></a>
 				<h3>open<wbr>Form<wbr>Modal</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">open<wbr>Form<wbr>Modal&lt;T&gt;<span class="tsd-signature-symbol">(</span>fields<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, values<span class="tsd-signature-symbol">: </span><a href="../modules/lxr.html#formmodalvalues" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, update<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/lxr.html#formmodalvalues" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">open<wbr>Form<wbr>Modal<span class="tsd-signature-symbol">(</span>fields<span class="tsd-signature-symbol">: </span><a href="../modules/lxr.html#formmodalfields" class="tsd-signature-type">FormModalFields</a>, values<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodalvalues.html" class="tsd-signature-type">FormModalValues</a>, update<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.formmodalvalues.html" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -3071,49 +3071,43 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-type-parameters-title">Type parameters</h4>
-						<ul class="tsd-type-parameters">
-							<li>
-								<h4>T<span class="tsd-signature-symbol">: </span><a href="../modules/lxr.html#formmodalfields" class="tsd-signature-type">FormModalFields</a></h4>
-							</li>
-						</ul>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>fields: <span class="tsd-signature-type">T</span></h5>
+								<h5>fields: <a href="../modules/lxr.html#formmodalfields" class="tsd-signature-type">FormModalFields</a></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>An object containing the form fields to be displayed in this dialog.</p>
 								</div>
 							</li>
 							<li>
-								<h5>values: <a href="../modules/lxr.html#formmodalvalues" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>values: <a href="../interfaces/lxr.formmodalvalues.html" class="tsd-signature-type">FormModalValues</a></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>An object with the same keys as [[fields]] containing the initial values of those fields.</p>
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> update: <span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> update: <span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a></h5>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter-siganture">
 										<ul class="tsd-signatures tsd-kind-type-literal">
-											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>form<span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a></li>
 										</ul>
 										<ul class="tsd-descriptions">
 											<li class="tsd-description">
 												<h4 class="tsd-parameters-title">Parameters</h4>
 												<ul class="tsd-parameters">
 													<li>
-														<h5>form: <a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+														<h5>form: <a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a></h5>
 													</li>
 												</ul>
-												<h4 class="tsd-returns-title">Returns <a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+												<h4 class="tsd-returns-title">Returns <a href="../interfaces/lxr.formmodal.html" class="tsd-signature-type">FormModal</a></h4>
 											</li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/lxr.html#formmodalvalues" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.formmodalvalues.html" class="tsd-signature-type">FormModalValues</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						<p>A promise that resolves to the configuration confirmed by the user or to <code>false</code> if the user canceled the configuration</p>
 					</li>
 				</ul>
