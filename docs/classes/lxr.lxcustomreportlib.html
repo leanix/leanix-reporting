@@ -2409,6 +2409,9 @@ img {
 					<a href="lxr.lxcustomreportlib.html#init" class="tsd-kind-icon">init</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#isfeatureenabled" class="tsd-kind-icon">is<wbr>Feature<wbr>Enabled</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#openformmodal" class="tsd-kind-icon">open<wbr>Form<wbr>Modal</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -2528,6 +2531,7 @@ lx.init()
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hideedittoggle" class="tsd-kind-icon">hide<wbr>Edit<wbr>Toggle</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#hidespinner" class="tsd-kind-icon">hide<wbr>Spinner</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#init" class="tsd-kind-icon">init</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#isfeatureenabled" class="tsd-kind-icon">is<wbr>Feature<wbr>Enabled</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#openformmodal" class="tsd-kind-icon">open<wbr>Form<wbr>Modal</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#openlink" class="tsd-kind-icon">open<wbr>Link</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#openrouterlink" class="tsd-kind-icon">open<wbr>Router<wbr>Link</a></li>
@@ -2717,7 +2721,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:323</li>
+								<li>Defined in lx.ts:330</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2774,7 +2778,7 @@ lx.formatCurrency(<span class="hljs-number">1288893.50</span>, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:347</li>
+								<li>Defined in lx.ts:354</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2829,7 +2833,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:377</li>
+								<li>Defined in lx.ts:384</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3025,6 +3029,38 @@ lx.getFactSheetRelationFieldMetaData(
 						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/lxr.reportsetup.html" class="tsd-signature-type">ReportSetup</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						<p>A promise that resolves to the ReportSetup object</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="isfeatureenabled" class="tsd-anchor"></a>
+				<h3>is<wbr>Feature<wbr>Enabled</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">is<wbr>Feature<wbr>Enabled<span class="tsd-signature-symbol">(</span>featureId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:314</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Check if a given Feature is enabled for the current Workspace.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>featureId: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Feature identifier</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>Boolean expressing if the feature is enabled.</p>
 					</li>
 				</ul>
 			</section>

@@ -2422,7 +2422,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.uiminimalconfiguration.html">UIMinimalConfiguration</a>.<a href="lxr.uiminimalconfiguration.html#elements">elements</a></p>
 					<ul>
-						<li>Defined in lx.ts:966</li>
+						<li>Defined in lx.ts:973</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2437,7 +2437,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>transformation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>picker<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:973</li>
+						<li>Defined in lx.ts:980</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2466,7 +2466,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.uiminimalconfiguration.html">UIMinimalConfiguration</a>.<a href="lxr.uiminimalconfiguration.html#timeline">timeline</a></p>
 					<ul>
-						<li>Defined in lx.ts:961</li>
+						<li>Defined in lx.ts:968</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2478,10 +2478,10 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="update" class="tsd-anchor"></a>
 				<h3>update</h3>
-				<div class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a></div>
+				<div class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:988</li>
+						<li>Defined in lx.ts:997</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2492,13 +2492,14 @@ img {
 					interacts with them.</p>
 					<p><code>selection</code> is an object that reflects the state of the current selection
 					of the UI elements.</p>
+					<p><code>update</code> also allows modifying the ui configuration</p>
 				</div>
 				<div class="tsd-type-declaration">
 					<h4>Type declaration</h4>
 					<ul class="tsd-parameters">
 						<li class="tsd-parameter-siganture">
 							<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a></li>
+								<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol">&gt;</span></li>
 							</ul>
 							<ul class="tsd-descriptions">
 								<li class="tsd-description">
@@ -2508,7 +2509,7 @@ img {
 											<h5>selection: <a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a></h5>
 										</li>
 									</ul>
-									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a></h4>
+									<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 						</li>
