@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ViewModelSingleFieldMetaData | @leanix/reporting</title>
+	<title>FormModalMultiSelectField | @leanix/reporting</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2364,13 +2364,19 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface tsd-parent-kind-module">
-			<a href="lxr.viewmodelsinglefieldmetadata.html" class="tsd-kind-icon">View<wbr>Model<wbr>Single<wbr>Field<wbr>Meta<wbr>Data</a>
+			<a href="lxr.formmodalmultiselectfield.html" class="tsd-kind-icon">Form<wbr>Modal<wbr>Multi<wbr>Select<wbr>Field</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.viewmodelsinglefieldmetadata.html#icon" class="tsd-kind-icon">icon</a>
+					<a href="lxr.formmodalmultiselectfield.html#disabled" class="tsd-kind-icon">disabled</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.viewmodelsinglefieldmetadata.html#values" class="tsd-kind-icon">values</a>
+					<a href="lxr.formmodalmultiselectfield.html#label" class="tsd-kind-icon">label</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.formmodalmultiselectfield.html#options" class="tsd-kind-icon">options</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.formmodalmultiselectfield.html#type" class="tsd-kind-icon">type</a>
 				</li>
 			</ul>
 		</li>
@@ -2382,7 +2388,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">ViewModelSingleFieldMetaData</span>
+					<span class="target">FormModalMultiSelectField</span>
 				</li>
 			</ul>
 		</section>
@@ -2393,8 +2399,10 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.viewmodelsinglefieldmetadata.html#icon" class="tsd-kind-icon">icon</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.viewmodelsinglefieldmetadata.html#values" class="tsd-kind-icon">values</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.formmodalmultiselectfield.html#disabled" class="tsd-kind-icon">disabled</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.formmodalmultiselectfield.html#label" class="tsd-kind-icon">label</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.formmodalmultiselectfield.html#options" class="tsd-kind-icon">options</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.formmodalmultiselectfield.html#type" class="tsd-kind-icon">type</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2403,32 +2411,44 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="icon" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> icon</h3>
-				<div class="tsd-signature tsd-kind-icon">icon<span class="tsd-signature-symbol">:</span> <a href="lxr.statusicon.html" class="tsd-signature-type">StatusIcon</a></div>
+				<a name="disabled" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> disabled</h3>
+				<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1439</li>
+						<li>Defined in lx.ts:1679</li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="values" class="tsd-anchor"></a>
-				<h3>values</h3>
-				<div class="tsd-signature tsd-kind-icon">values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+				<a name="label" class="tsd-anchor"></a>
+				<h3>label</h3>
+				<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1440</li>
+						<li>Defined in lx.ts:1677</li>
 					</ul>
 				</aside>
-				<div class="tsd-type-declaration">
-					<h4>Type declaration</h4>
-					<ul class="tsd-parameters">
-						<li class="tsd-parameter-index-signature">
-							<h5><span class="tsd-signature-symbol">[</span>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="lxr.viewmodelsinglefieldvaluemetadata.html" class="tsd-signature-type">ViewModelSingleFieldValueMetaData</a></h5>
-						</li>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="options" class="tsd-anchor"></a>
+				<h3>options</h3>
+				<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="lxr.formmodalsingleselectfieldoption.html" class="tsd-signature-type">FormModalSingleSelectFieldOption</a><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1678</li>
 					</ul>
-				</div>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="type" class="tsd-anchor"></a>
+				<h3>type</h3>
+				<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"MultiSelect"</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1676</li>
+					</ul>
+				</aside>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
