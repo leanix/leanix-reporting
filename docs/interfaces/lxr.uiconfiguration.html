@@ -2430,7 +2430,7 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 				<a name="timeline" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> timeline</h3>
-				<div class="tsd-signature tsd-kind-icon">timeline<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#uitimeline" class="tsd-signature-type">UITimeline</a></div>
+				<div class="tsd-signature tsd-kind-icon">timeline<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#uitimeline" class="tsd-signature-type">UITimeline</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.uiminimalconfiguration.html">UIMinimalConfiguration</a>.<a href="lxr.uiminimalconfiguration.html#timeline">timeline</a></p>
 					<ul>
@@ -2449,7 +2449,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>selection<span class="tsd-signature-symbol">: </span><a href="lxr.uiselection.html" class="tsd-signature-type">UISelection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="lxr.uiminimalconfiguration.html" class="tsd-signature-type">UIMinimalConfiguration</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1042</li>
+						<li>Defined in lx.ts:1044</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2460,7 +2460,9 @@ img {
 					interacts with them.</p>
 					<p><code>selection</code> is an object that reflects the state of the current selection
 					of the UI elements.</p>
-					<p><code>update</code> also allows modifying the ui configuration</p>
+					<p><code>update</code> also allows modifying the ui configuration by returning the target configuration. Use <code>null</code> to
+						destroy any visible elements. When using an <code>undefined</code> value for a specific element, the element remains
+					untouched.</p>
 				</div>
 				<div class="tsd-type-declaration">
 					<h4>Type declaration</h4>
