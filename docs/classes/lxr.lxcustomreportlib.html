@@ -2689,13 +2689,13 @@ lx.init()
 				<a name="executeparentoriginxhr" class="tsd-anchor"></a>
 				<h3>execute<wbr>Parent<wbr>OriginXHR</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">execute<wbr>Parent<wbr>OriginXHR<span class="tsd-signature-symbol">(</span>_method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">execute<wbr>Parent<wbr>OriginXHR<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"GET"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"POST"</span>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, body<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:124</li>
+								<li>Defined in lx.ts:125</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2706,15 +2706,21 @@ lx.init()
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>_method: <span class="tsd-signature-type">string</span></h5>
+								<h5>method: <span class="tsd-signature-type">"GET"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"POST"</span></h5>
 								<div class="tsd-comment tsd-typography">
-									<p>This param is currently ignored; only GET requests are permitted.</p>
+									<p>GET and POST requests are permitted. For POST requests not every endpoint is allowed.</p>
 								</div>
 							</li>
 							<li>
 								<h5>path: <span class="tsd-signature-type">string</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>Relative URL</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> body: <span class="tsd-signature-type">any</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Optional body for POST requests</p>
 								</div>
 							</li>
 						</ul>
@@ -2733,7 +2739,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:399</li>
+								<li>Defined in lx.ts:400</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2790,7 +2796,7 @@ lx.formatCurrency(<span class="hljs-number">1288893.50</span>, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:423</li>
+								<li>Defined in lx.ts:424</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2845,7 +2851,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:453</li>
+								<li>Defined in lx.ts:454</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2911,7 +2917,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:130</li>
+								<li>Defined in lx.ts:131</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3053,7 +3059,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:279</li>
+								<li>Defined in lx.ts:280</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3075,7 +3081,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:269</li>
+								<li>Defined in lx.ts:270</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3126,7 +3132,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:383</li>
+								<li>Defined in lx.ts:384</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3159,7 +3165,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:175</li>
+								<li>Defined in lx.ts:176</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3239,7 +3245,7 @@ lx.openFormModal(fields, initialValues).then(<span class="hljs-function">(<span 
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:218</li>
+								<li>Defined in lx.ts:219</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3331,7 +3337,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:245</li>
+								<li>Defined in lx.ts:246</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3378,7 +3384,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:251</li>
+								<li>Defined in lx.ts:252</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3409,7 +3415,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:225</li>
+								<li>Defined in lx.ts:226</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3462,7 +3468,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:261</li>
+								<li>Defined in lx.ts:262</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3530,7 +3536,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:138</li>
+								<li>Defined in lx.ts:139</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3563,7 +3569,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:286</li>
+								<li>Defined in lx.ts:287</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3595,7 +3601,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:275</li>
+								<li>Defined in lx.ts:276</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3619,7 +3625,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:300</li>
+								<li>Defined in lx.ts:301</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3659,7 +3665,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:265</li>
+								<li>Defined in lx.ts:266</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3681,7 +3687,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:325</li>
+								<li>Defined in lx.ts:326</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3737,7 +3743,7 @@ lx.translateCustomKey(<span class="hljs-string">'header.description'</span>, { <
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:339</li>
+								<li>Defined in lx.ts:340</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3782,7 +3788,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:351</li>
+								<li>Defined in lx.ts:352</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3825,7 +3831,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:364</li>
+								<li>Defined in lx.ts:365</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3874,7 +3880,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:376</li>
+								<li>Defined in lx.ts:377</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
