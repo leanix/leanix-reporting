@@ -2367,6 +2367,9 @@ img {
 			<a href="lxr.dropdownentry.html" class="tsd-kind-icon">Dropdown<wbr>Entry</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.dropdownentry.html#activelabel" class="tsd-kind-icon">active<wbr>Label</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.dropdownentry.html#id" class="tsd-kind-icon">id</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -2378,6 +2381,13 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p><code>DropdownEntry</code> defines the structure needed for a UI dropdown entry to be used for <code>UIDropdown</code> or a section of a <code>UIGroupDropdown</code>.</p>
+				</div>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2393,6 +2403,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.dropdownentry.html#activelabel" class="tsd-kind-icon">active<wbr>Label</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.dropdownentry.html#id" class="tsd-kind-icon">id</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.dropdownentry.html#label" class="tsd-kind-icon">label</a></li>
 						</ul>
@@ -2403,24 +2414,50 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="activelabel" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> active<wbr>Label</h3>
+				<div class="tsd-signature tsd-kind-icon">active<wbr>Label<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#dropdownentrylabel" class="tsd-signature-type">DropdownEntryLabel</a></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1175</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>activeLabel</code> is displayed in the dropdown&#39;s button, when the entry is selected.
+						In case <code>activeLabel</code> is not defined, it fall backs to <code>label</code>.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="id" class="tsd-anchor"></a>
 				<h3>id</h3>
 				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1093</li>
+						<li>Defined in lx.ts:1183</li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>id</code> declares an identificator for the dropdown entry.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="label" class="tsd-anchor"></a>
 				<h3>label</h3>
-				<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#dropdownentrylabel" class="tsd-signature-type">DropdownEntryLabel</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1092</li>
+						<li>Defined in lx.ts:1179</li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>label</code> defines the entry&#39;s label to be used in the options dropdown.</p>
+					</div>
+				</div>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
