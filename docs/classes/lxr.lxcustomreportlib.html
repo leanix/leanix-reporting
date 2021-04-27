@@ -2451,6 +2451,9 @@ img {
 					<a href="lxr.lxcustomreportlib.html#showspinner" class="tsd-kind-icon">show<wbr>Spinner</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#showtoastr" class="tsd-kind-icon">show<wbr>Toastr</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#translatecustomkey" class="tsd-kind-icon">translate<wbr>Custom<wbr>Key</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -2554,6 +2557,7 @@ lx.init()
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#showedittoggle" class="tsd-kind-icon">show<wbr>Edit<wbr>Toggle</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#showlegend" class="tsd-kind-icon">show<wbr>Legend</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#showspinner" class="tsd-kind-icon">show<wbr>Spinner</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#showtoastr" class="tsd-kind-icon">show<wbr>Toastr</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translatecustomkey" class="tsd-kind-icon">translate<wbr>Custom<wbr>Key</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translatefactsheettype" class="tsd-kind-icon">translate<wbr>Fact<wbr>Sheet<wbr>Type</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translatefield" class="tsd-kind-icon">translate<wbr>Field</a></li>
@@ -2739,7 +2743,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:403</li>
+								<li>Defined in lx.ts:422</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2796,7 +2800,7 @@ lx.formatCurrency(<span class="hljs-number">1288893.50</span>, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:427</li>
+								<li>Defined in lx.ts:446</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2851,7 +2855,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:457</li>
+								<li>Defined in lx.ts:476</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3132,7 +3136,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:387</li>
+								<li>Defined in lx.ts:406</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3678,6 +3682,58 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="showtoastr" class="tsd-anchor"></a>
+				<h3>show<wbr>Toastr</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">show<wbr>Toastr<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../modules/lxr.html#toastrtype" class="tsd-signature-type">ToastrType</a>, message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, title<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:323</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Show toastr of different types with custom message
+								and optional title.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>example</dt>
+								<dd><pre><code class="language-js">lx.showToastr(
+  { <span class="hljs-attr">type</span>: <span class="hljs-string">'error'</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">'Something went wrong'</span> },
+)
+
+lx.showToastr(
+  { <span class="hljs-attr">type</span>: <span class="hljs-string">'warning'</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">'This is a warning'</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">'Attention'</span> },
+)</code></pre>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>type: <a href="../modules/lxr.html#toastrtype" class="tsd-signature-type">ToastrType</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>toastr type</p>
+								</div>
+							</li>
+							<li>
+								<h5>message: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>message content</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> title: <span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="translatecustomkey" class="tsd-anchor"></a>
 				<h3>translate<wbr>Custom<wbr>Key</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -3687,7 +3743,7 @@ lx.openFormModal({fields, values, messages, <span class="hljs-attr">valid</span>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:329</li>
+								<li>Defined in lx.ts:348</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3743,7 +3799,7 @@ lx.translateCustomKey(<span class="hljs-string">'header.description'</span>, { <
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:343</li>
+								<li>Defined in lx.ts:362</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3788,7 +3844,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:355</li>
+								<li>Defined in lx.ts:374</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3831,7 +3887,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:368</li>
+								<li>Defined in lx.ts:387</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3880,7 +3936,7 @@ lx.translateFactSheetType(<span class="hljs-string">'BusinessCapability'</span>,
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:380</li>
+								<li>Defined in lx.ts:399</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
