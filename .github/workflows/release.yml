@@ -8,10 +8,6 @@ jobs:
     name: Notify release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # fetches entire history of commit
-
       - name: Get credentials
         uses: leanix/secrets-action@master
         with:
