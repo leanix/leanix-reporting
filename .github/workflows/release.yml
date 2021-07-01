@@ -9,24 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-          with:
-            fetch-depth: 0 # fetches entire history of commit
+        with:
+          fetch-depth: 0 # fetches entire history of commit
 
       - name: Get credentials
         uses: leanix/secrets-action@master
         with:
-          secret-store-credentials: ${{ secrets.INJECTED_SECRET_STORE_CREDENTIALS }} 
-      
+          secret-store-credentials: ${{ secrets.INJECTED_SECRET_STORE_CREDENTIALS }}
+
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      
+
       - name: Notify Slack
         uses: archive/github-actions-slack@v1.0.0
         with:
           slack-bot-user-oauth-access-token: ${{ env.SLACK_TOKEN }}
-          slack-channel: '#dev-reporting'
+          slack-channel: "#dev-reporting"
           slack-text: |
             :rocket-snail: *NEW VERSION*: ${{ steps.get_release.outputs.tag_name }} - ${{ steps.get_release.outputs.html_url }}
