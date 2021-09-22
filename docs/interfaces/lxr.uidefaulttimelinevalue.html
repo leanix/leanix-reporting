@@ -2375,6 +2375,13 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p><code>UIDefaultTimelineValue</code> defines the current value of the {@link UIDefaultTimeline | <code>UIDefaultTimeline</code>}.</p>
+				</div>
+			</div>
+		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
@@ -2401,12 +2408,22 @@ img {
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="dates" class="tsd-anchor"></a>
 				<h3>dates</h3>
-				<div class="tsd-signature tsd-kind-icon">dates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+				<div class="tsd-signature tsd-kind-icon">dates<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#uidefaulttimelinedate" class="tsd-signature-type">UIDefaultTimelineDate</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1343</li>
+						<li>Defined in lx.ts:1373</li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>dates</code> defines a tuple of dates of size 2 to be used as value in the timeline.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><pre><code><span class="hljs-keyword">const</span> singlePoint: lxr.UIDefaultTimelineDate[] = [<span class="hljs-string">"2020-01-01"</span>]; <span class="hljs-comment">// select a single point.</span>
+<span class="hljs-keyword">const</span> multiplePoints: lxr.UIDefaultTimelineDate[] = [<span class="hljs-string">"2020-01-01"</span>, <span class="hljs-string">"2020-03-01"</span>] <span class="hljs-comment">// select the time span between two dates.</span></code></pre></dd>
+					</dl>
+				</div>
 			</section>
 		</section>
 		<footer class="with-border-bottom">
