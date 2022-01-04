@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>UIImpactTimelineValue | @leanix/reporting</title>
+	<title>UIImpactTimelineValueMulti | @leanix/reporting</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2364,13 +2364,13 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface tsd-parent-kind-module">
-			<a href="lxr.uiimpacttimelinevalue.html" class="tsd-kind-icon">UIImpact<wbr>Timeline<wbr>Value</a>
+			<a href="lxr.uiimpacttimelinevaluemulti.html" class="tsd-kind-icon">UIImpact<wbr>Timeline<wbr>Value<wbr>Multi</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.uiimpacttimelinevalue.html#factsheet" class="tsd-kind-icon">fact<wbr>Sheet</a>
+					<a href="lxr.uiimpacttimelinevaluemulti.html#factsheets" class="tsd-kind-icon">fact<wbr>Sheets</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.uiimpacttimelinevalue.html#selectedpoints" class="tsd-kind-icon">selected<wbr>Points</a>
+					<a href="lxr.uiimpacttimelinevaluemulti.html#selectedpoints" class="tsd-kind-icon">selected<wbr>Points</a>
 				</li>
 			</ul>
 		</li>
@@ -2381,7 +2381,7 @@ img {
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
 				<div class="lead">
-					<p><code>UIImpactTimelineValue</code> defines the current value of a  {@link UIImpactTimeline | <code>UIImpactTimeline</code>}.</p>
+					<p><code>UIImpactTimelineValueSingle</code> defines the current value of a {@link UIImpactTimeline | <code>UIImpactTimeline</code>}, using multiple source Fact Sheets.</p>
 				</div>
 			</div>
 		</section>
@@ -2389,7 +2389,7 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">UIImpactTimelineValue</span>
+					<span class="target">UIImpactTimelineValueMulti</span>
 				</li>
 			</ul>
 		</section>
@@ -2400,8 +2400,8 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uiimpacttimelinevalue.html#factsheet" class="tsd-kind-icon">fact<wbr>Sheet</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uiimpacttimelinevalue.html#selectedpoints" class="tsd-kind-icon">selected<wbr>Points</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uiimpacttimelinevaluemulti.html#factsheets" class="tsd-kind-icon">fact<wbr>Sheets</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uiimpacttimelinevaluemulti.html#selectedpoints" class="tsd-kind-icon">selected<wbr>Points</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2410,39 +2410,18 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="factsheet" class="tsd-anchor"></a>
-				<h3>fact<wbr>Sheet</h3>
-				<div class="tsd-signature tsd-kind-icon">fact<wbr>Sheet<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+				<a name="factsheets" class="tsd-anchor"></a>
+				<h3>fact<wbr>Sheets</h3>
+				<div class="tsd-signature tsd-kind-icon">fact<wbr>Sheets<span class="tsd-signature-symbol">:</span> <a href="lxr.uiimpacttimelinefactsheetvalue.html" class="tsd-signature-type">UIImpactTimelineFactSheetValue</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1447</li>
+						<li>Defined in lx.ts:1466</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Specify the BTM Fact Sheet to be used.</p>
+						<p>Source Fact Sheets where the timeline dates is read from.</p>
 					</div>
-				</div>
-				<div class="tsd-type-declaration">
-					<h4>Type declaration</h4>
-					<ul class="tsd-parameters">
-						<li class="tsd-parameter">
-							<h5>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Fact Sheet ID of the BTM Fact Sheet containing a collection of impacts.</p>
-								</div>
-							</div>
-						</li>
-						<li class="tsd-parameter">
-							<h5>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Fact Sheet type.</p>
-								</div>
-							</div>
-						</li>
-					</ul>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -2451,12 +2430,12 @@ img {
 				<div class="tsd-signature tsd-kind-icon">selected<wbr>Points<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#timelinestep" class="tsd-signature-type">TimelineStep</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1460</li>
+						<li>Defined in lx.ts:1470</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The points selected in the timeline.</p>
+						<p>Selected timeline points.</p>
 					</div>
 				</div>
 			</section>
