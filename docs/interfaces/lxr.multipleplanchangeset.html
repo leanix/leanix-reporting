@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SidePaneTableRow | @leanix/reporting</title>
+	<title>MultiplePlanChangeSet | @leanix/reporting</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2364,13 +2364,19 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class="current tsd-kind-interface tsd-parent-kind-module">
-			<a href="lxr.sidepanetablerow.html" class="tsd-kind-icon">Side<wbr>Pane<wbr>Table<wbr>Row</a>
+			<a href="lxr.multipleplanchangeset.html" class="tsd-kind-icon">Multiple<wbr>Plan<wbr>Change<wbr>Set</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.sidepanetablerow.html#cells" class="tsd-kind-icon">cells</a>
+					<a href="lxr.multipleplanchangeset.html#date" class="tsd-kind-icon">date</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
-					<a href="lxr.sidepanetablerow.html#link" class="tsd-kind-icon">link</a>
+					<a href="lxr.multipleplanchangeset.html#factsheetids" class="tsd-kind-icon">fact<wbr>Sheet<wbr>Ids</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.multipleplanchangeset.html#milestoneid" class="tsd-kind-icon">milestone<wbr>Id</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.multipleplanchangeset.html#type" class="tsd-kind-icon">type</a>
 				</li>
 			</ul>
 		</li>
@@ -2378,24 +2384,11 @@ img {
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
-		<section class="tsd-panel tsd-comment">
-			<div class="tsd-comment tsd-typography">
-				<div class="lead">
-					<p>Table row
-						link?: link e.g to the specific Fact Sheet
-					columns: columns with different values to be shown.</p>
-				</div>
-				<dl class="tsd-comment-tags">
-					<dt>beta</dt>
-					<dd></dd>
-				</dl>
-			</div>
-		</section>
 		<section class="tsd-panel tsd-hierarchy">
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">SidePaneTableRow</span>
+					<span class="target">MultiplePlanChangeSet</span>
 				</li>
 			</ul>
 		</section>
@@ -2406,8 +2399,10 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.sidepanetablerow.html#cells" class="tsd-kind-icon">cells</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.sidepanetablerow.html#link" class="tsd-kind-icon">link</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.multipleplanchangeset.html#date" class="tsd-kind-icon">date</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.multipleplanchangeset.html#factsheetids" class="tsd-kind-icon">fact<wbr>Sheet<wbr>Ids</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.multipleplanchangeset.html#milestoneid" class="tsd-kind-icon">milestone<wbr>Id</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.multipleplanchangeset.html#type" class="tsd-kind-icon">type</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2416,22 +2411,42 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="cells" class="tsd-anchor"></a>
-				<h3>cells</h3>
-				<div class="tsd-signature tsd-kind-icon">cells<span class="tsd-signature-symbol">:</span> <a href="../modules/lxr.html#sidepanetablecell" class="tsd-signature-type">SidePaneTableCell</a><span class="tsd-signature-symbol">[]</span></div>
+				<a name="date" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> date</h3>
+				<div class="tsd-signature tsd-kind-icon">date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:2512</li>
+						<li>Defined in lx.ts:2191</li>
 					</ul>
 				</aside>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-				<a name="link" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> link</h3>
-				<div class="tsd-signature tsd-kind-icon">link<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<a name="factsheetids" class="tsd-anchor"></a>
+				<h3>fact<wbr>Sheet<wbr>Ids</h3>
+				<div class="tsd-signature tsd-kind-icon">fact<wbr>Sheet<wbr>Ids<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:2511</li>
+						<li>Defined in lx.ts:2190</li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="milestoneid" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> milestone<wbr>Id</h3>
+				<div class="tsd-signature tsd-kind-icon">milestone<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:2192</li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="type" class="tsd-anchor"></a>
+				<h3>type</h3>
+				<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"multiplePlan"</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:2189</li>
 					</ul>
 				</aside>
 			</section>
