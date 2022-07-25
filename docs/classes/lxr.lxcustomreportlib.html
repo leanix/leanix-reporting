@@ -2472,6 +2472,12 @@ img {
 					<a href="lxr.lxcustomreportlib.html#translaterelation" class="tsd-kind-icon">translate<wbr>Relation</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#translaterelationfield" class="tsd-kind-icon">translate<wbr>Relation<wbr>Field</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="lxr.lxcustomreportlib.html#translaterelationfieldvalue" class="tsd-kind-icon">translate<wbr>Relation<wbr>Field<wbr>Value</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="lxr.lxcustomreportlib.html#updateconfiguration" class="tsd-kind-icon">update<wbr>Configuration</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -2567,6 +2573,8 @@ lx.init()
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translatefield" class="tsd-kind-icon">translate<wbr>Field</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translatefieldvalue" class="tsd-kind-icon">translate<wbr>Field<wbr>Value</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translaterelation" class="tsd-kind-icon">translate<wbr>Relation</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translaterelationfield" class="tsd-kind-icon">translate<wbr>Relation<wbr>Field</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#translaterelationfieldvalue" class="tsd-kind-icon">translate<wbr>Relation<wbr>Field<wbr>Value</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#updateconfiguration" class="tsd-kind-icon">update<wbr>Configuration</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="lxr.lxcustomreportlib.html#updatetableconfig" class="tsd-kind-icon">update<wbr>Table<wbr>Config</a></li>
 						</ul>
@@ -2747,7 +2755,7 @@ lx.init()
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:430</li>
+								<li>Defined in lx.ts:458</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2804,7 +2812,7 @@ lx.formatCurrency(<span class="hljs-number">1288893.50</span>, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:454</li>
+								<li>Defined in lx.ts:482</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2859,7 +2867,7 @@ lx.getFactSheetFieldMetaData(<span class="hljs-string">'Application'</span>, <sp
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:484</li>
+								<li>Defined in lx.ts:512</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3143,7 +3151,7 @@ lx.getFactSheetRelationFieldMetaData(
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in lx.ts:414</li>
+								<li>Defined in lx.ts:442</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3994,6 +4002,101 @@ lx.translateRelation(<span class="hljs-string">'relToChild'</span>)             
 								<h5>relationName: <span class="tsd-signature-type">string</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>Name of the relation</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>Translation</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="translaterelationfield" class="tsd-anchor"></a>
+				<h3>translate<wbr>Relation<wbr>Field</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">translate<wbr>Relation<wbr>Field<span class="tsd-signature-symbol">(</span>relationName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, fieldName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:421</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the translation of a field present in a relation.
+								In case the relation is not present in the translation model, the fieldName would be returned.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>example</dt>
+								<dd><pre><code class="language-js">lx.translateRelationField(<span class="hljs-string">'relDataObjectToApplication'</span>, <span class="hljs-string">'usage'</span>)  <span class="hljs-comment">// =&gt; 'Usage'</span>
+lx.translateRelationField(<span class="hljs-string">'relApplicationToBusinessCapability'</span>, <span class="hljs-string">'functionalSuitability'</span>)  <span class="hljs-comment">// =&gt; 'Functional Fit'</span></code></pre>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>relationName: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Name of the relation</p>
+								</div>
+							</li>
+							<li>
+								<h5>fieldName: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Field of the relation</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<p>Translation</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="translaterelationfieldvalue" class="tsd-anchor"></a>
+				<h3>translate<wbr>Relation<wbr>Field<wbr>Value</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">translate<wbr>Relation<wbr>Field<wbr>Value<span class="tsd-signature-symbol">(</span>relationName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, fieldName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, fieldValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in lx.ts:435</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Returns the translation of a field value for fields with predefined set of values (e.g. Single Select)
+								present in a relation. In case the relation, fieldName or fieldValue is not present in the translation model, the fieldValue would be returned.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>example</dt>
+								<dd><pre><code class="language-js">lx.translateRelationFieldValue(<span class="hljs-string">'relApplicationToBusinessCapability'</span>, <span class="hljs-string">'functionalSuitability'</span>, <span class="hljs-string">'appropriate'</span>)  <span class="hljs-comment">// =&gt; 'Appropriate'</span></code></pre>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>relationName: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Name of the relation</p>
+								</div>
+							</li>
+							<li>
+								<h5>fieldName: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Field of the relation</p>
+								</div>
+							</li>
+							<li>
+								<h5>fieldValue: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Value of this field</p>
 								</div>
 							</li>
 						</ul>
