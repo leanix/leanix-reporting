@@ -2367,6 +2367,9 @@ img {
 			<a href="lxr.uidropdown.html" class="tsd-kind-icon">UIDropdown</a>
 			<ul>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.uidropdown.html#disabled" class="tsd-kind-icon">disabled</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.uidropdown.html#entries" class="tsd-kind-icon">entries</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -2374,6 +2377,9 @@ img {
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface">
 					<a href="lxr.uidropdown.html#label" class="tsd-kind-icon">label</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="lxr.uidropdown.html#tooltip" class="tsd-kind-icon">tooltip</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
 					<a href="lxr.uidropdown.html#type" class="tsd-kind-icon">type</a>
@@ -2413,9 +2419,11 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uidropdown.html#disabled" class="tsd-kind-icon">disabled</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uidropdown.html#entries" class="tsd-kind-icon">entries</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="lxr.uidropdown.html#id" class="tsd-kind-icon">id</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uidropdown.html#label" class="tsd-kind-icon">label</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="lxr.uidropdown.html#tooltip" class="tsd-kind-icon">tooltip</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="lxr.uidropdown.html#type" class="tsd-kind-icon">type</a></li>
 						</ul>
 					</section>
@@ -2425,12 +2433,27 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="disabled" class="tsd-anchor"></a>
+				<h3>disabled</h3>
+				<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1324</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>disabled</code> passes down a boolean to disable the dropdown options.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 				<a name="entries" class="tsd-anchor"></a>
 				<h3>entries</h3>
 				<div class="tsd-signature tsd-kind-icon">entries<span class="tsd-signature-symbol">:</span> <a href="lxr.dropdownentry.html" class="tsd-signature-type">DropdownEntry</a><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1307</li>
+						<li>Defined in lx.ts:1320</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2446,7 +2469,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="lxr.uibaseelement.html">UIBaseElement</a>.<a href="lxr.uibaseelement.html#id">id</a></p>
 					<ul>
-						<li>Defined in lx.ts:1212</li>
+						<li>Defined in lx.ts:1225</li>
 					</ul>
 				</aside>
 			</section>
@@ -2456,12 +2479,27 @@ img {
 				<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in lx.ts:1303</li>
+						<li>Defined in lx.ts:1316</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p><code>label</code> defines the dropdown label to be shown aside the dropdown element.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="tooltip" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagOptional">Optional</span> tooltip</h3>
+				<div class="tsd-signature tsd-kind-icon">tooltip<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in lx.ts:1328</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><code>tooltip</code> defines the text a user sees on hovering a disabled dropdown element.</p>
 					</div>
 				</div>
 			</section>
@@ -2472,7 +2510,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Overrides <a href="lxr.uibaseelement.html">UIBaseElement</a>.<a href="lxr.uibaseelement.html#type">type</a></p>
 					<ul>
-						<li>Defined in lx.ts:1299</li>
+						<li>Defined in lx.ts:1312</li>
 					</ul>
 				</aside>
 			</section>
