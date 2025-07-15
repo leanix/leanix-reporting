@@ -18,6 +18,6 @@ jobs:
         uses: archive/github-actions-slack@v1.0.0
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_TOKEN }}
-          slack-channel: "#dev-reporting"
+          slack-channel: "#team-tornado-deployments"
           slack-text: |
             :rocket-snail: *NEW VERSION*: ${{ steps.get_release.outputs.tag_name }} - ${{ steps.get_release.outputs.html_url }}
