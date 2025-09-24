@@ -15,7 +15,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Notify Slack
-        uses: archive/github-actions-slack@v1.1.0
+        uses: archive/github-actions-slack@v2.10.1
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_TOKEN }}
           slack-channel: "#team-tornado-deployments"
