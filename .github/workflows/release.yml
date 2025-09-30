@@ -10,12 +10,12 @@ jobs:
     steps:
       - name: Get release
         id: get_release
-        uses: bruceadams/get-release@v1.3.2
+        uses: bruceadams/get-release@74c3d60f5a28f358ccf241a00c9021ea16f0569f # v1.3.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Notify Slack
-        uses: archive/github-actions-slack@v2.10.1
+        uses: archive/github-actions-slack@c643e5093620d65506466f2c9b317d5d29a5e517 # v2.10.1
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_TOKEN }}
           slack-channel: "#team-tornado-deployments"
