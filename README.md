@@ -18,10 +18,10 @@ npm install @leanix/reporting --save
 ### Modern Usage (ES Module Imports)
 
 ```typescript
-import { lx, ReportSetup, ReportConfiguration } from "@leanix/reporting";
+import { lx, lxr } from "@leanix/reporting";
 
-lx.init().then((setup: ReportSetup) => {
-  const config: ReportConfiguration = {};
+lx.init().then((setup: lxr.ReportSetup) => {
+  const config: lxr.ReportConfiguration = {};
   lx.ready(config);
 });
 ```
