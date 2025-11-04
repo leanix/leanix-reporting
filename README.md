@@ -26,9 +26,10 @@ lx.init().then((setup: ReportSetup) => {
 });
 ```
 
-Available exports: `lx`, `lxr`, `ReportSetup`, `ReportConfiguration`, `ReportFacetsConfig`
+All types are accessed via the `lxr` namespace (e.g., `lxr.ReportSetup`, `lxr.ReportConfiguration`, `lxr.FactSheet`).
 
-### Legacy Usage (Global Variables)
+<details>
+<summary>Legacy Usage (Global Variables)</summary>
 
 #### As a simple script tag inside your HTML
 
@@ -53,6 +54,8 @@ lx.init().then(function (setupInfo) {
   lx.ready(config);
 });
 ```
+
+</details>
 
 ## Documentation
 
