@@ -55,7 +55,7 @@ You have access to **LeanIX MCP Server tools** that provide:
 3. **Test** - Run `npm run dev` and test in browser
 4. **Repeat** - Iterate until working
 
-**Note:** The dev server handles compilation automatically. Only run `npm run build` before final deployment.
+**Note:** The dev server handles compilation automatically. Only run `npm run build` before uploading to LeanIX.
 
 ### Testing Your Report
 
@@ -357,9 +357,19 @@ const config: lxr.ReportConfiguration = {
 
 ---
 
-## Pre-Deploy Checklist
+## Uploading to LeanIX
 
-Before considering your work complete:
+Once your report is ready, upload it to your LeanIX workspace:
+
+1. **Build the report** - Run `npm run build` to create production bundle
+2. **Upload to workspace** - Run `npm run upload` (executes `vite build --mode upload`)
+3. **Verify upload** - Check console output for success message, then confirm in Administration > Reports
+
+---
+
+## Pre-Upload Checklist
+
+Before uploading your report:
 
 - [ ] **Schema verified** - Used MCP tools to verify all field names and types
 - [ ] **No hardcoded assumptions** - All fact sheet types and field names verified
@@ -371,6 +381,7 @@ Before considering your work complete:
 - [ ] **Linting passes** - `npm run lint` succeeds
 - [ ] **Build succeeds** - `npm run build` succeeds
 - [ ] **Browser tested** - `npm run dev` tested in browser with real data
+- [ ] **Credentials configured** - `lxr.json` has a host URL and token
 
 ---
 
