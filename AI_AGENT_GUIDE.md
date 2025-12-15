@@ -4,70 +4,85 @@
 
 ## Your Mission
 
-**Your goal is to help the user alter this LeanIX custom report.** You are working within a scaffolded custom report project that already has `@leanix/reporting` installed as a dependency.
+**Your goal is to help the user to create a LeanIX custom report.**
+
+You are probably working in a custom report project that has `@leanix/reporting` installed as a dependency.
+It might be an existing project or a newly initialized one with example code.
+
+If you see code comments specifying that it is a starter project with demo content. Delete that comment and alter everything according to the users needs. Feel free to completely rewire everything.
+
+If you are not in a custom report project, instruct the user to initialize a custom report using `npm create lxr`.
 
 ---
 
-## Package & Import Context
+## LeanIX Reporting Package
 
-The `@leanix/reporting` npm package is the runtime framework that connects reports to LeanIX workspaces. It is installed by default.
+The `@leanix/reporting` npm package is the runtime framework that lets reports interact with the LeanIX workspace.
 
-**All code examples in this guide assume this import:**
+**All code examples in this guide assume these imports:**
 
 ```typescript
-import { lx, lxr } from "@leanix/reporting";
+import { lx } from "@leanix/reporting";
+import type { lxr } from "@leanix/reporting";
 ```
 
 - `lxr` is the main namespace containing all types and interfaces
 - `lx` is an instance of `lxr.LxCustomReportLib` that provides the runtime API
 
+In `lxr` there are also some utility functions (`lxr.cloneDeep`, `lxr.difference`, etc.).
+When using them, the import needs to be changed to: `import { lx, lxr } from '@leanix/reporting'`
+
+Initializion of happens with `await lx.init()`. Configuration is done using `lx.ready(config)`.
+Use the LeanIX MCP Tools to get information about the usage.
+
 ---
 
-## Schema Discovery with MCP Tools
+## LeanIX MCP Tools
 
-**Before writing any code, use MCP tools to discover the workspace schema.**
+Before writing any code, use MCP tools to discover the schema of the connected workspace.
 
 You have access to **LeanIX MCP Server tools** that provide:
 
-- **GraphQL type definitions** - Request SDL for types like `Query`, `Application`, `ITComponent`, `BaseFactSheet`
 - **TypeScript definitions** - Access TypeScript definitions from the `@leanix/reporting` package
-- **Available types listing** - Discover all GraphQL types in the workspace
+- **GraphQL type definitions** - Request Schema in SDL for types like `Query`, `Application`, `ITComponent`, `BaseFactSheet`
+
+There might be more LeanIX MCP tools available.
+Do not use other LeanIX MCP tools to modify data.
+Do not use other LeanIX MCP tools to fetch data and hardcode it in the report.
+
+The LeanIX MCP Server is always connected to a specific workspace via an API token. Since each workspace can have different configurations, the GraphQL schema definitions may vary between workspaces.
 
 ### Discovery Process
 
-1. **Identify what you need** - Query operations? Fact sheet fields? Relations?
-2. **Request type definitions** - Use MCP tools to get SDL for specific types
-3. **Review the schema** - Check available fields, their types, and whether they're optional
-4. **Write code** - Use the actual schema, not assumptions
-
-**Example:** To query applications, first request the `Query` type definition to see available queries, then request the `Application` type definition to see available fields.
-
-**The MCP tools provide detailed usage instructions - refer to their documentation.**
+1. **Identify what you need** - Methods from `LxCustomReportLib`? GraphQL Query operations? Fact sheet fields? Relations?
+2. **Request type definitions** - Use LeanIX MCP tools to get TypeScript definitions or GraphQL SDL for specific types
+3. **Write code** - Use the information received, not assumptions
 
 ---
 
-## Iterative Development Cycle
+## Development
 
 **Follow this cycle for every change:**
 
-1. **Write Code** - Implement using TypeScript with `lxr` types
+1. **Write Code** - Implement using TypeScript with `lxr.*` types
 2. **Lint** - Run `npm run lint` to catch issues
-3. **Test** - Run `npm run dev` and test in browser
-4. **Repeat** - Iterate until working
-
-**Note:** The dev server handles compilation automatically. Only run `npm run build` before uploading to LeanIX.
+3. **Test** - Run `npm run dev` to start a dev server with hot reload and test in browser
+4. **Repeat** - Iterate based on the input from the user 
 
 ### Testing Your Report
 
-Run `npm run dev` to get a **LeanIX-hosted development URL** (not localhost). Copy the complete URL from the terminal output and open it in your browser for live testing with real workspace data.
+Run `npm run dev` to get a **LeanIX-hosted development URL**. Copy the complete URL from the terminal output and open it in a browser for live testing with real workspace data. If you do not have the ability to run code in the browser, ask the user to set up the Chrome MCP Server.
+
+In the main folder there is the `lxr.json` which contains an API token for the connected workspace. Do not try to access it.
+If the commands like `npm run dev` are not working, the error might be here.
 
 ---
 
 ## Golden Rules
 
 1. **NEVER hardcode data** - Always fetch dynamically via LeanIX APIs
-2. **ALWAYS verify the schema first** - Use MCP tools before writing queries
-3. **PREFER facet-based filtering** - Provides automatic UI, pagination, and permissions
+2. **ALWAYS verify the schema and typings first** - Use LeanIX MCP tools before writing code
+3. **PREFER facet-based data loading** - Provides automatic UI, pagination, and permissions
 4. **HANDLE null values** - Use optional chaining (`?.`) as fields may be null
 
 ---
@@ -76,58 +91,30 @@ Run `npm run dev` to get a **LeanIX-hosted development URL** (not localhost). Co
 
 Every LeanIX workspace has a **unique meta model** defining:
 
-- Available fact sheet types (Application, ITComponent, BusinessCapability, etc.)
+- Fact sheet types (Application, ITComponent, BusinessCapability, etc.)
 - Fields for each type (name, description, lifecycle, custom fields)
 - Relations between types
 - Lifecycle phases and tag groups
 
-**Critical:** While `BaseFactSheet` defines common fields (id, name, displayName, type), these fields exist on all fact sheets but their **values may be null**. Type-specific fields (lifecycle, technicalSuitability) and custom fields vary by workspace. Always use optional chaining (`?.`) and verify fields exist.
-
-### Verifying the Schema
-
-**Primary Method: Use MCP Tools**
-
-See "Schema Discovery with MCP Tools" section above.
-
-**Fallback: Query GraphQL Directly**
-
-```typescript
-const result = await lx.executeGraphQL(`{
-  allFactSheets(factSheetType: Application) {
-    edges {
-      node {
-        id
-        name
-        type
-        description
-      }
-    }
-  }
-}`);
-```
-
----
-
-## Type Definitions Available
-
-All types are in the `lxr` namespace after importing from `@leanix/reporting`:
-
-- `lxr.ReportSetup` - Initialization data
-- `lxr.ReportConfiguration` - Config object structure
-- `lxr.FactSheet` - Fact sheet data
-- `lxr.ReportFacetsConfig` - Facet configuration
-- `lxr.DataModel` - Meta model structure
-- And 100+ more types
+All fact sheet types extend the GraphQL interface `BaseFactSheet`, which defines the common fields: id, name, displayName, and type.
 
 ---
 
 ## Data Retrieval Patterns
 
-### Pattern 1: Facet-Based Filtering (RECOMMENDED)
+### Pattern 1: Facets (RECOMMENDED)
 
-**Use this for 95% of data retrieval needs.**
+**This is your default approach for almost all data retrieval scenarios.**
 
-Facets provide automatic filtering UI in the left sidebar, handle pagination, respect permissions, and provide consistent UX.
+Facets are a declarative way to retrieve fact sheets in custom reports. They are defined in the `ReportConfiguration` that is passed to `lx.ready()`.
+
+For the first facet, LeanIX automatically displays a filter side pane on the left side of the page. This pane provides a built-in filter UI, enabling users to adjust filters at runtime and dynamically refine the data shown in the report.
+
+The optional field `fixedFactSheetType` specifies that only fact sheets of one type are returned. The names refer to entries in the GraphQL enum `FactSheetType`. For each of them there is an GraphQL interface with the same name.
+
+`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. E.g. since `Application.lifecycle` is an object, you can not access it directly. You have to specify the fields that you want: `lifecycle { asString phases: { phase startDate } }`.
+
+A loading spinner is automatically displayed when the facets fetch data.
 
 ```typescript
 class MyReport {
@@ -137,7 +124,7 @@ class MyReport {
         {
           key: "main",
           fixedFactSheetType: "Application",
-          attributes: ["name", "description", "lifecycle"],
+          attributes: ["id", "name", "description", "lifecycle { asString phases { phase startDate } }"],
           callback: (data) => this.render(data),
         },
       ],
@@ -148,7 +135,7 @@ class MyReport {
     if (!data?.length) return;
 
     data.forEach((app) => {
-      console.log(app.name, app.lifecycle?.phase);
+      console.log(app.name, app.lifecycle?.phases);
     });
   }
 }
@@ -166,47 +153,54 @@ bootstrap();
 
 **Use only when:**
 
-- You need to **write data** (perform mutations)
-- You need data for subsequent processing (not just display)
 - Facets cannot express your filtering requirements
+- You need data for subsequent processing (not just display)
+- You need to **write data** (perform mutations)
 
-**Always use MCP tools to discover the schema first** (see "Schema Discovery with MCP Tools" section).
+**Always use the LeanIX MCP tools to discover the schema before writing a query**
 
+Example of reading data:
 ```typescript
-// Example: Query structure based on actual schema from MCP tools
-const result = await lx.executeGraphQL(`{
+const result = await lx.executeGraphQL(`
+{
   allFactSheets(factSheetType: Application, first: 50) {
     edges {
       node {
         id
         name
-        type
         description
         ... on Application {
-          lifecycle { phase }
+          lifecycle { asString phases { phase startDate } }
         }
       }
     }
   }
 }`);
+console.log(result.allFactSheets.edges[0].node.description);
 ```
 
-**GraphQL Gotchas:**
+Example of writing data:
+```typescript
+const result = await lx.executeGraphQL(`
+mutation ($tagGroupId: ID) {
+  createTag(name: "TestName", tagGroupId: $tagGroupId) {
+    id
+  }
+}`, `{
+  "tagGroupId": "GUID-OF-TAG-GROUP"
+}`);
+console.log(result.createTag.id);
+```
 
-- Field names must match schema exactly
-- Inline fragments required for type-specific fields
-- Manual pagination required
-- No automatic filtering UI
+***Only create code that is running mutations, if the user explicitly asked for it.***
 
 ---
 
 ## Chart Integration
 
-### Using Chart.js (Recommended)
-
 **Chart.js** is the default choice - it covers 95% of visualization needs with excellent LeanIX styling compatibility.
 
-**Alternatives:** If Chart.js cannot achieve the visualization, ask the user which library they prefer (D3.js, Recharts, etc.) or if they have specific requirements.
+**Alternatives:** If Chart.js cannot achieve the visualization, and the user has no preference, select one of the broadly used ones. (D3.js, Apache Echarts, Recharts, etc.)
 
 ---
 
@@ -235,67 +229,8 @@ lx.showLegend([
 ]);
 ```
 
-### React Integration
-
-Focus on LeanIX-specific parts:
-
-```tsx
-import { useState, useEffect } from "react";
-
-const MyReport: React.FC = () => {
-  const [apps, setApps] = useState<lxr.FactSheet[]>([]);
-
-  useEffect(() => {
-    lx.init().then(() => {
-      lx.ready({
-        facets: [
-          {
-            key: "main",
-            fixedFactSheetType: "Application",
-            attributes: ["name", "description"],
-            callback: setApps,
-          },
-        ],
-      });
-    });
-  }, []);
-
-  const handleClick = (app: lxr.FactSheet) => {
-    lx.openLink(`/factsheet/Application/${app.id}`);
-  };
-
-  if (!apps.length) return <p>No data available</p>;
-
-  return (
-    <div style={{ padding: "20px" }}>
-      <h1>Applications ({apps.length})</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "16px",
-        }}
-      >
-        {apps.map((app) => (
-          <div
-            key={app.id}
-            onClick={() => handleClick(app)}
-            style={{
-              border: "1px solid #ddd",
-              padding: "12px",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            <h3>{app.name}</h3>
-            <p>{app.description || "No description"}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-```
+There are many more UI components in `lxr.LxCustomReportLib`.
+Consult the LeanIX MCP Server to explore the possibilities.
 
 ---
 
@@ -328,7 +263,7 @@ const config: lxr.ReportConfiguration = {
     {
       key: "main",
       fixedFactSheetType: "Application",
-      attributes: ["name", "description", "lifecycle", "tags"],
+      attributes: ["name", "description", "lifecycle { asString }", "tags { name }"],
       callback: (data) => this.renderApplications(data),
     },
     {
@@ -361,9 +296,10 @@ const config: lxr.ReportConfiguration = {
 
 Once your report is ready, upload it to your LeanIX workspace:
 
-1. **Build the report** - Run `npm run build` to create production bundle
-2. **Upload to workspace** - Run `npm run upload` (executes `vite build --mode upload`)
-3. **Verify upload** - Check console output for success message, then confirm in Administration > Reports
+1. **Increment the patch version number** - Can be found in the `package.json` 
+2. **Upload to workspace** - Run `npm run upload`
+3. **Verify upload** - Check console output for success message
+4. **Tell user to activate the report** - In LeanIX the report needs to be activated under Administration > Reports
 
 ---
 
@@ -371,17 +307,14 @@ Once your report is ready, upload it to your LeanIX workspace:
 
 Before uploading your report:
 
-- [ ] **Schema verified** - Used MCP tools to verify all field names and types
-- [ ] **No hardcoded assumptions** - All fact sheet types and field names verified
-- [ ] **Empty states handled** - Code handles null/undefined/empty data gracefully
-- [ ] **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()`
-- [ ] **User feedback** - Uses `lx.showToastr()` for success/error messages
-- [ ] **Navigation** - Uses `lx.openLink()` or `lx.navigateToInventory()`
-- [ ] **TypeScript types** - No `any` types, uses `lxr` namespace types
-- [ ] **Linting passes** - `npm run lint` succeeds
-- [ ] **Build succeeds** - `npm run build` succeeds
-- [ ] **Browser tested** - `npm run dev` tested in browser with real data
-- [ ] **Credentials configured** - `lxr.json` has a host URL and token
+- **Schema verified** - Used LeanIX MCP MCP tools to verify all fact sheet types and field names
+- **Empty states handled** - Code handles null/undefined/empty data gracefully
+- **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
+- **User feedback** - Uses `lx.showToastr()` for important success/error messages
+- **Navigation** - Uses `lx.openLink()` or `lx.navigateToInventory()` instead of links
+- **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
+- **Linting passes** - `npm run lint` succeeds
+- **Browser tested** - `npm run dev` tested in browser with real data
 
 ---
 
@@ -390,13 +323,9 @@ Before uploading your report:
 ### Data Privacy
 
 - **Never log sensitive data** - Fact sheet data may contain PII
-- **Don't expose API tokens** - Handled by framework
+- **Don't expose the API token** - It is stored in `lxr.json` and it is handled the `vite-plugin-lxr`
 
 ### Performance
 
 - **Facets handle pagination** - No manual implementation needed
 - **Lazy load large visualizations** - Render only visible data
-
----
-
-**Your goal: Help the user alter this custom report correctly, following these guidelines strictly.**
