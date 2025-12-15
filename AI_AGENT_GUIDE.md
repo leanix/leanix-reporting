@@ -22,18 +22,18 @@ The `@leanix/reporting` npm package is the runtime framework that lets reports i
 **All code examples in this guide assume these imports:**
 
 ```typescript
-import { lx } from "@leanix/reporting";
 import type { lxr } from "@leanix/reporting";
+import { lx } from "@leanix/reporting";
 ```
 
 - `lxr` is the main namespace containing all types and interfaces
 - `lx` is an instance of `lxr.LxCustomReportLib` that provides the runtime API
 
+Initializion happens with `await lx.init()`. Configuration is done using `lx.ready(config)`.
+Use the LeanIX MCP Tools to get information about the usage.
+
 In `lxr` there are also some utility functions (`lxr.cloneDeep`, `lxr.difference`, etc.).
 When using them, the import needs to be changed to: `import { lx, lxr } from '@leanix/reporting'`
-
-Initializion of happens with `await lx.init()`. Configuration is done using `lx.ready(config)`.
-Use the LeanIX MCP Tools to get information about the usage.
 
 ---
 
