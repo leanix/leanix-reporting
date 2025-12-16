@@ -59,6 +59,10 @@ lx.init().then(function (setupInfo) {
 
 ## Documentation
 
+### AI Agent Development Guide
+
+**For AI agents assisting with custom report development:** See [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) for comprehensive instructions, best practices, and workflows.
+
 ### Typedoc
 
 Since the reporting library is created using TypeScript we are able to provide documentation of the typings that you can find here:
