@@ -9,7 +9,7 @@
 You are probably working in a custom report project that has `@leanix/reporting` installed as a dependency.
 It might be an existing project or a newly initialized one with example code.
 
-If you see code comments specifying that it is a starter project with demo content. Delete that comment and alter everything according to the users needs. Feel free to completely rewire everything.
+If you see code comments specifying that it is a starter project with demo content, delete that comment and alter everything according to the user's needs. Feel free to completely rewire everything.
 
 If you are not in a custom report project, instruct the user to initialize a custom report using `npm create lxr`.
 
@@ -29,7 +29,7 @@ import { lx } from "@leanix/reporting";
 - `lxr` is the main namespace containing all types and interfaces
 - `lx` is an instance of `lxr.LxCustomReportLib` that provides the runtime API
 
-Initializion happens with `await lx.init()`. Configuration is done using `lx.ready(config)`.
+Initialization happens with `await lx.init()`. Configuration is done using `lx.ready(config)`.
 Use the LeanIX MCP Tools to get information about the usage.
 
 In `lxr` there are also some utility functions (`lxr.cloneDeep`, `lxr.difference`, etc.).
@@ -46,9 +46,8 @@ You have access to **LeanIX MCP Server tools** that provide:
 - **TypeScript definitions** - Access TypeScript definitions from the `@leanix/reporting` package
 - **GraphQL type definitions** - Request Schema in SDL for types like `Query`, `Application`, `ITComponent`, `BaseFactSheet`
 
-There might be more LeanIX MCP tools available.
-Do not use other LeanIX MCP tools to modify data.
-Do not use other LeanIX MCP tools to fetch data and hardcode it in the report.
+There may be more LeanIX MCP tools available.
+Do not use other LeanIX MCP tools to modify data or to fetch data and hardcoding it in the report
 
 The LeanIX MCP Server is always connected to a specific workspace via an API token. Since each workspace can have different configurations, the GraphQL schema definitions may vary between workspaces.
 
@@ -67,13 +66,13 @@ The LeanIX MCP Server is always connected to a specific workspace via an API tok
 1. **Write Code** - Implement using TypeScript with `lxr.*` types
 2. **Lint** - Run `npm run lint` to catch issues
 3. **Test** - Run `npm run dev` to start a dev server with hot reload and test in browser
-4. **Repeat** - Iterate based on the input from the user 
+4. **Repeat** - Iterate based on the input from the user
 
 ### Testing Your Report
 
 Run `npm run dev` to get a **LeanIX-hosted development URL**. Copy the complete URL from the terminal output and open it in a browser for live testing with real workspace data. If you do not have the ability to run code in the browser, ask the user to set up the Chrome MCP Server.
 
-In the main folder there is the `lxr.json` which contains an API token for the connected workspace. Do not try to access it.
+In the main folder there is the `lxr.json` which contains an API token for the connected workspace. Do not attempt to access it.
 If the commands like `npm run dev` are not working, the error might be here.
 
 ---
@@ -112,7 +111,7 @@ For the first facet, LeanIX automatically displays a filter side pane on the lef
 
 The optional field `fixedFactSheetType` specifies that only fact sheets of one type are returned. The names refer to entries in the GraphQL enum `FactSheetType`. For each of them there is an GraphQL interface with the same name.
 
-`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. E.g. since `Application.lifecycle` is an object, you can not access it directly. You have to specify the fields that you want: `lifecycle { asString phases: { phase startDate } }`.
+`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. E.g. since `Application.lifecycle` is an object, you can not access it directly. You have to specify the fields that you want, e.g., `lifecycle { asString phases: { phase startDate } }`.
 
 A loading spinner is automatically displayed when the facets fetch data.
 
@@ -124,7 +123,12 @@ class MyReport {
         {
           key: "main",
           fixedFactSheetType: "Application",
-          attributes: ["id", "name", "description", "lifecycle { asString phases { phase startDate } }"],
+          attributes: [
+            "id",
+            "name",
+            "description",
+            "lifecycle { asString phases { phase startDate } }",
+          ],
           callback: (data) => this.render(data),
         },
       ],
@@ -181,14 +185,23 @@ console.log(result.allFactSheets.edges[0].node.description);
 
 Example of writing data:
 ```typescript
-const result = await lx.executeGraphQL(`
-mutation ($tagGroupId: ID) {
-  createTag(name: "TestName", tagGroupId: $tagGroupId) {
-    id
-  }
-}`, `{
-  "tagGroupId": "GUID-OF-TAG-GROUP"
-}`);
+const result = await lx.executeGraphQL(
+  `
+    mutation ($tagGroupId: ID) {
+      createTag(
+        name: "TestName",
+        tagGroupId: $tagGroupId
+      ) {
+        id
+      }
+    }
+  `,
+  `
+    {
+      "tagGroupId": "GUID-OF-TAG-GROUP"
+    }
+  `
+);
 console.log(result.createTag.id);
 ```
 
@@ -255,48 +268,11 @@ lx.navigateToInventory({
 
 ---
 
-## Report Configuration Reference
-
-```typescript
-const config: lxr.ReportConfiguration = {
-  facets: [
-    {
-      key: "main",
-      fixedFactSheetType: "Application",
-      attributes: ["name", "description", "lifecycle { asString }", "tags { name }"],
-      callback: (data) => this.renderApplications(data),
-    },
-    {
-      key: "components",
-      fixedFactSheetType: "ITComponent",
-      attributes: ["name", "category"],
-      callback: (data) => this.renderComponents(data),
-    },
-  ],
-
-  menuActions: {
-    dropdowns: [
-      {
-        id: "viewMode",
-        name: "View Mode",
-        entries: [
-          { id: "grid", label: "Grid View" },
-          { id: "list", label: "List View" },
-        ],
-        callback: (selected) => this.changeView(selected),
-      },
-    ],
-  },
-};
-```
-
----
-
 ## Uploading to LeanIX
 
 Once your report is ready, upload it to your LeanIX workspace:
 
-1. **Increment the patch version number** - Can be found in the `package.json` 
+1. **Increment the patch version number** - Can be found in the `package.json`
 2. **Upload to workspace** - Run `npm run upload`
 3. **Verify upload** - Check console output for success message
 4. **Tell user to activate the report** - In LeanIX the report needs to be activated under Administration > Reports
@@ -323,7 +299,7 @@ Before uploading your report:
 ### Data Privacy
 
 - **Never log sensitive data** - Fact sheet data may contain PII
-- **Don't expose the API token** - It is stored in `lxr.json` and it is handled the `vite-plugin-lxr`
+- **Don't expose the API token** - It is stored in `lxr.json` and it is handled by the `vite-plugin-lxr`
 
 ### Performance
 
