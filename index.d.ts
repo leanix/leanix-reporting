@@ -728,6 +728,15 @@ declare module lxr
 	    [factSheetName: string]: ReportFactSheetPermission;
 	}
 	export type Language = 'en' | 'de' | 'es' | 'fr' | 'pt' | 'ja';
+	export interface ManyToManyRelationConfig {
+	    relationToParent: string;
+	    relationToChild: string;
+	    parentsAttributeName: string;
+	    childrenAttributeName: string;
+	}
+	export interface ManyToManyRelationsConfig {
+	    [factSheetType: string]: ManyToManyRelationConfig;
+	}
 	export interface ReportSetupSettings {
 	    baseUrl: string;
 	    environment: Environment;
@@ -742,6 +751,7 @@ declare module lxr
 	    workspace: Workspace;
 	    page: PageContext;
 	    mtmWorkspaceSettings: MtmWorkspaceSettings;
+	    manyToManyRelationsConfig?: ManyToManyRelationsConfig;
 	}
 	export interface ReportSetupConfig {
 	    factSheetType?: string;
