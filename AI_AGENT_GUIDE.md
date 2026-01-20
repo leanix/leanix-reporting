@@ -164,6 +164,7 @@ bootstrap();
 **Always use the LeanIX MCP tools to discover the schema before writing a query**
 
 Example of reading data:
+
 ```typescript
 const result = await lx.executeGraphQL(`
 {
@@ -184,6 +185,7 @@ console.log(result.allFactSheets.edges[0].node.description);
 ```
 
 Example of writing data:
+
 ```typescript
 const result = await lx.executeGraphQL(
   `
@@ -200,12 +202,12 @@ const result = await lx.executeGraphQL(
     {
       "tagGroupId": "GUID-OF-TAG-GROUP"
     }
-  `
+  `,
 );
 console.log(result.createTag.id);
 ```
 
-***Only create code that is running mutations, if the user explicitly asked for it.***
+**Only create code that is running mutations, if the user explicitly asked for it.**
 
 ---
 
@@ -278,6 +280,18 @@ The view model is accessible at `lx.currentSetup.settings.viewModel`. Refer to t
 
 ---
 
+## Using Translations
+
+**Always translate technical keys to user-friendly display names for fact sheet types, fields, and values.** Users can configure workspace translations in multiple languages, and translations exist for almost all metamodel elements.
+
+Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
+
+**How Translations Work:** Users can switch languages, define custom field translations, and customize labels for field values. When a translation is not found, methods return the original key as a fallback. Translations automatically respect the user's current language setting.
+
+**Best Practices:** Always translate fact sheet type names (use plural forms for lists), field names, field values, and relation names before displaying them to users. This ensures reports are internationalized and match workspace terminology.
+
+---
+
 ## Uploading to LeanIX
 
 Once your report is ready, upload it to your LeanIX workspace:
@@ -300,6 +314,7 @@ Before uploading your report:
 - **Navigation** - Uses `lx.openLink()` or `lx.navigateToInventory()` instead of links
 - **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
 - **View model colors** - Uses workspace colors from `lx.currentSetup.settings.viewModel` for visual consistency
+- **Translations** - Translates all technical keys (fact sheet types, fields, values) to user-friendly display names
 - **Linting passes** - `npm run lint` succeeds
 - **Browser tested** - `npm run dev` tested in browser with real data
 
