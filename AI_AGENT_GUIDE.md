@@ -272,7 +272,7 @@ lx.navigateToInventory({
 
 **Always use workspace-defined colors to ensure visual consistency across custom reports.** Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
 
-The view model is accessible at `lx.currentSetup.settings.viewModel`. Before implementing color retrieval, use LeanIX MCP typescript definition tool to discover the complete type definitions and available methods.
+The view model is accessible at `lx.currentSetup.settings.viewModel`. Refer to the TypeScript definitions for available color retrieval methods and view model structure.
 
 **Best Practices:** Always use optional chaining (`?.`), provide fallback colors, check for existence of `"values" in metadata` before accessing field value colors, use both `bgColor` and `color` properties for proper contrast, and apply colors consistently across all visual elements to match workspace configuration.
 
