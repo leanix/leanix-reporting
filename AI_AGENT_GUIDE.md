@@ -43,7 +43,6 @@ Before writing any code, use MCP tools to discover the schema of the connected w
 
 You have access to **LeanIX MCP Server tools** that provide:
 
-- **TypeScript definitions** - Access TypeScript definitions from the `@leanix/reporting` package
 - **GraphQL type definitions** - Request Schema in SDL for types like `Query`, `Application`, `ITComponent`, `BaseFactSheet`
 
 There may be more LeanIX MCP tools available.
@@ -51,11 +50,16 @@ Do not use other LeanIX MCP tools to modify data or to fetch data and hardcoding
 
 The LeanIX MCP Server is always connected to a specific workspace via an API token. Since each workspace can have different configurations, the GraphQL schema definitions may vary between workspaces.
 
+### TypeScript Definitions
+
+Complete TypeScript type definitions for the `@leanix/reporting` package are included in the **TypeScript Type Definitions** section.
+
 ### Discovery Process
 
 1. **Identify what you need** - Methods from `LxCustomReportLib`? GraphQL Query operations? Fact sheet fields? Relations?
-2. **Request type definitions** - Use LeanIX MCP tools to get TypeScript definitions or GraphQL SDL for specific types
-3. **Write code** - Use the information received, not assumptions
+2. **Request GraphQL SDL** - Use LeanIX MCP tools to get GraphQL Schema Definition Language for workspace-specific types
+3. **Reference TypeScript definitions** - See the **TypeScript Type Definitions** section for `@leanix/reporting` types
+4. **Write code** - Use the information received, not assumptions
 
 ---
 
@@ -243,7 +247,7 @@ lx.showLegend([
 ```
 
 There are many more UI components in `lxr.LxCustomReportLib`.
-Consult the LeanIX MCP Server to explore the possibilities.
+Reference the **TypeScript Type Definitions** section to explore all available methods and properties.
 
 ---
 
