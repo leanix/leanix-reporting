@@ -3093,6 +3093,7 @@ declare module lxr
 	    includeInvalidRelations?: boolean;
 	    excludeConstrainingRelations?: string[];
 	    trackingKey?: string;
+	    getOnlyBaseAttributes?: boolean;
 	}
 	export type ReportAllFactSheetsResponse = Record<string, ReportPointOfViewFactSheets>;
 	export interface ReportPointOfViewFactSheets {
