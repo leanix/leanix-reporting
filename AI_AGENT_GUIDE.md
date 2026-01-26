@@ -272,23 +272,17 @@ lx.navigateToInventory({
 
 ## Using Workspace View Model Colors
 
-**Always use workspace-defined colors to ensure visual consistency across custom reports.** Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
+**Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.** Always use these workspace-defined colors to ensure visual consistency across custom reports.
 
-The view model is accessible at `lx.currentSetup.settings.viewModel`. Refer to the TypeScript definitions for available color retrieval methods and view model structure.
+Color information can be accessed through helper methods `lx.getFactSheetFieldMetaData()` and `lx.getFactSheetRelationFieldMetaData()` for specific factsheet field or relation coloring, while the entire viewModel (`lx.currentSetup.settings.viewModel.factSheets`) provides access to factsheet type colors. The main color property is `bgColor` (for element colors, icon colors) while `color` (for text that displays on top of the background color).
 
-**Best Practices:** Always use optional chaining (`?.`), provide fallback colors, check for existence of `"values" in metadata` before accessing field value colors, use both `bgColor` and `color` properties for proper contrast, and apply colors consistently across all visual elements to match workspace configuration.
+**Best Practices:** Always use optional chaining (`?.`), provide fallback colors, check for property existence before access, and apply colors consistently across all visual elements to match workspace configuration.
 
 ---
 
 ## Using Translations
 
-**Always translate technical keys to user-friendly display names for fact sheet types, fields, and values.** Users can configure workspace translations in multiple languages, and translations exist for almost all metamodel elements.
-
-Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
-
-**How Translations Work:** Users can switch languages, define custom field translations, and customize labels for field values. When a translation is not found, methods return the original key as a fallback. Translations automatically respect the user's current language setting.
-
-**Best Practices:** Always translate fact sheet type names (use plural forms for lists), field names, field values, and relation names before displaying them to users. This ensures reports are internationalized and match workspace terminology.
+**Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.** Users can switch languages, define custom field translations, and customize labels for field values. Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback. Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
 
 ---
 
