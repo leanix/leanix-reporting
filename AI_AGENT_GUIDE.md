@@ -168,6 +168,7 @@ bootstrap();
 **Always use the LeanIX MCP tools to discover the schema before writing a query**
 
 Example of reading data:
+
 ```typescript
 const result = await lx.executeGraphQL(`
 {
@@ -188,6 +189,7 @@ console.log(result.allFactSheets.edges[0].node.description);
 ```
 
 Example of writing data:
+
 ```typescript
 const result = await lx.executeGraphQL(
   `
@@ -204,12 +206,12 @@ const result = await lx.executeGraphQL(
     {
       "tagGroupId": "GUID-OF-TAG-GROUP"
     }
-  `
+  `,
 );
 console.log(result.createTag.id);
 ```
 
-***Only create code that is running mutations, if the user explicitly asked for it.***
+**Only create code that is running mutations, if the user explicitly asked for it.**
 
 ---
 
@@ -272,6 +274,26 @@ lx.navigateToInventory({
 
 ---
 
+## Using Workspace View Model Colors
+
+Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
+**Always use these workspace-defined colors to ensure visual consistency across custom reports.**
+
+Color information can be accessed through helper methods `lx.getFactSheetFieldMetaData()` and `lx.getFactSheetRelationFieldMetaData()` for specific factsheet field or relation coloring, while the entire viewModel (`lx.currentSetup.settings.viewModel.factSheets`) provides access to factsheet type colors. The main color property is `bgColor` (for element colors, icon colors) while `color` (for text that displays on top of the background color).
+
+**Best Practices:** Always use optional chaining (`?.`), provide fallback colors, check for property existence before access, and apply colors consistently across all visual elements to match workspace configuration.
+
+---
+
+## Using Translations
+
+Users can switch languages, define custom field translations, and customize labels for field values.
+**Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.**
+Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
+Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback. 
+
+---
+
 ## Uploading to LeanIX
 
 Once your report is ready, upload it to your LeanIX workspace:
@@ -293,6 +315,8 @@ Before uploading your report:
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` or `lx.navigateToInventory()` instead of links
 - **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
+- **View model colors** - Uses workspace colors from `lx.currentSetup.settings.viewModel` for visual consistency
+- **Translations** - Translates all technical keys (fact sheet types, fields, values) to user-friendly display names
 - **Linting passes** - `npm run lint` succeeds
 - **Browser tested** - `npm run dev` tested in browser with real data
 
