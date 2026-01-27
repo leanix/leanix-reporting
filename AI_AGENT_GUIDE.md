@@ -272,7 +272,8 @@ lx.navigateToInventory({
 
 ## Using Workspace View Model Colors
 
-**Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.** Always use these workspace-defined colors to ensure visual consistency across custom reports.
+Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
+**Always use these workspace-defined colors to ensure visual consistency across custom reports.**
 
 Color information can be accessed through helper methods `lx.getFactSheetFieldMetaData()` and `lx.getFactSheetRelationFieldMetaData()` for specific factsheet field or relation coloring, while the entire viewModel (`lx.currentSetup.settings.viewModel.factSheets`) provides access to factsheet type colors. The main color property is `bgColor` (for element colors, icon colors) while `color` (for text that displays on top of the background color).
 
@@ -282,7 +283,10 @@ Color information can be accessed through helper methods `lx.getFactSheetFieldMe
 
 ## Using Translations
 
-**Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.** Users can switch languages, define custom field translations, and customize labels for field values. Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback. Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
+Users can switch languages, define custom field translations, and customize labels for field values.
+**Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.**
+Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
+Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback. 
 
 ---
 
