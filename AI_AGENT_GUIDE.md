@@ -177,31 +177,42 @@ A dash (`-`) as a lifecycle value means the lifecycle field is currently empty o
 
 **Facet filters implicitly filter by quality seal (`lxState`):**
 
-- By default, facet filters show only **approved** and **broken quality seal** fact sheets
-- Draft and rejected fact sheets are filtered out automatically
+- By default, facet filters show only `APPROVED` and `BROKEN_QUALITY_SEAL` fact sheets
+- `DRAFT` and `REJECTED` fact sheets are filtered out automatically
 
-**GraphQL queries do NOT apply this implicit filter:**
+This implicit filtering happens automatically and can cause **incomplete data** in custom reports data (e.g., showing missing initiatives count)
 
-- GraphQL queries return all fact sheets by default, regardless of quality seal
-- You must explicitly filter by `lxState` in GraphQL if needed
+---
 
-**To show all fact sheets in a faceted report** (including drafts), explicitly set an empty filter:
+**Use `defaultFilters` to include all fact sheets**
+
+To show **all fact sheets** in a faceted report (including draftsand rejected), explicitly set `defaultFilters` with an **empty `keys` array**:
 
 ```typescript
 facets: [
   {
-    key: "main",
-    fixedFactSheetType: "Application",
+    key: "initiatives",
+    fixedFactSheetType: "Initiative",
+    attributes: ["id", "displayName" /* ... */],
     defaultFilters: [
       {
         facetKey: "lxState",
-        keys: [],
+        keys: [], // Empty array = no quality seal filtering
       },
     ],
-    // ... other config
+    callback: (factSheets) => {
+      // Will now receive ALL fact sheets regardless of quality seal status
+    },
   },
 ];
 ```
+
+---
+
+**GraphQL queries behave differently:**
+
+- GraphQL queries (`lx.executeGraphQL()`) return **all fact sheets** by default, regardless of quality seal
+- You must explicitly filter by `lxState` in GraphQL if you want to exclude certain statuses
 
 ---
 
