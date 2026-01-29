@@ -135,7 +135,7 @@ Extract unique values from the actual dataset being visualized since these value
 
 When the user does **not explicitly specify styling**, apply these defaults:
 
-1. **Background:** White background for single chart report, for dashboards: gray background with white cards
+1. **Background:** White background for single chart report, for dashboards: gray background `#f0f2f5` with white cards
 2. **No redundant titles:** Do NOT add a report title (rendered outside the custom report iframe) or "Total number of fact sheets" counters (unless explicitly requested)
 3. **Single chart or charts with matching/similar values:** Use LeanIX default legends through `lx.showLegend()`
 
