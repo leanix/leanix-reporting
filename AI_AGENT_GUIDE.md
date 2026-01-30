@@ -221,6 +221,8 @@ console.log(result.createTag.id);
 
 **Alternatives:** If Chart.js cannot achieve the visualization, and the user has no preference, select one of the broadly used ones. (D3.js, Apache Echarts, Recharts, etc.)
 
+**Data aggregation:** Charts should summarize **fact sheet-level data** by default (e.g., count applications by lifecycle phase). Only explore relations when the user explicitly requests relationship analysis (e.g., "show which applications use which IT components").
+
 ---
 
 ## UI Components & Styling
@@ -279,9 +281,16 @@ lx.navigateToInventory({
 Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
 **Always use these workspace-defined colors to ensure visual consistency across custom reports.**
 
-Color information can be accessed through helper methods `lx.getFactSheetFieldMetaData()` and `lx.getFactSheetRelationFieldMetaData()` for specific factsheet field or relation coloring, while the entire viewModel (`lx.currentSetup.settings.viewModel.factSheets`) provides access to factsheet type colors. The main color property is `bgColor` (for element colors, icon colors) while `color` (for text that displays on top of the background color).
+**IMPORTANT:** `lx.getFactSheetFieldMetaData()` requires `lx.init()` to be called first.
 
-**Best Practices:** Always use optional chaining (`?.`), provide fallback colors, check for property existence before access, and apply colors consistently across all visual elements to match workspace configuration.
+**Accessing colors:**
+
+- **Fact sheet type colors** - Access via `lx.currentSetup.settings.viewModel.factSheets.find(f => f.type === fsType).bgColor`
+- **Field value colors** (lifecycle, functional fit, etc.) - Use `lx.getFactSheetFieldMetaData(fsType, fieldName)`
+
+**Color properties:** `bgColor` (for element colors, icon colors), `color` (for text on colored backgrounds).
+
+**Best Practices:** Always use workspace colors, never hardcode. Use optional chaining (`?.`) to handle missing values.
 
 ---
 
