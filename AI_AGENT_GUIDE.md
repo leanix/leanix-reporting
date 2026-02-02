@@ -84,15 +84,68 @@ If the commands like `npm run dev` are not working, the error might be here.
 ## Golden Rules
 
 1. **NEVER hardcode data** - Always fetch dynamically via LeanIX APIs
-2. **ALWAYS verify the schema and typings first** - Use LeanIX MCP tools before writing code
-3. **PREFER facet-based data loading** - Provides automatic UI, pagination, and permissions
-4. **HANDLE null values** - Use optional chaining (`?.`) as fields may be null
+2. **NEVER hardcode expected values in charts** - Derive all values dynamically from the dataset (e.g., lifecycle phases, statuses)
+3. **ALWAYS verify the schema and typings first** - Use LeanIX MCP tools before writing code
+4. **PREFER facet-based data loading** - Provides automatic UI, pagination, and permissions
+5. **HANDLE null values** - Use optional chaining (`?.`) as fields may be null
+
+---
+
+## Handling Missing or Unavailable Data
+
+When a user requests data that is not available in the current workspace:
+
+**DO NOT:**
+
+- Assume values exist
+- Hardcode mock data
+- Proceed with placeholder values
+
+**DO:**
+
+- Explicitly inform the user about the data gap
+- Ask how the user would like to proceed
+- Suggest alternatives if applicable
+
+---
+
+## Report Metadata Protection
+
+**The AI must NOT change the following unless explicitly requested by the user:**
+
+In `package.json`:
+
+- `name`: Project/repository name
+- `leanixReport.title`: Report title displayed in LeanIX
+- `leanixReport.id`: Report ID used to identify that two uploads are the same report
+- `leanixReport.description`
+- `leanixReport.author`
+
+### Report ID Rules
+
+Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), and underscores (`_`), and must not end with a dot.
+
+---
+
+## Dynamic Chart Values (No Hardcoding)
+
+Extract unique values from the actual dataset being visualized since these values are dynamic and workspace-specific.
+
+---
+
+## Default Styling Rules
+
+When the user does **not explicitly specify styling**, apply these defaults:
+
+1. **Background:** White background for single chart report, for dashboards: gray background `#f0f2f5` with white cards
+2. **No redundant titles:** Do NOT add a report title (rendered outside the custom report iframe) or "Total number of fact sheets" counters (unless explicitly requested)
+3. **Single chart or charts with matching/similar values:** Use LeanIX default legends through `lx.showLegend()`
 
 ---
 
 ## Understanding the Meta Model
 
-Every LeanIX workspace has a **unique meta model** defining:
+Every LeanIX workspace has a **unique meta model**, consisting of a viewModel and a dataModel, which together define:
 
 - Fact sheet types (Application, ITComponent, BusinessCapability, etc.)
 - Fields for each type (name, description, lifecycle, custom fields)
@@ -100,6 +153,63 @@ Every LeanIX workspace has a **unique meta model** defining:
 - Lifecycle phases and tag groups
 
 All fact sheet types extend the GraphQL interface `BaseFactSheet`, which defines the common fields: id, name, displayName, and type.
+
+Users can customize the meta model by:
+
+- Defining custom fields for any fact sheet type
+- Configuring possible values for select fields (single/multiple select)
+- Setting up relations between fact sheet types
+
+---
+
+## Product-Specific Behaviors
+
+### Lifecycle Value Interpretation
+
+A dash (`-`) as a lifecycle value indicates that lifecycles are defined, but none has started yet (the lifecycle value exists only in the future as a planned lifecycle).
+
+**Treat `-` the same as `null`, `undefined`, or `"n/a"`** in lifecycle-related logic and filtering.
+
+### Implicit Filtering of Drafts in Facet Filters
+
+**Facet filters implicitly filter by quality seal (`lxState`):**
+
+- By default, facet filters show only `APPROVED` and `BROKEN_QUALITY_SEAL` fact sheets
+- `DRAFT` and `REJECTED` fact sheets are filtered out automatically
+
+This implicit filtering happens automatically and can cause **incomplete data** in custom reports data (e.g., showing missing initiatives count)
+
+---
+
+**Use `defaultFilters` to include all fact sheets**
+
+To show **all fact sheets** in a faceted report (including `DRAFT` and `REJECTED`), explicitly set `defaultFilters` with an **empty `keys` array**:
+
+```typescript
+facets: [
+  {
+    key: "initiatives",
+    fixedFactSheetType: "Initiative",
+    attributes: ["id", "displayName" /* ... */],
+    defaultFilters: [
+      {
+        facetKey: "lxState",
+        keys: [], // Empty array = no quality seal filtering
+      },
+    ],
+    callback: (factSheets) => {
+      // Will now receive ALL fact sheets regardless of quality seal status
+    },
+  },
+];
+```
+
+---
+
+**GraphQL queries behave differently:**
+
+- GraphQL queries (`lx.executeGraphQL()`) return **all fact sheets** by default, regardless of quality seal
+- You must explicitly filter by `lxState` in GraphQL if you want to exclude certain statuses
 
 ---
 
@@ -255,26 +365,59 @@ Reference the **TypeScript Type Definitions** section to explore all available m
 
 ## Linking and Navigation
 
+**Use the appropriate navigation functions based on the target:**
+
+### Opening a Single Fact Sheet
+
+Use `lx.openLink()` to open a single fact sheet page:
+
 ```typescript
 // Link to fact sheet
 lx.openLink(`/factsheet/Application/${factSheetId}`);
 
 // Link with specific tab
 lx.openLink(`/factsheet/Application/${factSheetId}?tab=relations`);
-
-// Open filtered Inventory factsheets view
-lx.navigateToInventory({
-  factSheetType: "Application",
-  filters: {
-    lifecycle: ["Active"],
-    tags: ["Production"],
-  },
-});
 ```
+
+### Opening a Group of Fact Sheets (Inventory)
+
+The **Inventory** is the LeanIX Fact Sheets overview page - a table view that displays multiple fact sheets with their attributes. It uses the same facet filters as custom reports to filter and refine the displayed fact sheets.
+
+Use `lx.navigateToInventory()` to open a filtered inventory view.
 
 ---
 
-## Using Workspace View Model Colors
+## Using the Data Model
+
+The Data Model provides runtime metadata about fact sheet types, fields, relations, and their configurations in the current workspace.
+
+**Access the Data Model:**
+
+```typescript
+const dataModel = lx.currentSetup.settings.dataModel;
+```
+
+**Key capabilities:**
+
+- **Fact Sheet definitions:** `dataModel.factSheets[factSheetType]` provides field definitions, relations, and configuration for a specific fact sheet type
+- **Field definitions:** Each field includes its type (`INTEGER`, `LIFECYCLE`,`COMPLETION`, `QUALITYSEALSTATUS`, `SINGLE_SELECT` etc.) and available values
+- **Relation definitions:** `dataModel.relations[relationName]` provides information about relations between fact sheet types
+- **External ID fields:** `dataModel.externalIdFields` contains metadata for external ID configurations
+
+**When to use the Data Model:**
+
+- To get all possible values for a field (e.g., all lifecycle phases, all select field options)
+- To discover available fields and relations for a fact sheet type
+- To validate field types before rendering them in charts or tables
+- To check field configurations (mandatory fields, facet availability, etc.)
+
+**Helper utilities:**
+
+The `lx.dataModelHelpers` provides utility methods for working with the data model, such as `getRelationDefinition()` and `isConstrainingRelation()`.
+
+---
+
+## View Model Colors
 
 Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
 **Always use these workspace-defined colors to ensure visual consistency across custom reports.**
@@ -289,8 +432,16 @@ Color information can be accessed through helper methods `lx.getFactSheetFieldMe
 
 Users can switch languages, define custom field translations, and customize labels for field values.
 **Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.**
+
+Field values, relation values, and fact sheet types have workspace-specific translations:
+
+- **Field values** are stored as technical IDs (e.g., `"phaseIn"`, `"missionCritical"`) - not display labels
+- **Relation values** are stored as technical IDs (e.g., relation type names like `"relApplicationToITComponent"`)
+- **Fact sheet types** are stored as technical IDs (e.g., `"Application"`, `"ITComponent"`, `"BusinessCapability"`)
+- Always use `displayName` property when available, or translation functions to convert technical IDs to user-friendly display names
+
 Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
-Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback. 
+Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback.
 
 ---
 
@@ -311,12 +462,13 @@ Before uploading your report:
 
 - **Schema verified** - Used LeanIX MCP MCP tools to verify all fact sheet types and field names
 - **Empty states handled** - Code handles null/undefined/empty data gracefully
+- **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
 - **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
-- **Navigation** - Uses `lx.openLink()` or `lx.navigateToInventory()` instead of links
+- **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
 - **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
-- **View model colors** - Uses workspace colors from `lx.currentSetup.settings.viewModel` for visual consistency
-- **Translations** - Translates all technical keys (fact sheet types, fields, values) to user-friendly display names
+- **View model colors** - Colors all technical fact sheet types, fields, and values through workspace colors
+- **Translations** - Translates all technical keys (fact sheet types, fields, relations, values) to user-friendly display names
 - **Linting passes** - `npm run lint` succeeds
 - **Browser tested** - `npm run dev` tested in browser with real data
 
