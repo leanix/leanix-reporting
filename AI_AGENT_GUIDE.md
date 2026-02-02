@@ -281,7 +281,7 @@ lx.navigateToInventory({
 Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
 **Always use these workspace-defined colors to ensure visual consistency across custom reports.**
 
-**IMPORTANT:** `lx.getFactSheetFieldMetaData()` requires `lx.init()` to be called first.
+**IMPORTANT:** All `lx` methods require `lx.init()` to be called first.
 
 **Accessing colors:**
 
