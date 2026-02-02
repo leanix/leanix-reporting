@@ -31,6 +31,10 @@ declare module lxr
 	 * Entry class of the LeanIX Reporting Library.
 	 * An instance of this class is globally available as `lx` variable.
 	 *
+	 * All methods in this library require {@link LxCustomReportLib.init} to be called first
+	 * and its promise to be resolved before they can be used. Always initialize the library before
+	 * calling other methods.
+	 *
 	 * @example
 	 * ```js
 	 * // The sequence to initialise the library for a report looks like this:
@@ -59,6 +63,10 @@ declare module lxr
 	     * which is resolved once initialisation with the framework is finished. The
 	     * resolved promise contains a {@link ReportSetup} instance with information
 	     * provided to you through the framework.
+	     *
+	     * This method must be called first and its promise must be resolved before using
+	     * all other methods in this library (such as metadata methods, navigation methods, etc.).
+	     *
 	     * With that information you should be able to set up your report properly. Once
 	     * that is done the {@link LxCustomReportLib.ready} function needs be called to signal
 	     * that the report is ready to receive and process data and user events.
@@ -303,9 +311,36 @@ declare module lxr
 	     */
 	    openRouterLink(url: string): void;
 	    /**
-	     * Navigate to inventory using provided filters
+	     * Navigate to inventory using provided filters.
+	     *
+	     * This method allows reports to programmatically navigate to the inventory view with specific filters applied.
+	     * Filters can include facet-based filtering (e.g., fact sheet types, lifecycle, tags) and/or filtering by
+	     * specific fact sheet IDs.
 	     *
 	     * @param filters Specified filters will be applied to inventory
+	     * @param filters.facetFilters Array of facet filters to apply (e.g., FactSheetTypes, lifecycle, tags, etc.).
+	     *                             Each filter must have a `facetKey` and an array of `keys` representing the selected values.
+	     * @param filters.factSheetIds Optional array of fact sheet UUIDs to filter by specific fact sheets.
+	     * @param filters.fullTextSearchTerm Optional full-text search term to apply to the inventory view
+	     * @param filters.sorting Optional sorting configuration to order the inventory results
+	     *
+	     * @example
+	     * // Filter by fact sheet type and lifecycle phase
+	     * lx.navigateToInventory({
+	     *   facetFilters: [
+	     *     { facetKey: 'FactSheetTypes', keys: ['Application'] },
+	     *     { facetKey: 'lifecycle', keys: ['active', 'phaseIn'] }
+	     *   ]
+	     * });
+	     *
+	     * @example
+	     * // Filter by specific fact sheet IDs
+	     * lx.navigateToInventory({
+	     *   facetFilters: [
+	     *     { facetKey: 'FactSheetTypes', keys: ['Application'] }
+	     *   ],
+	     *   factSheetIds: ['uuid-1234-5678', 'uuid-abcd-efgh', 'uuid-9876-5432']
+	     * });
 	     */
 	    navigateToInventory(filters: NavigateToInventoryFilters): void;
 	    /**
