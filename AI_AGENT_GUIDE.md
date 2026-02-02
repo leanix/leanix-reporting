@@ -93,13 +93,35 @@ If the commands like `npm run dev` are not working, the error might be here.
 
 ## Handling Missing or Unavailable Data
 
-When a user requests data that is not available in the current workspace, never assume values exist, hardcode mock data, or proceed with placeholder values. Instead, explicitly inform the user about the data gap, ask how they would like to proceed, and suggest alternatives if applicable.
+When a user requests data that is not available in the current workspace:
+
+**DO NOT:**
+
+- Assume values exist
+- Hardcode mock data
+- Proceed with placeholder values
+
+**DO:**
+
+- Explicitly inform the user about the data gap
+- Ask how the user would like to proceed
+- Suggest alternatives if applicable
 
 ---
 
 ## Report Metadata Protection
 
-Do NOT change the following in `package.json` unless explicitly requested by the user: `name` (project/repository name), `leanixReport.title` (report title displayed in LeanIX), and `leanixReport.id` (report ID used to identify that two uploads are the same report). If explicitly asked to modify the report ID, ensure it only contains lowercase letters (`a-z`), digits (`0-9`), dots (`.`), and underscores (`_`), and does not end with a dot.
+**The AI must NOT change the following unless explicitly requested by the user:**
+
+In `package.json`:
+
+- `name`: Project/repository name
+- `leanixReport.title`: Report title displayed in LeanIX
+- `leanixReport.id`: Report ID used to identify that two uploads are the same report
+
+### Report ID Rules
+
+Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), and underscores (`_`), and must not end with a dot.
 
 ---
 
@@ -142,11 +164,18 @@ Users can customize the meta model by:
 
 ### Lifecycle Value Interpretation
 
-A dash (`-`) as a lifecycle value means the lifecycle field is currently empty or a lifecycle value exists in the future (planned lifecycle), and should be treated the same as `null`, `undefined`, or `"n/a"` in lifecycle-related logic and filtering.
+A dash (`-`) as a lifecycle value means the lifecycle field is currently empty or a lifecycle value exists in the future (planned lifecycle).
+
+**Treat `-` the same as `null`, `undefined`, or `"n/a"`** in lifecycle-related logic and filtering.
 
 ### Implicit Filtering of Drafts in Facet Filters
 
-Facet filters implicitly filter by quality seal (`lxState`), showing only `APPROVED` and `BROKEN_QUALITY_SEAL` fact sheets by default while automatically filtering out `DRAFT` and `REJECTED` fact sheets. This can cause incomplete data in custom reports (e.g., showing missing initiatives count).
+**Facet filters implicitly filter by quality seal (`lxState`):**
+
+- By default, facet filters show only `APPROVED` and `BROKEN_QUALITY_SEAL` fact sheets
+- `DRAFT` and `REJECTED` fact sheets are filtered out automatically
+
+This implicit filtering happens automatically and can cause **incomplete data** in custom reports data (e.g., showing missing initiatives count)
 
 ---
 
@@ -366,9 +395,19 @@ The Data Model provides runtime metadata about fact sheet types, fields, relatio
 const dataModel = lx.currentSetup.settings.dataModel;
 ```
 
-The Data Model provides fact sheet definitions through `dataModel.factSheets[factSheetType]` (field definitions, relations, and configuration), field definitions including their type (`INTEGER`, `LIFECYCLE`, `COMPLETION`, `QUALITYSEALSTATUS`, `SINGLE_SELECT` etc.) and available values, relation definitions via `dataModel.relations[relationName]` (information about relations between fact sheet types), and external ID field metadata through `dataModel.externalIdFields`.
+**Key capabilities:**
 
-Use the Data Model to get all possible values for a field (e.g., all lifecycle phases, all select field options), discover available fields and relations for a fact sheet type, validate field types before rendering them in charts or tables, and check field configurations (mandatory fields, facet availability, etc.).
+- **Fact Sheet definitions:** `dataModel.factSheets[factSheetType]` provides field definitions, relations, and configuration for a specific fact sheet type
+- **Field definitions:** Each field includes its type (`INTEGER`, `LIFECYCLE`,`COMPLETION`, `QUALITYSEALSTATUS`, `SINGLE_SELECT` etc.) and available values
+- **Relation definitions:** `dataModel.relations[relationName]` provides information about relations between fact sheet types
+- **External ID fields:** `dataModel.externalIdFields` contains metadata for external ID configurations
+
+**When to use the Data Model:**
+
+- To get all possible values for a field (e.g., all lifecycle phases, all select field options)
+- To discover available fields and relations for a fact sheet type
+- To validate field types before rendering them in charts or tables
+- To check field configurations (mandatory fields, facet availability, etc.)
 
 **Helper utilities:**
 
