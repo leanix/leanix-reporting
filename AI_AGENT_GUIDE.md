@@ -158,11 +158,6 @@ Users can customize the meta model by:
 - Configuring possible values for select fields (single/multiple select)
 - Setting up relations between fact sheet types
 
-**Field Values:**
-
-- Field values are stored as **technical IDs** (e.g., `"phaseIn"`, `"missionCritical"`) - not display labels
-- Field values may have workspace-specific translations and colors
-
 ---
 
 ## Product-Specific Behaviors
@@ -420,7 +415,7 @@ The `lx.dataModelHelpers` provides utility methods for working with the data mod
 
 ---
 
-## Using Workspace View Model Colors
+## View Model Colors
 
 Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
 **Always use these workspace-defined colors to ensure visual consistency across custom reports.**
@@ -435,6 +430,14 @@ Color information can be accessed through helper methods `lx.getFactSheetFieldMe
 
 Users can switch languages, define custom field translations, and customize labels for field values.
 **Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.**
+
+Field values, relation values, and fact sheet types have workspace-specific translations:
+
+- **Field values** are stored as technical IDs (e.g., `"phaseIn"`, `"missionCritical"`) - not display labels
+- **Relation values** are stored as technical IDs (e.g., relation type names like `"relApplicationToITComponent"`)
+- **Fact sheet types** are stored as technical IDs (e.g., `"Application"`, `"ITComponent"`, `"BusinessCapability"`)
+- Always use `displayName` property when available, or translation functions to convert technical IDs to user-friendly display names
+
 Translation methods are available on the `lx` object. Refer to the TypeScript definitions for available translation functions and their usage.
 Translation methods automatically respect the user's current language setting. When a translation is not found, methods return the original name as a fallback.
 
@@ -462,8 +465,8 @@ Before uploading your report:
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
 - **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
-- **View model colors** - Uses workspace colors from `lx.currentSetup.settings.viewModel` for visual consistency
-- **Translations** - Translates all technical keys (fact sheet types, fields, values) to user-friendly display names
+- **View model colors** - Colors all technical fact sheet types, fields, and values through workspace colors
+- **Translations** - Translates all technical keys (fact sheet types, fields, relations, values) to user-friendly display names
 - **Linting passes** - `npm run lint` succeeds
 - **Browser tested** - `npm run dev` tested in browser with real data
 
