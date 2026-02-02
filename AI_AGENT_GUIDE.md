@@ -118,6 +118,8 @@ In `package.json`:
 - `name`: Project/repository name
 - `leanixReport.title`: Report title displayed in LeanIX
 - `leanixReport.id`: Report ID used to identify that two uploads are the same report
+- `leanixReport.description`
+- `leanixReport.author`
 
 ### Report ID Rules
 
@@ -164,7 +166,7 @@ Users can customize the meta model by:
 
 ### Lifecycle Value Interpretation
 
-A dash (`-`) as a lifecycle value means the lifecycle field is currently empty or a lifecycle value exists in the future (planned lifecycle).
+A dash (`-`) as a lifecycle value indicates that lifecycles are defined, but none has started yet (the lifecycle value exists only in the future as a planned lifecycle).
 
 **Treat `-` the same as `null`, `undefined`, or `"n/a"`** in lifecycle-related logic and filtering.
 
@@ -181,7 +183,7 @@ This implicit filtering happens automatically and can cause **incomplete data** 
 
 **Use `defaultFilters` to include all fact sheets**
 
-To show **all fact sheets** in a faceted report (including draftsand rejected), explicitly set `defaultFilters` with an **empty `keys` array**:
+To show **all fact sheets** in a faceted report (including `DRAFT` and `REJECTED`), explicitly set `defaultFilters` with an **empty `keys` array**:
 
 ```typescript
 facets: [
