@@ -225,7 +225,7 @@ For the first facet, LeanIX automatically displays a filter side pane on the lef
 
 The optional field `fixedFactSheetType` specifies that only fact sheets of one type are returned. The names refer to entries in the GraphQL enum `FactSheetType`. For each of them there is an GraphQL interface with the same name.
 
-`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. E.g. since `Application.lifecycle` is an object, you can not access it directly. You have to specify the fields that you want, e.g., `lifecycle { asString phases: { phase startDate } }`.
+`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. E.g. since `Application.lifecycle` is an object, you can not access it directly. You have to specify the fields that you want, e.g., `lifecycle { phases { phase startDate } }`.
 
 A loading spinner is automatically displayed when the facets fetch data.
 
@@ -241,7 +241,7 @@ class MyReport {
             "id",
             "name",
             "description",
-            "lifecycle { asString phases { phase startDate } }",
+            "lifecycle { phases { phase startDate } }",
           ],
           callback: (data) => this.render(data),
         },
@@ -289,7 +289,7 @@ const result = await lx.executeGraphQL(`
         name
         description
         ... on Application {
-          lifecycle { asString phases { phase startDate } }
+          lifecycle { phases { phase startDate } }
         }
       }
     }
