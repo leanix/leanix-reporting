@@ -277,6 +277,36 @@ bootstrap();
 
 **Always use the LeanIX MCP tools to discover the schema before writing a query**
 
+**Verify each nested field's structure** - Don't assume nested fields follow the same pattern as their parent. Use `get_graphql_type_definitions` to check each level:
+
+```typescript
+// ❌ WRONG - Assuming roles follows the same edges/node pattern as subscriptions
+subscriptions {
+  edges {
+    node {
+      roles {
+        edges {
+          node {
+            id name
+          }
+        }
+      }
+    }
+  }
+}
+
+// ✅ CORRECT - roles is a direct array, not a connection
+subscriptions {
+  edges {
+    node {
+      roles {
+        id name
+      }
+    }
+  }
+}
+```
+
 Example of reading data:
 
 ```typescript
