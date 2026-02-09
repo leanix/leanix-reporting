@@ -442,19 +442,6 @@ All `lx` methods (e.g., `getFactSheetFieldMetaData()`) require `lx.init()` to be
 
 Enum fields (single select, lifecycle, status fields) have workspace-specific values that cannot be assumed. **Always retrieve values dynamically from field metadata.**
 
-❌ **DO NOT assume or hardcode enum values:**
-
-```typescript
-// WRONG - Field may not have these values in this workspace
-if (value === 'low' || value === 'high') { ... }
-
-// WRONG - Hardcoding value mappings
-const valueMap = { 'low': 2, 'high': 7 };
-const score = valueMap[value] || 5;
-```
-
-✅ **Get actual values from field metadata:**
-
 ```typescript
 const fieldMeta = lx.getFactSheetFieldMetaData('Application', 'businessCriticality');
 const availableValues = Object.keys(fieldMeta?.values || {});
@@ -462,7 +449,7 @@ const availableValues = Object.keys(fieldMeta?.values || {});
 // Now use availableValues for processing, validation, or mapping
 ```
 
-**When mapping to other formats** (numbers, colors, priorities), derive mappings from the actual values and their order in metadata, not from assumptions about what values exist.
+**When mapping to other formats** (numbers, colors, priorities), derive mappings from the available values and their order in metadata, not from assumptions about what values exist.
 
 ---
 
