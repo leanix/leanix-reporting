@@ -438,6 +438,21 @@ All `lx` methods (e.g., `getFactSheetFieldMetaData()`) require `lx.init()` to be
 
 ---
 
+## Working with Enum Field Values
+
+Enum fields (single select, lifecycle, status fields) have workspace-specific values that cannot be assumed. **Always retrieve values dynamically from field metadata.**
+
+```typescript
+const fieldMeta = lx.getFactSheetFieldMetaData('Application', 'businessCriticality');
+const availableValues = Object.keys(fieldMeta?.values || {});
+
+// Now use availableValues for processing, validation, or mapping
+```
+
+**When mapping to other formats** (numbers, colors, priorities), derive mappings from the available values and their order in metadata, not from assumptions about what values exist.
+
+---
+
 ## Using Translations
 
 Users can switch languages, define custom field translations, and customize labels for field values.
