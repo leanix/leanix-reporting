@@ -225,9 +225,10 @@ For the first facet, LeanIX automatically displays a filter side pane on the lef
 
 The optional field `fixedFactSheetType` specifies that only fact sheets of one type are returned. The names refer to entries in the GraphQL enum `FactSheetType`. For each of them there is an GraphQL interface with the same name.
 
-`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query.
+`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. **Always use the LeanIX MCP tools to request the GraphQL schema definition and discover the correct field names and structure for the fact sheet type you're working with.**
 
 **For simple string fields** (like `businessCriticality`, `functionalSuitability`), specify the field name directly.
+
 **For complex object fields** (like `lifecycle`), you must specify the subfields you want:
 
 - For the current lifecycle phase: `lifecycle { asString }`
