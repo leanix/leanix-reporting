@@ -290,6 +290,22 @@ bootstrap();
 
 **Always use the LeanIX MCP tools to discover the schema before writing a query**
 
+**Verify each nested field's structure** - Don't assume nested fields follow the same pattern as their parent. Each level may use different structures (edges/node connections vs direct arrays). Use the LeanIX MCP Server to verify the GraphQL structure at each level:
+
+For example, while `subscriptions` uses edges/node, its nested `roles` field is a direct array:
+
+```typescript
+subscriptions {
+  edges {
+    node {
+      roles {
+        id name
+      }
+    }
+  }
+}
+```
+
 Example of reading data:
 
 ```typescript
