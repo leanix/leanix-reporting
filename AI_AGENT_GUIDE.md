@@ -225,7 +225,16 @@ For the first facet, LeanIX automatically displays a filter side pane on the lef
 
 The optional field `fixedFactSheetType` specifies that only fact sheets of one type are returned. The names refer to entries in the GraphQL enum `FactSheetType`. For each of them there is an GraphQL interface with the same name.
 
-`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. E.g. since `Application.lifecycle` is an object, you can not access it directly. You have to specify the fields that you want, e.g., `lifecycle { phases { phase startDate } }`.
+If `fixedFactSheetType` is not defined, all returned Fact Sheets default to the `BaseFactSheet` type. `BaseFactSheet` serves as the root interface that every Fact Sheet type implements.
+
+`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL object type. Think of them as the field selections you would place inside a GraphQL selection set. **Always use the LeanIX MCP tools to retrieve the GraphQL schema definition for the Fact Sheet type you are working with, or for `BaseFactSheet` if no specific type is set. This ensures you can verify the correct field names, field types, and the nested structure.**
+
+**For scalar fields** (like `businessCriticality`, `functionalSuitability`), specify the field name directly.
+
+**For object fields** (like `lifecycle`), you must specify the subfields you want:
+
+- For the current lifecycle phase: `lifecycle { asString }`
+- For full phase history: `lifecycle { asString phases { phase startDate } }`
 
 A loading spinner is automatically displayed when the facets fetch data.
 
@@ -241,7 +250,8 @@ class MyReport {
             "id",
             "name",
             "description",
-            "lifecycle { phases { phase startDate } }",
+            "businessCriticality", // Scalar field - direct access
+            "lifecycle { asString phases { phase startDate } }", // Object field - requires a selection set for its subfields
           ],
           callback: (data) => this.render(data),
         },
@@ -253,7 +263,10 @@ class MyReport {
     if (!data?.length) return;
 
     data.forEach((app) => {
-      console.log(app.name, app.lifecycle?.phases);
+      // Access scalar fields directly
+      console.log(app.name, app.businessCriticality);
+      // Access object fields with subfields
+      console.log(app.lifecycle?.asString, app.lifecycle?.phases);
     });
   }
 }
@@ -289,13 +302,16 @@ const result = await lx.executeGraphQL(`
         name
         description
         ... on Application {
-          lifecycle { phases { phase startDate } }
+          businessCriticality
+          lifecycle { asString phases { phase startDate } }
         }
       }
     }
   }
 }`);
 console.log(result.allFactSheets.edges[0].node.description);
+console.log(result.allFactSheets.edges[0].node.businessCriticality);
+console.log(result.allFactSheets.edges[0].node.lifecycle?.asString);
 ```
 
 Example of writing data:
