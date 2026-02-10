@@ -225,11 +225,13 @@ For the first facet, LeanIX automatically displays a filter side pane on the lef
 
 The optional field `fixedFactSheetType` specifies that only fact sheets of one type are returned. The names refer to entries in the GraphQL enum `FactSheetType`. For each of them there is an GraphQL interface with the same name.
 
-`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL Object. Think of them as parts of a GraphQL query. **Always use the LeanIX MCP tools to request the GraphQL schema definition and discover the correct field names and structure for the fact sheet type you're working with.**
+If `fixedFactSheetType` is not defined, all returned Fact Sheets default to the `BaseFactSheet` type. `BaseFactSheet` serves as the root interface that every Fact Sheet type implements.
 
-**For simple string fields** (like `businessCriticality`, `functionalSuitability`), specify the field name directly.
+`attributes` defines which fields of the fact sheet should be returned. They refer to fields on the underlying GraphQL object type. Think of them as the field selections you would place inside a GraphQL selection set. **Always use the LeanIX MCP tools to retrieve the GraphQL schema definition for the Fact Sheet type you are working with, or for `BaseFactSheet` if no specific type is set. This ensures you can verify the correct field names, field types, and the nested structure.**
 
-**For complex object fields** (like `lifecycle`), you must specify the subfields you want:
+**For scalar fields** (like `businessCriticality`, `functionalSuitability`), specify the field name directly.
+
+**For object fields** (like `lifecycle`), you must specify the subfields you want:
 
 - For the current lifecycle phase: `lifecycle { asString }`
 - For full phase history: `lifecycle { asString phases { phase startDate } }`
@@ -248,8 +250,8 @@ class MyReport {
             "id",
             "name",
             "description",
-            "businessCriticality", // Simple string field - direct access
-            "lifecycle { asString phases { phase startDate } }", // Complex object - specify subfields
+            "businessCriticality", // Scalar field - direct access
+            "lifecycle { asString phases { phase startDate } }", // Object field - requires a selection set for its subfields
           ],
           callback: (data) => this.render(data),
         },
@@ -261,9 +263,9 @@ class MyReport {
     if (!data?.length) return;
 
     data.forEach((app) => {
-      // Access simple fields directly
+      // Access scalar fields directly
       console.log(app.name, app.businessCriticality);
-      // Access complex fields with subfields
+      // Access object fields with subfields
       console.log(app.lifecycle?.asString, app.lifecycle?.phases);
     });
   }
