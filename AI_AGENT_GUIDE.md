@@ -37,9 +37,13 @@ When using them, the import needs to be changed to: `import { lx, lxr } from '@l
 
 ---
 
-## LeanIX MCP Tools
+## LeanIX MCP Tools (NOT NEGOTIABLE)
 
-Before writing any code, use MCP tools to discover the schema of the connected workspace.
+**Before writing ANY code, YOU MUST verify the workspace schema using MCP tools.** This is NOT NEGOTIABLE. Even if there's a 1% chance a field doesn't exist, you MUST verify first.
+
+You CANNOT proceed to implementation until schema verification is complete. No exceptions.
+
+Unverified schema = fields don't exist = query failures = broken report. Every single time.
 
 You have access to **LeanIX MCP Server tools** that provide:
 
@@ -81,25 +85,28 @@ If the commands like `npm run dev` are not working, the error might be here.
 
 ---
 
-## Golden Rules
+## Golden Rules (NOT NEGOTIABLE)
 
-1. **NEVER hardcode data** - Always fetch dynamically via LeanIX APIs
-2. **NEVER hardcode expected values in charts** - Derive all values dynamically from the dataset (e.g., lifecycle phases, statuses)
-3. **ALWAYS verify the schema and typings first** - Use LeanIX MCP tools before writing code
+1. **NEVER hardcode data** - Always fetch dynamically via LeanIX APIs. No exceptions.
+2. **NEVER hardcode expected values in charts** - Derive all values dynamically from the dataset (e.g., lifecycle phases, statuses). Every time.
+3. **YOU MUST verify schema BEFORE writing ANY code** - Use LeanIX MCP tools first. You CANNOT proceed to implementation until schema verification completes. No exceptions.
 4. **PREFER facet-based data loading** - Provides automatic UI, pagination, and permissions
 5. **HANDLE null values** - Use optional chaining (`?.`) as fields may be null
 
 ---
 
-## When You Don't Know - ASK (Critical)
+## When You Don't Know - ASK (NOT NEGOTIABLE)
 
-**NEVER make assumptions.** When you encounter any uncertainty, you MUST stop and ask clarifying questions. Users prefer informed questions over broken reports they cannot understand.
+**NEVER make assumptions.** When you encounter ANY uncertainty, you MUST stop and ask clarifying questions. Even if there's a 1% chance you're guessing, you MUST ask. This is NOT NEGOTIABLE.
+
+Assumptions = broken reports users cannot understand = wasted implementation time. Every single time.
 
 ### Missing Data or Unavailable Fields
 
 When a user requests data that doesn't exist in the workspace:
 
 **YOU MUST:**
+
 - Stop immediately and verify the schema using LeanIX MCP tools
 - Inform the user about the missing data
 - Ask which alternative field or approach to use
@@ -112,18 +119,21 @@ When a user requests data that doesn't exist in the workspace:
 When implementing calculations, classifications, scoring, or any logic NOT defined in the meta model:
 
 **YOU MUST ask the user to define:**
+
 - Classification schemes: What makes something "high risk" vs "low risk"?
 - Calculation formulas: How should ROI, savings, or priority be calculated?
 - Thresholds: What values qualify as "needs attention" or "critical"?
 - Weighting: How should multiple factors be combined?
 
 **NEVER invent:**
+
 - Classification criteria (high/medium/low without definition)
 - Calculation percentages (arbitrary 90%, 70%, 30%)
 - Scoring formulas (made-up risk or priority calculations)
 - Threshold values (assuming what "high" means)
 
 **Common scenarios requiring questions:**
+
 - "Show high-risk applications" → Ask: What defines high risk?
 - "Calculate cost savings" → Ask: What's the savings methodology?
 - "Highlight applications needing attention" → Ask: What criteria determine this?
@@ -475,10 +485,12 @@ The `lx.dataModelHelpers` provides utility methods for working with the data mod
 
 ---
 
-## View Model Colors
+## View Model Colors (NOT NEGOTIABLE)
 
 Users configure colors for fact sheet types, field values (lifecycle phases, status fields, select fields), and icons.
-**Always use these workspace-defined colors to ensure visual consistency across custom reports.**
+**YOU MUST use workspace-defined colors from the ViewModel. Never hardcode colors. No exceptions.**
+
+Hardcoded colors = inconsistent with workspace branding = reports look foreign to users. Every single instance.
 
 All `lx` methods (e.g., `getFactSheetFieldMetaData()`) require `lx.init()` to be called first.
 
@@ -499,7 +511,10 @@ All `lx` methods (e.g., `getFactSheetFieldMetaData()`) require `lx.init()` to be
 Enum fields (single select, lifecycle, status fields) have workspace-specific values that cannot be assumed. **Always retrieve values dynamically from field metadata.**
 
 ```typescript
-const fieldMeta = lx.getFactSheetFieldMetaData('Application', 'businessCriticality');
+const fieldMeta = lx.getFactSheetFieldMetaData(
+  "Application",
+  "businessCriticality",
+);
 const availableValues = Object.keys(fieldMeta?.values || {});
 
 // Now use availableValues for processing, validation, or mapping
@@ -509,10 +524,12 @@ const availableValues = Object.keys(fieldMeta?.values || {});
 
 ---
 
-## Using Translations
+## Using Translations (NOT NEGOTIABLE)
 
 Users can switch languages, define custom field translations, and customize labels for field values.
-**Always translate fact sheet types, fields, and values from their technical/internal names to user-friendly display names.**
+**YOU MUST translate ALL technical keys before displaying them. No exceptions.**
+
+Untranslated keys = users see "phaseIn" instead of "Phase In" = confusing UX. Every single field.
 
 Field values, relation values, and fact sheet types have workspace-specific translations:
 
