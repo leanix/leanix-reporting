@@ -91,21 +91,45 @@ If the commands like `npm run dev` are not working, the error might be here.
 
 ---
 
-## Handling Missing or Unavailable Data
+## When You Don't Know - ASK (Critical)
 
-When a user requests data that is not available in the current workspace:
+**NEVER make assumptions.** When you encounter any uncertainty, you MUST stop and ask clarifying questions. Users prefer informed questions over broken reports they cannot understand.
 
-**DO NOT:**
+### Missing Data or Unavailable Fields
 
-- Assume values exist
-- Hardcode mock data
-- Proceed with placeholder values
+When a user requests data that doesn't exist in the workspace:
 
-**DO:**
+**YOU MUST:**
+- Stop immediately and verify the schema using LeanIX MCP tools
+- Inform the user about the missing data
+- Ask which alternative field or approach to use
+- Suggest available alternatives based on the actual schema
 
-- Explicitly inform the user about the data gap
-- Ask how the user would like to proceed
-- Suggest alternatives if applicable
+**Example:** User asks for "business criticality" but the field doesn't exist → Ask if they want to use "lifecycle" or "technicalSuitability" instead, or show what fields ARE available.
+
+### Uncertain Business Logic
+
+When implementing calculations, classifications, scoring, or any logic NOT defined in the meta model:
+
+**YOU MUST ask the user to define:**
+- Classification schemes: What makes something "high risk" vs "low risk"?
+- Calculation formulas: How should ROI, savings, or priority be calculated?
+- Thresholds: What values qualify as "needs attention" or "critical"?
+- Weighting: How should multiple factors be combined?
+
+**NEVER invent:**
+- Classification criteria (high/medium/low without definition)
+- Calculation percentages (arbitrary 90%, 70%, 30%)
+- Scoring formulas (made-up risk or priority calculations)
+- Threshold values (assuming what "high" means)
+
+**Common scenarios requiring questions:**
+- "Show high-risk applications" → Ask: What defines high risk?
+- "Calculate cost savings" → Ask: What's the savings methodology?
+- "Highlight applications needing attention" → Ask: What criteria determine this?
+- "Show modernization priority" → Ask: How should priority be calculated?
+
+**After the user defines logic:** Document it clearly in code comments explaining the methodology.
 
 ---
 
@@ -517,9 +541,11 @@ Once your report is ready, upload it to your LeanIX workspace:
 
 Before uploading your report:
 
-- **Schema verified** - Used LeanIX MCP MCP tools to verify all fact sheet types and field names
+- **Schema verified** - Used LeanIX MCP tools to verify all fact sheet types and field names
 - **Empty states handled** - Code handles null/undefined/empty data gracefully
 - **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
+- **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
+- **Business logic documented** - Code comments explain any classification schemes, formulas, or thresholds
 - **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
