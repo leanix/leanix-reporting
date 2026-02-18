@@ -111,7 +111,7 @@ When a user requests data that is not available in the current workspace:
 
 ## Report Metadata Protection
 
-**The AI must NOT change the following unless explicitly requested by the user:**
+**You must NOT change the following unless explicitly requested by the user:**
 
 In `package.json`:
 
@@ -517,7 +517,7 @@ Once your report is ready, upload it to your LeanIX workspace:
 
 Before uploading your report:
 
-- **Schema verified** - Used LeanIX MCP MCP tools to verify all fact sheet types and field names
+- **Schema verified** - Used LeanIX MCP tools to verify all fact sheet types and field names
 - **Empty states handled** - Code handles null/undefined/empty data gracefully
 - **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
 - **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
