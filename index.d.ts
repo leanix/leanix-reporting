@@ -1615,6 +1615,16 @@ declare module lxr
 	     * `hidden` represents an optional parameter to hide an entry in the dropdown. It will then not render at all.
 	     */
 	    hidden?: boolean;
+	    /**
+	     * `disabled` represents an optional parameter to disable an entry in the dropdown. It will then render as disabled and not be selectable.
+	     * Currently available for {@link UISuggestionDropdown}
+	     */
+	    disabled?: boolean;
+	    /**
+	     * `tooltip` defines the text a user sees on hovering an entry ideally disabled dropdown entry.
+	     * Currently available for {@link UISuggestionDropdown}
+	     */
+	    tooltip?: string;
 	}
 	/**
 	 * `DropdownEntryLabel` is either a plain text attribute, a {@link DropdownEntryIconLabel}, or a {@link DropdownFactSheetEntryLabel}.
