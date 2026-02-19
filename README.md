@@ -1,3 +1,4 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/leanix/leanix-reporting)](https://api.reuse.software/info/github.com/leanix/leanix-reporting)
 # @leanix/reporting
 
 [![npm version](https://badge.fury.io/js/%40leanix%2Freporting.svg)](https://badge.fury.io/js/%40leanix%2Freporting)
