@@ -43,7 +43,7 @@ Before writing any code, use MCP tools to discover the schema of the connected w
 
 You have access to **LeanIX MCP Server tools** that provide:
 
-- **GraphQL type definitions** - Request Schema in SDL for types like `Query`, `Application`, `ITComponent`, `BaseFactSheet`
+- **GraphQL type definitions** - Request Schema in SDL for types like `Query`, `Mutation`, `Application`, `ITComponent`, `BaseFactSheet`
 
 There may be more LeanIX MCP tools available.
 Do not use other LeanIX MCP tools to modify data or to fetch data and hardcoding it in the report
@@ -355,6 +355,19 @@ console.log(result.allFactSheets.edges[0].node.lifecycle?.asString);
 ```
 
 Example of writing data:
+
+**Before writing mutations, ALWAYS verify the `Mutation` type to see available operations:**
+
+```typescript
+// STEP 1: Verify available mutations
+// Use MCP: get_graphql_type_definitions(["Mutation"])
+// This shows: createTag, upsertRelation, deleteRelation, updateFactSheet, etc.
+```
+
+**Common mutations:**
+- Relations: `upsertRelation`, `deleteRelation`
+- Fact Sheets: `createFactSheet`, `updateFactSheet`
+- Tags: `createTag`, `updateTag`
 
 ```typescript
 const result = await lx.executeGraphQL(
