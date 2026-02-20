@@ -410,9 +410,9 @@ lx.showToastr("info", "Processing...");
 
 // Legend
 lx.showLegend([
-  { name: "Active", color: "#00aa00" },
-  { name: "Phase Out", color: "#ff6600" },
-  { name: "End of Life", color: "#cc0000" },
+  { label: "Active", bgColor: "#496a8f" },
+  { label: "Phase Out", bgColor: "#ffd02c" },
+  { label: "End of Life", bgColor: "#c00000" },
 ]);
 ```
 
@@ -517,6 +517,7 @@ Users can switch languages, define custom field translations, and customize labe
 Field values, relation values, and fact sheet types have workspace-specific translations:
 
 - **Field values** are stored as technical IDs (e.g., `"phaseIn"`, `"missionCritical"`) - not display labels
+- **Object field values** like `asString` return technical IDs (e.g., `"active"`, `"phaseOut"`)
 - **Relation values** are stored as technical IDs (e.g., relation type names like `"relApplicationToITComponent"`)
 - **Fact sheet types** are stored as technical IDs (e.g., `"Application"`, `"ITComponent"`, `"BusinessCapability"`)
 - Always use `displayName` property when available, or translation functions to convert technical IDs to user-friendly display names
