@@ -410,9 +410,9 @@ lx.showToastr("info", "Processing...");
 
 // Legend
 lx.showLegend([
-  { name: "Active", color: "#00aa00" },
-  { name: "Phase Out", color: "#ff6600" },
-  { name: "End of Life", color: "#cc0000" },
+  { label: "Active", bgColor: "#496a8f" },
+  { label: "Phase Out", bgColor: "#ffd02c" },
+  { label: "End of Life", bgColor: "#c00000" },
 ]);
 ```
 
