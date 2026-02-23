@@ -408,12 +408,14 @@ lx.showToastr("error", "Failed to load data");
 lx.showToastr("warning", "Some data is missing");
 lx.showToastr("info", "Processing...");
 
-// Legend
-lx.showLegend([
-  { label: "Active", bgColor: "#496a8f" },
-  { label: "Phase Out", bgColor: "#ffd02c" },
-  { label: "End of Life", bgColor: "#c00000" },
-]);
+// Legend - derive colors and labels from view model
+const fieldMeta = lx.getFactSheetFieldMetaData("Application", "lifecycle");
+const legendItems = Object.keys(fieldMeta?.values || {}).map((key) => ({
+  label: lx.translateFieldValue("Application", "lifecycle", key),
+  bgColor: fieldMeta?.values?.[key]?.bgColor,
+}));
+// If your data includes null/undefined/n/a values that aren't in field metadata, add them to the legend manually with label 'n/a' and bgColor '#555555'
+lx.showLegend(legendItems);
 ```
 
 There are many more UI components in `lxr.LxCustomReportLib`.
