@@ -408,12 +408,14 @@ lx.showToastr("error", "Failed to load data");
 lx.showToastr("warning", "Some data is missing");
 lx.showToastr("info", "Processing...");
 
-// Legend
-lx.showLegend([
-  { name: "Active", color: "#00aa00" },
-  { name: "Phase Out", color: "#ff6600" },
-  { name: "End of Life", color: "#cc0000" },
-]);
+// Legend - derive colors and labels from view model
+const fieldMeta = lx.getFactSheetFieldMetaData("Application", "lifecycle");
+const legendItems = Object.keys(fieldMeta?.values || {}).map((key) => ({
+  label: lx.translateFieldValue("Application", "lifecycle", key),
+  bgColor: fieldMeta?.values?.[key]?.bgColor,
+}));
+// If your data includes null/undefined/n/a values that aren't in field metadata, add them to the legend manually with label 'n/a' and bgColor '#555555'
+lx.showLegend(legendItems);
 ```
 
 There are many more UI components in `lxr.LxCustomReportLib`.
@@ -517,6 +519,7 @@ Users can switch languages, define custom field translations, and customize labe
 Field values, relation values, and fact sheet types have workspace-specific translations:
 
 - **Field values** are stored as technical IDs (e.g., `"phaseIn"`, `"missionCritical"`) - not display labels
+- **Object field values** like `asString` return technical IDs (e.g., `"active"`, `"phaseOut"`)
 - **Relation values** are stored as technical IDs (e.g., relation type names like `"relApplicationToITComponent"`)
 - **Fact sheet types** are stored as technical IDs (e.g., `"Application"`, `"ITComponent"`, `"BusinessCapability"`)
 - Always use `displayName` property when available, or translation functions to convert technical IDs to user-friendly display names
