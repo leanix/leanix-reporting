@@ -259,6 +259,7 @@ If `fixedFactSheetType` is not defined, all returned Fact Sheets default to the 
 
 - For the current lifecycle phase: `lifecycle { asString }`
 - For full phase history: `lifecycle { asString phases { phase startDate } }`
+- For type-specific fields on relation targets: use inline fragments (`... on TypeName { }`) since relation `factSheet` properties return `BaseFactSheet`
 
 A loading spinner is automatically displayed when the facets fetch data.
 
