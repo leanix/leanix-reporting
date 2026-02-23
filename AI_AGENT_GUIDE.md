@@ -360,7 +360,7 @@ Example of writing data:
 
 ```typescript
 // STEP 1: Verify available mutations
-// Use MCP: get_graphql_type_definitions(["Mutation"])
+// Use LeanIX MCP tools to get GraphQL Schema Definition for "Mutation" type
 // This shows: createTag, upsertRelation, deleteRelation, updateFactSheet, etc.
 ```
 
