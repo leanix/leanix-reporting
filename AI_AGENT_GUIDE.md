@@ -52,13 +52,23 @@ The LeanIX MCP Server is always connected to a specific workspace via an API tok
 
 ### TypeScript Definitions
 
-Complete TypeScript type definitions for the `@leanix/reporting` package are included in the **TypeScript Type Definitions** section.
+When you need **autocomplete functions, TypeScript definitions, or detailed type information** for the `@leanix/reporting` package (including `lx`, `lxr` types, or any reporting-lib specific definitions):
+
+1. **Do NOT load the entire file** - The complete TypeScript definitions file is very large
+2. **Search on-demand** - Use file search/grep to find specific types, interfaces, or functions in `node_modules/@leanix/reporting/index.d.ts`
+3. **Be specific** - Search for exact type names, function names, or interface names you need (e.g., "ReportConfiguration", "LxCustomReportLib", "executeGraphQL")
+
+**Example searches:**
+
+- Finding a specific type: Search for `interface ReportConfiguration` or `type FacetConfig`
+- Finding a method signature: Search for `executeGraphQL` or `showLegend`
+- Finding available properties: Search for the interface name, then read just that section
 
 ### Discovery Process
 
 1. **Identify what you need** - Methods from `LxCustomReportLib`? GraphQL Query operations? Fact sheet fields? Relations?
 2. **Request GraphQL SDL** - Use LeanIX MCP tools to get GraphQL Schema Definition Language for workspace-specific types
-3. **Reference TypeScript definitions** - See the **TypeScript Type Definitions** section for `@leanix/reporting` types
+3. **Search TypeScript definitions on-demand** - Use file search in `node_modules/@leanix/reporting/index.d.ts` for specific types, interfaces, or method signatures you need
 4. **Write code** - Use the information received, not assumptions
 
 ---
@@ -419,7 +429,7 @@ lx.showLegend(legendItems);
 ```
 
 There are many more UI components in `lxr.LxCustomReportLib`.
-Reference the **TypeScript Type Definitions** section to explore all available methods and properties.
+To explore all available methods and properties, search for `LxCustomReportLib` in `node_modules/@leanix/reporting/index.d.ts`.
 
 ---
 
