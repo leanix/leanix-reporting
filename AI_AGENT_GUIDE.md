@@ -259,6 +259,10 @@ If `fixedFactSheetType` is not defined, all returned Fact Sheets default to the 
 
 - For the current lifecycle phase: `lifecycle { asString }`
 - For full phase history: `lifecycle { asString phases { phase startDate } }`
+- For relation targets: use inline fragments to access type-specific fields. Relation `factSheet` properties return `BaseFactSheet`, which only includes common fields. To access fields specific to concrete types, use inline fragment syntax:
+  ```
+  "relApplicationToBusinessCapability { edges { node { factSheet { ... on BusinessCapability { id displayName strategicImportance } } } } }"
+  ```
 
 A loading spinner is automatically displayed when the facets fetch data.
 
