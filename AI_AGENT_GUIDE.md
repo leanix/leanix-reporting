@@ -84,10 +84,44 @@ When you need **autocomplete functions, TypeScript definitions, or detailed type
 
 ### Testing Your Report
 
-Run `npm run dev` to get a **LeanIX-hosted development URL**. Copy the complete URL from the terminal output and open it in a browser for live testing with real workspace data. If you do not have the ability to run code in the browser, ask the user to set up the Chrome MCP Server.
+Run `npm run dev` to get a **LeanIX-hosted development URL**. Copy the complete URL from the terminal output and open it in a browser for live testing with real workspace data.
 
 In the main folder there is the `lxr.json` which contains an API token for the connected workspace. Do not attempt to access it.
 If the commands like `npm run dev` are not working, the error might be here.
+
+### Verifying Report Rendering (Chrome DevTools MCP)
+
+**After writing code, verify the report renders before declaring success.**
+
+Use Chrome DevTools MCP to verify reports render without errors. This prevents AI-generated reports from showing blank screens due to small errors (wrong field names, incorrect data access).
+
+**When to verify:**
+
+- After initial code generation
+- After significant changes
+- Before telling the user "report is ready"
+
+**Workflow:**
+
+1. **Start dev server** - Run `npm run dev` to get the LeanIX-hosted URL
+2. **Navigate to URL** - Use the **exact URL from npm run dev output**, not localhost (reports need workspace context for data access)
+3. **Check console** - Look for JavaScript or GraphQL errors
+4. **Take screenshot** - Verify content displays (not a blank screen)
+5. **Fix if needed** - Correct errors, save, and re-verify
+
+**Common issues to catch:**
+
+- JavaScript errors (undefined properties, null references)
+- GraphQL errors (wrong field names, incorrect query structure)
+- Blank screens (no content rendered)
+
+**Setup (if not available):**
+
+```bash
+npx -y chrome-devtools-mcp@latest
+```
+
+Requires Chrome browser and Node.js v20.19+. More info: https://github.com/ChromeDevTools/chrome-devtools-mcp
 
 ---
 
@@ -572,6 +606,7 @@ Once your report is ready, upload it to your LeanIX workspace:
 Before uploading your report:
 
 - **Schema verified** - Used LeanIX MCP tools to verify all fact sheet types and field names
+- **Rendering verified** - Chrome DevTools MCP verification passed (no console errors or blank screens)
 - **Empty states handled** - Code handles null/undefined/empty data gracefully
 - **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
 - **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
@@ -583,7 +618,7 @@ Before uploading your report:
 - **View model colors** - Colors all technical fact sheet types, fields, and values through workspace colors
 - **Translations** - Translates all technical keys (fact sheet types, fields, relations, values) to user-friendly display names
 - **Linting passes** - `npm run lint` succeeds
-- **Browser tested** - `npm run dev` tested in browser with real data
+- **Browser tested** - `npm run dev` tested in browser with real data (or Chrome DevTools MCP verification passed)
 
 ---
 
