@@ -458,6 +458,56 @@ lx.showLegend(legendItems);
 There are many more UI components in `lxr.LxCustomReportLib`.
 To explore all available methods and properties, search for `LxCustomReportLib` in `node_modules/@leanix/reporting/index.d.ts`.
 
+### Interactive UI Components (@ui5/webcomponents-react)
+
+**For ALL interactive UI elements (buttons, inputs, tables, modals, cards, etc.), you MUST use @ui5/webcomponents-react:**
+
+```bash
+npm install @ui5/webcomponents-react @ui5/webcomponents @ui5/webcomponents-fiori
+```
+
+**Why mandatory:** Ensures visual consistency with SAP LeanIX design language, provides accessibility (WCAG 2.1), automatic theming, and follows SAP LeanIX design system standards.
+
+**Never use plain HTML elements** (`<button>`, `<table>`, etc.) for interactive components. Always import and use the corresponding UI5 component.
+
+**Avoid vague asset imports**, they are unnecessary. Use specific imports only when needed (e.g., icons)
+
+**Follow table component structure:** The UI5 Table component follows a specific hierarchy. Understanding this structure is critical for building tables correctly. Don't wrap Table in Card, it prevents proper scrolling. Place Table directly in your container div.
+
+```typescript
+import {
+  Table,
+  TableHeaderRow,
+  TableHeaderCell,
+  TableRow,
+  TableCell,
+  Button
+} from '@ui5/webcomponents-react';
+import '@ui5/webcomponents-icons/dist/action.js';
+
+<Button
+  design="Emphasized"
+  icon="action"
+  onClick={() => ...}
+/>
+
+<Table
+  headerRow={
+    <TableHeaderRow>
+      <TableHeaderCell><span>Column 1</span></TableHeaderCell>
+      <TableHeaderCell><span>Column 2</span></TableHeaderCell>
+    </TableHeaderRow>
+  }
+>
+  {data.map((item) => (
+    <TableRow key={item.id}>
+      <TableCell><span>{item.name}</span></TableCell>
+      <TableCell><span>{item.value}</span></TableCell>
+    </TableRow>
+  ))}
+</Table>
+```
+
 ---
 
 ## Linking and Navigation
@@ -589,6 +639,7 @@ Before uploading your report:
 - **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
 - **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
 - **Business logic documented** - Code comments explain any classification schemes, formulas, or thresholds
+- **UI components** - Uses @ui5/webcomponents-react for all interactive components (buttons, inputs, tables, cards, etc.) instead of plain HTML elements
 - **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
