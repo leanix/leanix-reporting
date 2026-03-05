@@ -110,6 +110,7 @@ If the commands like `npm run dev` are not working, the error might be here.
 When a user requests data that doesn't exist in the workspace:
 
 **YOU MUST:**
+
 - Stop immediately and verify the schema using LeanIX MCP tools
 - Inform the user about the missing data
 - Ask which alternative field or approach to use
@@ -122,18 +123,21 @@ When a user requests data that doesn't exist in the workspace:
 When implementing calculations, classifications, scoring, or any logic NOT defined in the meta model:
 
 **YOU MUST ask the user to define:**
+
 - Classification schemes: What makes something "high risk" vs "low risk"?
 - Calculation formulas: How should ROI, savings, or priority be calculated?
 - Thresholds: What values qualify as "needs attention" or "critical"?
 - Weighting: How should multiple factors be combined?
 
 **NEVER invent:**
+
 - Classification criteria (high/medium/low without definition)
 - Calculation percentages (arbitrary 90%, 70%, 30%)
 - Scoring formulas (made-up risk or priority calculations)
 - Threshold values (assuming what "high" means)
 
 **Common scenarios requiring questions:**
+
 - "Show high-risk applications" → Ask: What defines high risk?
 - "Calculate cost savings" → Ask: What's the savings methodology?
 - "Highlight applications needing attention" → Ask: What criteria determine this?
@@ -164,16 +168,6 @@ Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`
 ## Dynamic Chart Values (No Hardcoding)
 
 Extract unique values from the actual dataset being visualized since these values are dynamic and workspace-specific.
-
----
-
-## Default Styling Rules
-
-When the user does **not explicitly specify styling**, apply these defaults:
-
-1. **Background:** White background for single chart report, for dashboards: gray background `#f0f2f5` with white cards
-2. **No redundant titles:** Do NOT add a report title (rendered outside the custom report iframe) or "Total number of fact sheets" counters (unless explicitly requested)
-3. **Single chart or charts with matching/similar values:** Use LeanIX default legends through `lx.showLegend()`
 
 ---
 
@@ -379,6 +373,7 @@ Example of writing data:
 ```
 
 **Common mutations:**
+
 - Relations: `upsertRelation`, `deleteRelation`
 - Fact Sheets: `createFactSheet`, `updateFactSheet`
 - Tags: `createTag`, `updateTag`
@@ -415,6 +410,21 @@ console.log(result.createTag.id);
 **Alternatives:** If Chart.js cannot achieve the visualization, and the user has no preference, select one of the broadly used ones. (D3.js, Apache Echarts, Recharts, etc.)
 
 **Data aggregation:** Charts should summarize **fact sheet-level data** by default (e.g., count applications by lifecycle phase). Only explore relations when the user explicitly requests relationship analysis (e.g., "show which applications use which IT components").
+
+---
+
+## Default Styling Rules
+
+When the user does **not explicitly specify styling**, apply these defaults:
+
+1. **Background:** White background for single chart report, for dashboards: gray background `#f0f2f5` with white cards
+2. **No redundant titles:** Do NOT add a report title (rendered outside the custom report iframe) or "Total number of fact sheets" counters (unless explicitly requested)
+3. **Single chart or charts with matching/similar values:** Use LeanIX default legends through `lx.showLegend()`
+4. **Font Family:** Use SAP's official **'72' font family** for consistency with the SAP LeanIX. Set as the base font:
+   ```css
+   font-family: "72", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   ```
+   The '72' font is automatically available in the LeanIX platform environment.
 
 ---
 
@@ -528,7 +538,10 @@ All `lx` methods (e.g., `getFactSheetFieldMetaData()`) require `lx.init()` to be
 Enum fields (single select, lifecycle, status fields) have workspace-specific values that cannot be assumed. **Always retrieve values dynamically from field metadata.**
 
 ```typescript
-const fieldMeta = lx.getFactSheetFieldMetaData('Application', 'businessCriticality');
+const fieldMeta = lx.getFactSheetFieldMetaData(
+  "Application",
+  "businessCriticality",
+);
 const availableValues = Object.keys(fieldMeta?.values || {});
 
 // Now use availableValues for processing, validation, or mapping
