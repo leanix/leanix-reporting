@@ -115,13 +115,13 @@ Use Chrome DevTools MCP to verify reports render without errors. This prevents A
 - GraphQL errors (wrong field names, incorrect query structure)
 - Blank screens (no content rendered)
 
-**Setup (if not available):**
+**Setup:**
 
-```bash
-npx -y chrome-devtools-mcp@latest
-```
+Chrome DevTools MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json`, `.mcp.json`, `.cline/mcp.json`). Configuration files contain actual credentials and are automatically gitignored.
 
-Requires Chrome browser and Node.js v20.19+. More info: https://github.com/ChromeDevTools/chrome-devtools-mcp
+**Note:** Local MCP configuration takes precedence over global IDE settings. If you need access to other MCP servers from your global configuration, you must add them to the local config files.
+
+If MCP tools are unavailable after scaffolding, restart your IDE to load the configuration.
 
 ---
 
