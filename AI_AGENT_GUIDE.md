@@ -144,6 +144,7 @@ Requires Chrome browser and Node.js v20.19+. More info: https://github.com/Chrom
 When a user requests data that doesn't exist in the workspace:
 
 **YOU MUST:**
+
 - Stop immediately and verify the schema using LeanIX MCP tools
 - Inform the user about the missing data
 - Ask which alternative field or approach to use
@@ -156,18 +157,21 @@ When a user requests data that doesn't exist in the workspace:
 When implementing calculations, classifications, scoring, or any logic NOT defined in the meta model:
 
 **YOU MUST ask the user to define:**
+
 - Classification schemes: What makes something "high risk" vs "low risk"?
 - Calculation formulas: How should ROI, savings, or priority be calculated?
 - Thresholds: What values qualify as "needs attention" or "critical"?
 - Weighting: How should multiple factors be combined?
 
 **NEVER invent:**
+
 - Classification criteria (high/medium/low without definition)
 - Calculation percentages (arbitrary 90%, 70%, 30%)
 - Scoring formulas (made-up risk or priority calculations)
 - Threshold values (assuming what "high" means)
 
 **Common scenarios requiring questions:**
+
 - "Show high-risk applications" → Ask: What defines high risk?
 - "Calculate cost savings" → Ask: What's the savings methodology?
 - "Highlight applications needing attention" → Ask: What criteria determine this?
@@ -198,16 +202,6 @@ Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`
 ## Dynamic Chart Values (No Hardcoding)
 
 Extract unique values from the actual dataset being visualized since these values are dynamic and workspace-specific.
-
----
-
-## Default Styling Rules
-
-When the user does **not explicitly specify styling**, apply these defaults:
-
-1. **Background:** White background for single chart report, for dashboards: gray background `#f0f2f5` with white cards
-2. **No redundant titles:** Do NOT add a report title (rendered outside the custom report iframe) or "Total number of fact sheets" counters (unless explicitly requested)
-3. **Single chart or charts with matching/similar values:** Use LeanIX default legends through `lx.showLegend()`
 
 ---
 
@@ -413,6 +407,7 @@ Example of writing data:
 ```
 
 **Common mutations:**
+
 - Relations: `upsertRelation`, `deleteRelation`
 - Fact Sheets: `createFactSheet`, `updateFactSheet`
 - Tags: `createTag`, `updateTag`
@@ -452,6 +447,21 @@ console.log(result.createTag.id);
 
 ---
 
+## Default Styling Rules
+
+When the user does **not explicitly specify styling**, apply these defaults:
+
+1. **Background:** White background for single chart report, for dashboards: gray background `#f0f2f5` with white cards
+2. **No redundant titles:** Do NOT add a report title (rendered outside the custom report iframe) or "Total number of fact sheets" counters (unless explicitly requested)
+3. **Single chart or charts with matching/similar values:** Use LeanIX default legends through `lx.showLegend()`
+4. **Font Family:** Use SAP's official **'72' font family** for consistency with the SAP LeanIX. Set as the base font:
+   ```css
+   font-family: "72", "Helvetica Neue", Helvetica, Arial, sans-serif;
+   ```
+   The '72' font is automatically available in the LeanIX platform environment.
+
+---
+
 ## UI Components & Styling
 
 ### Built-in LeanIX Components
@@ -481,6 +491,56 @@ lx.showLegend(legendItems);
 
 There are many more UI components in `lxr.LxCustomReportLib`.
 To explore all available methods and properties, search for `LxCustomReportLib` in `node_modules/@leanix/reporting/index.d.ts`.
+
+### Interactive UI Components (@ui5/webcomponents-react)
+
+**For ALL interactive UI elements (buttons, inputs, tables, modals, cards, etc.), you MUST use @ui5/webcomponents-react:**
+
+```bash
+npm install @ui5/webcomponents-react @ui5/webcomponents @ui5/webcomponents-fiori
+```
+
+**Why mandatory:** Ensures visual consistency with SAP LeanIX design language, provides accessibility (WCAG 2.1), automatic theming, and follows SAP LeanIX design system standards.
+
+**Never use plain HTML elements** (`<button>`, `<table>`, etc.) for interactive components. Always import and use the corresponding UI5 component.
+
+**Avoid vague asset imports**, they are unnecessary. Use specific imports only when needed (e.g., icons)
+
+**Follow table component structure:** The UI5 Table component follows a specific hierarchy. Understanding this structure is critical for building tables correctly. Don't wrap Table in Card, it prevents proper scrolling. Place Table directly in your container div.
+
+```typescript
+import {
+  Table,
+  TableHeaderRow,
+  TableHeaderCell,
+  TableRow,
+  TableCell,
+  Button
+} from '@ui5/webcomponents-react';
+import '@ui5/webcomponents-icons/dist/action.js';
+
+<Button
+  design="Emphasized"
+  icon="action"
+  onClick={() => ...}
+/>
+
+<Table
+  headerRow={
+    <TableHeaderRow>
+      <TableHeaderCell><span>Column 1</span></TableHeaderCell>
+      <TableHeaderCell><span>Column 2</span></TableHeaderCell>
+    </TableHeaderRow>
+  }
+>
+  {data.map((item) => (
+    <TableRow key={item.id}>
+      <TableCell><span>{item.name}</span></TableCell>
+      <TableCell><span>{item.value}</span></TableCell>
+    </TableRow>
+  ))}
+</Table>
+```
 
 ---
 
@@ -562,7 +622,10 @@ All `lx` methods (e.g., `getFactSheetFieldMetaData()`) require `lx.init()` to be
 Enum fields (single select, lifecycle, status fields) have workspace-specific values that cannot be assumed. **Always retrieve values dynamically from field metadata.**
 
 ```typescript
-const fieldMeta = lx.getFactSheetFieldMetaData('Application', 'businessCriticality');
+const fieldMeta = lx.getFactSheetFieldMetaData(
+  "Application",
+  "businessCriticality",
+);
 const availableValues = Object.keys(fieldMeta?.values || {});
 
 // Now use availableValues for processing, validation, or mapping
@@ -611,6 +674,7 @@ Before uploading your report:
 - **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
 - **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
 - **Business logic documented** - Code comments explain any classification schemes, formulas, or thresholds
+- **UI components** - Uses @ui5/webcomponents-react for all interactive components (buttons, inputs, tables, cards, etc.) instead of plain HTML elements
 - **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
