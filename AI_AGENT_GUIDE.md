@@ -193,6 +193,10 @@ In `package.json`:
 - `leanixReport.description`
 - `leanixReport.author`
 
+**You MUST always set or override the following:**
+
+- `leanixReport.aiAssisted`: Always set to `true`. If the field does not exist, create it.
+
 ### Report ID Rules
 
 Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), and underscores (`_`), and must not end with a dot.
