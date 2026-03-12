@@ -115,13 +115,9 @@ Use Chrome DevTools MCP to verify reports render without errors. This prevents A
 - GraphQL errors (wrong field names, incorrect query structure)
 - Blank screens (no content rendered)
 
-**Setup (if not available):**
+**Setup:**
 
-```bash
-npx -y chrome-devtools-mcp@latest
-```
-
-Requires Chrome browser and Node.js v20.19+. More info: https://github.com/ChromeDevTools/chrome-devtools-mcp
+Chrome DevTools MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). Configuration files contain actual credentials and are automatically gitignored.
 
 ---
 
