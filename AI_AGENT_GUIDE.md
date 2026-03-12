@@ -117,7 +117,7 @@ Use Chrome DevTools MCP to verify reports render without errors. This prevents A
 
 **Setup:**
 
-Chrome DevTools MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json`, `.mcp.json`, `.cline/mcp.json`). Configuration files contain actual credentials and are automatically gitignored.
+Chrome DevTools MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). Configuration files contain actual credentials and are automatically gitignored.
 
 ---
 
