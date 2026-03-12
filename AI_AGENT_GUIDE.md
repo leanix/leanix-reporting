@@ -119,10 +119,6 @@ Use Chrome DevTools MCP to verify reports render without errors. This prevents A
 
 Chrome DevTools MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json`, `.mcp.json`, `.cline/mcp.json`). Configuration files contain actual credentials and are automatically gitignored.
 
-**Note:** Local MCP configuration takes precedence over global IDE settings. If you need access to other MCP servers from your global configuration, you must add them to the local config files.
-
-If MCP tools are unavailable after scaffolding, restart your IDE to load the configuration.
-
 ---
 
 ## Golden Rules
