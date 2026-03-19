@@ -1665,11 +1665,14 @@ declare module lxr
 	 * `UIZoom` defines the configuration for a zoom {@link UIElement}, which allows setting a zoom level.
 	 *
 	 * The associated `value` of the `UIZoom` element is the selected zoom level. A `value` of `1` represents 100%,
-	 * `0.5` means 50% and so on. The min value is `0.1`, the max value is `2`, and the value can be adjusted in steps
-	 * of `0.1`.
+	 * `0.5` means 50% and so on. The default min value is `0.1`, the default max value is `2`, and the value can be adjusted in steps
+	 * of `0.1` by default. Optionally, these default values can be overridden by setting the `min`, `max` and `step` properties.
 	 */
 	export interface UIZoom extends UIBaseElement {
 	    type: 'zoom';
+	    min?: number;
+	    max?: number;
+	    step?: number;
 	}
 	/**
 	 * `UIHierarchyDepth` defines the configuration for {@link UIElement} that allows to choose a hierarchy depth level.
