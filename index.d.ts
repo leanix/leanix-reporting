@@ -658,6 +658,8 @@ declare module lxr
 	    private getLocationQuery;
 	    private createReportExportData;
 	    private getCurrentStyles;
+	    private captureCanvasDataURLs;
+	    private convertCanvasElements;
 	    private encodeAllImages;
 	    private encodeImage;
 	    private sanitizeDimension;
@@ -3048,7 +3050,7 @@ declare module lxr
 	}
 	/**
 	 * Sidepane Fact Sheet Item Icon to be shown on the {@link SidePaneFactSheetTableItem}.
-	 * @prop {String} name  icon name that will be rendered as a regular font awesome icon
+	 * @prop {String} name icon name that will be rendered as a SAP icon
 	 * @prop {String} tooltip optional tooltip text that will show on icon hover
 	 * @example { name: 'level-up' }
 	 * @beta
