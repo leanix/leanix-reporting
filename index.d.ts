@@ -1383,6 +1383,13 @@ declare module lxr
 	export interface SentryConfig {
 	    dsn: string;
 	    environment?: string;
+	    /**
+	     * The release version string for Sentry Release Health (session tracking).
+	     * Without this, sessions are sent but cannot be attributed to a release,
+	     * so crash-free rate and healthy session metrics will not appear in Sentry.
+	     * Format: `reportName@version` e.g. `landscape-report@1.2.3`
+	     */
+	    release?: string;
 	}
 	/**
 	 * `UIElements` defines the configuration needed to allow a report to show certain {@link UIElement} items in the Reports page.
