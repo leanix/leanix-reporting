@@ -3310,6 +3310,21 @@ declare module lxr
 	export {};
 
 	/**
+	 * Self-contained copy of inbound filter logic from libs/shared/monitoring/feature.
+	 * Kept local to avoid pulling Angular / OpenTelemetry / internal shared libs into
+	 * the report-lib bundle.
+	 *
+	 * Source of truth: libs/shared/monitoring/feature/src/lib/services/sentry/inbound-filters.ts
+	 */
+	export function doesExceptionPassSentryInboundFilters(exception: unknown): boolean;
+	/**
+	 * Variant for use in `beforeSend`, where the original exception is no longer
+	 * available — extracts the stringified exception value from the processed event.
+	 */
+	export function doesEventPassSentryInboundFilters(event: ErrorEvent): boolean;
+	export function isLegacyBrowser(): boolean;
+
+	/**
 	 * Recursively masks sensitive data in any object structure.
 	 * This is a simplified version of the original maskDataInEvent function.
 	 *
