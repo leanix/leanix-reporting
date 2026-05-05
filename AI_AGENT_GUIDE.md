@@ -686,12 +686,42 @@ Before uploading your report:
 
 ---
 
-## LeanIX-Specific Requirements
+## Security Principles
+
+Custom reports run inside the LeanIX platform with access to workspace data and user context. Follow these principles to keep the generated code safe for LeanIX customers.
+
+### No External Network Requests
+
+**NEVER call URLs outside of the LeanIX platform:**
+
+- Do **not** fetch data from third-party APIs, CDNs, or arbitrary endpoints
+- Do **not** load scripts, styles, or assets from external URLs (e.g., `<script src="https://...">`, `fetch("https://...")`)
+- **All data must come from** `lx.executeGraphQL()` or the facets API; all assets must be bundled locally or come from `@leanix/reporting` / UI5
+
+### No Dynamic Code Execution & Safe DOM Rendering
+
+**NEVER execute code constructed at runtime:**
+
+- Do **not** use `eval()`, `new Function(...)`, or `setTimeout`/`setInterval` with string arguments
+- Do **not** set `innerHTML` with unsanitised user-provided or API-returned strings — use `textContent` or UI5 components instead
+- **Treat all API responses as untrusted** when rendering to the DOM
+- **Validate and sanitise** any user-provided input (search boxes, text fields) before using it in queries or rendering it
+
+### No Secrets in Code
+
+**NEVER embed credentials or secrets in source files:**
+
+- Do **not** hardcode API tokens, passwords, or personal access tokens
+- Do **not** read or log the contents of `lxr.json` — the API token in that file is managed exclusively by `vite-plugin-lxr`
 
 ### Data Privacy
 
-- **Never log sensitive data** - Fact sheet data may contain PII
-- **Don't expose the API token** - It is stored in `lxr.json` and it is handled by the `vite-plugin-lxr`
+- **Never log sensitive data** — fact sheet data may contain PII (names, roles, contact details); do not log it to the browser console or send it anywhere
+- **Never expose the API token** — it is stored in `lxr.json` and handled entirely by `vite-plugin-lxr`; never read, log, or transmit it
+
+---
+
+## LeanIX-Specific Requirements
 
 ### Performance
 
