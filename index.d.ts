@@ -45,10 +45,26 @@ declare module lxr
 	 *   lx.ready(config);
 	 * });
 	 * ```
+	 *
+	 * @see {@link https://leanix.github.io/leanix-reporting/classes/lxr.LxCustomReportLib.html | Full API reference (TypeDoc)}
 	 */
 	export class LxCustomReportLib {
 	    table: ReportLibTable;
+	    /**
+	     * Returns the last value that was passed to {@link LxCustomReportLib.publishState}.
+	     * Useful for reading the current report state synchronously without subscribing to events.
+	     * Returns `null` until {@link LxCustomReportLib.publishState} has been called at least once.
+	     */
 	    get latestPublishedState(): any;
+	    /**
+	     * Utility methods for working with the workspace's data model at runtime.
+	     * Provides helpers such as `getRelationDefinition()` and `isConstrainingRelation()`
+	     * for navigating fact sheet type definitions, field definitions, and relation structures.
+	     *
+	     * The data model itself is available via `lx.currentSetup.settings.dataModel`.
+	     *
+	     * @see {@link https://leanix.github.io/leanix-reporting/classes/lxr.DataModelHelpers.html | DataModelHelpers API reference}
+	     */
 	    readonly dataModelHelpers: DataModelHelpers;
 	    private messenger;
 	    private _currentSetup;
@@ -72,6 +88,8 @@ declare module lxr
 	     * that the report is ready to receive and process data and user events.
 	     *
 	     * @return A promise that resolves to the ReportSetup object
+	     *
+	     * @see {@link https://github.com/leanix/leanix-reporting#init-sequence | Init sequence overview}
 	     */
 	    init(): Promise<ReportSetup>;
 	    /**
@@ -81,6 +99,8 @@ declare module lxr
 	     * and the report framework.
 	     *
 	     * @param {ReportConfiguration} [configuration={}] Configuration object
+	     *
+	     * @see {@link https://github.com/leanix/leanix-reporting#init-sequence | Init sequence overview}
 	     */
 	    ready(configuration?: ReportConfiguration): void;
 	    /**
@@ -92,7 +112,16 @@ declare module lxr
 	     * In case the report has new requirements towards the report framework it can
 	     * update the configuration that was initially passed to {@link LxCustomReportLib.ready}.
 	     *
-	     * @param configuration
+	     * **Side effect:** calling this method de-registers **all** currently active message
+	     * listeners before registering the new ones derived from `configuration`. Any callbacks
+	     * (facet callbacks, UI callbacks, etc.) defined in the previous configuration will no
+	     * longer fire after this call. Ensure the new configuration is complete.
+	     *
+	     * Use this method when report requirements change dynamically at runtime (e.g. switching
+	     * the active fact sheet type, adding or removing facets). For the initial setup use
+	     * {@link LxCustomReportLib.ready} instead.
+	     *
+	     * @param configuration New report configuration replacing the previous one
 	     */
 	    updateConfiguration(configuration: ReportConfiguration): void;
 	    /**
@@ -106,11 +135,17 @@ declare module lxr
 	     */
 	    updateTableConfig(tableConfig: ReportTableConfig): void;
 	    /**
-	     * Execute a custom GraphQL query to the LeanIX GraphQL API.
+	     * Execute a custom GraphQL query or mutation against the LeanIX GraphQL API.
 	     *
-	     * @param query GraphQL query
-	     * @param variables GraphQL variables
-	     * @return A promise that resolves to the resulting data
+	     * @param query GraphQL query or mutation string
+	     * @param variables GraphQL variables as a **JSON-serialized string** (not a plain object).
+	     *   Use `JSON.stringify({ myVar: 'value' })` to produce the correct format.
+	     * @param trackingKey Optional identifier used for backend analytics and performance tracking.
+	     *   Has no effect on the query result or response shape.
+	     * @return A promise that resolves to the `data` field of the GraphQL response (e.g.
+	     *   `{ allFactSheets: { edges: [...] } }`). GraphQL errors are not thrown — check the
+	     *   response structure if queries return unexpected results.
+	     *
 	     * @example
 	     * ```js
 	     * lx.executeGraphQL(`{
@@ -126,28 +161,103 @@ declare module lxr
 	     *  }
 	     * }`)
 	     * ```
+	     *
+	     * @example
+	     * ```js
+	     * // With variables (must be JSON-serialized)
+	     * lx.executeGraphQL(
+	     *   `mutation ($name: String!, $tagGroupId: ID) {
+	     *     createTag(name: $name, tagGroupId: $tagGroupId) { id }
+	     *   }`,
+	     *   JSON.stringify({ name: 'MyTag', tagGroupId: 'uuid-here' })
+	     * )
+	     * ```
+	     *
+	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
+	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (data retrieval patterns)}
 	     */
 	    executeGraphQL(query: string, variables?: string, trackingKey?: string): Promise<any>;
 	    /**
 	     * Get projections from the impact service.
 	     *
-	     * @param attributes Fact Sheet attributes that the projection items should include.
-	     * @param filters Filter definition for the projection items
-	     * @param pointsOfView Amount of different point of views that the projection should include.
+	     * A "point of view" represents a specific point in time — either the current state of the
+	     * workspace or the projected state after a set of planned changes (e.g. an initiative or
+	     * transformation) has been applied. Requesting multiple points of view returns one result
+	     * set per POV, enabling before/after comparisons.
+	     *
+	     * @param attributes Descriptors for the Fact Sheet attributes to include in each projection
+	     *   item. Each descriptor has a `type` discriminator: `'field'` for direct Fact Sheet fields,
+	     *   `'relationField'` for fields on a relation, `'targetField'` for fields on the related
+	     *   Fact Sheet, `'path'` for nested traversal, or `'timing'` for timeline metadata.
+	     * @param filters Filter conditions to scope which Fact Sheets are included in the projection.
+	     *   Supports equality, range, full-text, fact sheet type, and relation-based filters.
+	     * @param pointsOfView One or more points of view to project. Each entry has an `id` and an
+	     *   optional `changeSet` that defines the plan or date to project into.
+	     *
+	     * @return A promise resolving to {@link ProjectionsResponse} — an array of
+	     *   `PointOfViewResponse` objects, one per requested point of view, each containing the
+	     *   projected Fact Sheet items with the requested attributes.
 	     *
 	     * @beta
+	     *
+	     * @example
+	     * ```js
+	     * lx.getProjections(
+	     *   [{ type: 'field', name: 'lifecycle', field: 'lifecycle' }],
+	     *   [{ type: 'factSheetType', types: ['Application'] }],
+	     *   [{ id: 'current' }, { id: 'after-plan', changeSet: { type: 'plan', planId: 'uuid' } }]
+	     * ).then(response => {
+	     *   response.data.forEach(pov => console.log(pov.id, pov.items));
+	     * });
+	     * ```
+	     *
+	     * @see {@link https://leanix.github.io/leanix-reporting/interfaces/lxr.ProjectionsResponse.html | ProjectionsResponse type reference}
+	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
 	     */
 	    getProjections(attributes: ProjectionAttribute[], filters: ProjectionFilter[], pointsOfView: PointOfViewInput[]): Promise<ProjectionsResponse>;
 	    /**
-	     * Get all Fact Sheets from the GraphQL endpoint.
+	     * Get all Fact Sheets of a given type from the GraphQL endpoint, optionally projected
+	     * across multiple points of view (e.g. current state vs. post-transformation state).
 	     *
-	     * @param factSheetType Fact Sheet type that needs to match.
-	     * @param attributes Fact Sheet attributes that the response should include.
-	     * @param facetSelection Filter definition for the Fact Sheets, if Composite Filters are defined, they are used instead of the normal Facet Filters.
-	     * @param pointsOfView A record of different point of views and their associated keys that the response should include and will return the Fact Sheets per each point of view key.
-	     * @param options Optional options to further specify the Fact Sheets
+	     * @param factSheetType The Fact Sheet type to query (e.g. `'Application'`, `'ITComponent'`).
+	     * @param attributes Descriptors for the fields to include on each returned Fact Sheet node.
+	     *   Each descriptor has a `type` discriminator:
+	     *   - `'field'` — a direct field on the Fact Sheet (e.g. `businessCriticality`)
+	     *   - `'relationField'` — a field that lives on a relation edge (e.g. `technicalSuitability`
+	     *     on `relApplicationToITComponent`)
+	     *   - `'targetField'` — a field on the Fact Sheet at the other end of a relation
+	     * @param facetSelection Filter definition for which Fact Sheets to return. When
+	     *   `compositeFacets` is present it takes precedence over the regular `facets` array.
+	     *   Use the same facet selection shape as provided by `ReportFacetsConfig.callback`.
+	     * @param pointsOfView A record mapping arbitrary string keys to {@link GraphQLPointOfViewInput}
+	     *   objects. Each key becomes a top-level key in the {@link ReportAllFactSheetsResponse},
+	     *   and its value defines the transformation scope (`factSheetIds` + `pointInTime`).
+	     *   Pass `{ current: { factSheetIds: [], pointInTime: { date: null, milestoneId: null } } }`
+	     *   to query the current workspace state only.
+	     * @param options Optional query modifiers:
+	     *   - `includeInvalidRelations` — include relations that violate data model constraints
+	     *   - `excludeConstrainingRelations` — relation names to exclude from constraining logic
+	     *   - `trackingKey` — analytics identifier for the query (no effect on results)
+	     *   - `getOnlyBaseAttributes` — restrict response to `BaseFactSheet` fields only
 	     *
-	     * @beta
+	     * @return A promise resolving to {@link ReportAllFactSheetsResponse} — a record keyed by
+	     *   the same keys as `pointsOfView`, each containing `totalCount` and an `edges` array of
+	     *   Fact Sheet nodes with the requested attributes.
+	     *
+	     * @example
+	     * ```js
+	     * lx.getAllFactSheets(
+	     *   'Application',
+	     *   [{ type: 'field', name: 'lifecycle', field: 'lifecycle', fieldType: 'LIFECYCLE' }],
+	     *   { facets: [], directHits: [] },
+	     *   { current: { factSheetIds: [], pointInTime: { date: null, milestoneId: null } } }
+	     * ).then(response => {
+	     *   const apps = response.current.edges.map(e => e.node);
+	     * });
+	     * ```
+	     *
+	     * @see {@link https://leanix.github.io/leanix-reporting/types/lxr.ReportAllFactSheetsResponse.html | ReportAllFactSheetsResponse type reference}
+	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
 	     */
 	    getAllFactSheets(factSheetType: string, attributes: AttributeDescription[], facetSelection: ReportFacetsSelection, pointsOfView: Record<string, GraphQLPointOfViewInput>, options?: GraphQLOptions): Promise<ReportAllFactSheetsResponse>;
 	    /**
@@ -169,30 +279,54 @@ declare module lxr
 	     */
 	    getMetricsRawSeries(query: string): Promise<number[][]>;
 	    /**
-	     * Allows making XHR requests through the parent's origin.
+	     * Allows making XHR requests through the parent frame's origin, bypassing the
+	     * same-origin restriction that applies to code running inside a report iframe.
 	     *
-	     * @param method The HTTP method for the request. GET, PUT, and POST requests are permitted.
-	     *               For POST and PUT requests, not every endpoint is allowed.
-	     * @param path Relative URL for the request.
-	     * @param body Optional body for POST and PUT requests. Defaults to an empty object.
-	     * @param responseType The expected type of the response. Can be 'text' or 'blob'. Defaults to 'text'.
-	     * @param extendedHandling Optional boolean to add a custom header for extended request handling.
-	     *                         If true, adds 'x-gateway-handle-request: EXTENDED' header. Defaults to false.
-	     * @return A promise that resolves to the returned data.
+	     * @param method The HTTP method. `GET` is always permitted. `POST` and `PUT` are
+	     *   permitted only for a restricted subset of workspace REST API paths — not every
+	     *   endpoint is available. Attempting an unsupported path will result in an error response.
+	     * @param path Relative URL for the request (e.g. `'/services/pathfinder/v1/...'`).
+	     *   The path is resolved against the workspace base URL.
+	     * @param body Optional request body for `POST` and `PUT` requests. Defaults to `{}`.
+	     * @param responseType Expected response type. Use `'blob'` for binary responses (e.g.
+	     *   file downloads). Defaults to `'text'`.
+	     * @param extendedHandling When `true`, adds the `x-gateway-handle-request: EXTENDED`
+	     *   header, required by certain endpoints such as the hierarchy API. Defaults to `false`.
+	     * @return A promise that resolves to the response data (string or Blob depending on
+	     *   `responseType`).
+	     *
+	     * @example
+	     * ```js
+	     * // Fetch workspace data via REST
+	     * lx.executeParentOriginXHR('GET', '/services/pathfinder/v1/factSheets?type=Application')
+	     *   .then(response => console.log(response));
+	     * ```
 	     */
 	    executeParentOriginXHR(method: 'GET' | 'POST' | 'PUT', path: string, body?: any, responseType?: 'text' | 'blob', extendedHandling?: boolean): Promise<any>;
 	    /**
-	     * Get the current filter result.
+	     * Get the current filter result — the latest set of Fact Sheet nodes delivered by the
+	     * active facet callback.
 	     *
-	     * @return Current filter result
+	     * The returned array has the same shape as the `data` argument passed to
+	     * `ReportFacetsConfig.callback`: an array of Fact Sheet objects containing the fields
+	     * specified in `ReportFacetsConfig.attributes`. Returns an empty array (`[]`) until the
+	     * first facet result has been received from the framework.
+	     *
+	     * @return Current facet result — array of Fact Sheet nodes, or `[]` if no result yet
+	     *
+	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference (Fact Sheet node shape)}
 	     */
 	    getFilterResult(): any[];
 	    /**
 	     * Show a dialog to the user to select one or more Fact Sheets.
 	     *
-	     * @param config Configures the Fact Sheet selection.
-	     * @return A promise that resolves to the selected Fact Sheet(s)
-	     *  or to `false` if the user canceled the selection
+	     * @param config Configures the Fact Sheet selection dialog.
+	     * @return A promise that resolves to:
+	     *   - `false` if the user dismissed or cancelled the dialog
+	     *   - A single Fact Sheet object when `config.mode` is `'SINGLE'`
+	     *   - An array of Fact Sheet objects when `config.mode` is `'MULTIPLE'`
+	     *
+	     *   Each Fact Sheet object contains the fields listed in `config.attributes`.
 	     */
 	    requestFactSheetSelection(config: FactSheetSelectionConfig): Promise<false | any | any[]>;
 	    /**
@@ -200,6 +334,8 @@ declare module lxr
 	     *
 	     * @param fields An object containing the form fields to be displayed in this dialog.
 	     * @param values An object with the same keys as __fields__ containing the initial values of those fields.
+	     * @param update Optional callback invoked each time the user changes any field value. See the
+	     *   {@link LxCustomReportLib.openFormModal} overload that accepts a {@link FormModal} for full details.
 	     * @return A promise that resolves to the configuration confirmed by the user or to `false` if the user canceled the configuration
 	     * @example
 	     * ```js
@@ -236,7 +372,10 @@ declare module lxr
 	     * Show a customisable configuration dialog to the user, in which the user can adjust report settings.
 	     *
 	     * @param formModal An object {@link FormModal} containing the form fields, values, optional messages and optional valid flag.
-	     * @param update Callback function called on form update.
+	     * @param update Optional callback invoked each time the user changes any field value in the dialog.
+	     *   Receives the current {@link FormModal} state and must return the (potentially modified)
+	     *   {@link FormModal} to render. Use it to implement conditional field visibility, cross-field
+	     *   validation messages, or to update `valid` to control whether the confirm button is enabled.
 	     * @return A promise that resolves to the configuration confirmed by the user or to `false` if the user canceled the configuration
 	     * @example
 	     * ```js
@@ -277,9 +416,39 @@ declare module lxr
 	    openFormModal(formModal: FormModal, update?: (form: FormModal) => FormModal): Promise<FormModalValues | false>;
 	    private doOpenFormModal;
 	    /**
-	     * Shows an overlaying sidepane with the provided elements.
+	     * Opens an overlaying side pane next to the report, populated with the provided elements.
+	     * Focus is automatically returned to the previously focused element when the side pane is closed.
 	     *
-	     * @beta
+	     * @param sidePaneElements A record mapping element IDs to {@link SidePaneElement} objects.
+	     *   Supported element types include `Container`, `Table`, `FactSheet`, `FactSheetTable`,
+	     *   `Badge`, `Description`, `ShowInventory`, `CategoryHeader`, and `ContextMenu`.
+	     * @param update Optional callback invoked whenever the user edits a field or relation
+	     *   inside the side pane (e.g. via an inline `FactSheet` element). Receives a
+	     *   {@link FactSheetUpdate} describing the changed field or relation. Use this to persist
+	     *   changes back to the workspace via `lx.executeGraphQL()`.
+	     * @param onClick Optional callback invoked when the user clicks a clickable element in the
+	     *   side pane (e.g. a `Description` element with a `clickId`, or a `ContextMenu` entry of
+	     *   type `'Click'`). Receives a {@link SidePaneClick} containing the `clickId` of the
+	     *   element that was clicked.
+	     *
+	     * @example
+	     * ```js
+	     * lx.openSidePane(
+	     *   {
+	     *     header: { type: 'CategoryHeader', label: 'My Application' },
+	     *     details: {
+	     *       type: 'FactSheet',
+	     *       factSheetId: 'uuid-here',
+	     *       factSheetType: 'Application',
+	     *       detailFields: ['description', 'businessCriticality'],
+	     *       relations: [],
+	     *       pointOfView: { id: 'current' }
+	     *     }
+	     *   },
+	     *   (update) => console.log('Field updated:', update),
+	     *   (click) => console.log('Clicked:', click.id)
+	     * );
+	     * ```
 	     */
 	    openSidePane(sidePaneElements: SidePaneElements, update?: (factSheetUpdate: FactSheetUpdate) => void, onClick?: (sidepaneClick: SidePaneClick) => void): void;
 	    /**
@@ -344,22 +513,36 @@ declare module lxr
 	     */
 	    navigateToInventory(filters: NavigateToInventoryFilters): void;
 	    /**
-	     * In case the report has some sort of internal state it should be published
-	     * to the framework. The state will be persisted when the user saves a certain
-	     * report configuration. Once that report configuration is restored the framework
-	     * will pass the saved state to the report on initialisation
-	     * ({@link LxCustomReportLib.init} and {@link ReportSetup.savedState})
+	     * Publishes the report's current internal state to the framework so it can be persisted
+	     * when the user saves a report configuration (bookmark). When that configuration is
+	     * restored, the saved state is passed back via {@link ReportSetup.savedState} in the
+	     * promise returned by {@link LxCustomReportLib.init}.
 	     *
-	     * @param state Custom report state
+	     * **Serialization requirement:** `state` must be JSON-serializable (no functions, class
+	     * instances, or circular references). The framework serializes it with `JSON.stringify`
+	     * before persisting.
+	     *
+	     * @param state Custom report state to persist. Accessible afterwards via
+	     *   {@link LxCustomReportLib.latestPublishedState}.
+	     *
+	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/features.md#save-and-restore-of-filters-and-internal-state | Save and restore of filters and internal state}
 	     */
 	    publishState(state: any): void;
 	    /**
-	     * This function opens a "new" instance of the report in a separate tab.
-	     * The state and facet filter parameters can be used as initial values for the new opened instance of the report.
+	     * Opens a new instance of the current report in a separate browser tab, pre-seeded
+	     * with the provided state and facet selection.
 	     *
-	     * @param state Custom report state
-	     * @param facetSelection Facet filter selection ({@link UISelection.facets})
-	     * @param name Preset name of the new report opened in new tab. If not set, falls back to default name.
+	     * **Serialization requirement:** `state` follows the same JSON-serializable constraint
+	     * as {@link LxCustomReportLib.publishState} — it becomes the `savedState` of the newly
+	     * opened report instance.
+	     *
+	     * @param state Custom report state for the new tab, subject to the same JSON-serializable
+	     *   constraints as {@link LxCustomReportLib.publishState}.
+	     * @param facetSelection Initial facet filter selection for the new tab. Typically obtained
+	     *   from `UISelection.facets` inside the `ui.update` callback defined in
+	     *   {@link ReportConfiguration.ui}.
+	     * @param name Optional display name pre-filled in the new tab's report header. Falls back
+	     *   to the default report name if not provided.
 	     *
 	     * @beta
 	     */
@@ -373,7 +556,9 @@ declare module lxr
 	     * Therefore, reports can enable features according to given workspace permissions.
 	     * See: [Authorization Model]{@link https://docs-eam.leanix.net/docs/authorization-model}
 	     * @param permissions Shiro permissions string array to check (example: `['BOOKMARKS:CREATE:VISUALIZER', 'BOOKMARKS:CREATE:REPORTS']` creation of diagram bookmarks)
-	     * @returns Promise of all requested permissions as key-value pair of the requested user permissions.
+	     * @return Promise resolving to a `Record<string, boolean>` where each key is one of the
+	     *   requested permission strings and the value indicates whether the current user holds
+	     *   that permission (`true`) or not (`false`).
 	     */
 	    hasPermission(permissions: string[]): Promise<{
 	        [permissionKey: string]: boolean;
@@ -408,7 +593,7 @@ declare module lxr
 	     * displayed, the calls to this function are ignored.
 	     *
 	     * @param items Legend items to be displayed
-	     * @exampleHide the spinner that was previously shown via
+	     * @example
 	     * ```js
 	     * lx.showLegend([
 	     *   { label: 'foo', bgColor: '#ff0000' },
@@ -557,10 +742,18 @@ declare module lxr
 	     */
 	    translateRelationFieldValue(relationName: string, fieldName: string, fieldValue: string): string;
 	    /**
-	     * Check if a given Feature is enabled for the current Workspace.
+	     * Check if a given feature is enabled for the current workspace.
 	     *
-	     * @param featureId Feature identifier
-	     * @return Boolean expressing if the feature is enabled.
+	     * Features come in two types:
+	     * - **`FUNCTIONAL`** — binary toggle; enabled when `status === 'ENABLED'`.
+	     * - **`QUOTA`** — capacity-based; enabled when `quota !== 0`.
+	     *
+	     * Feature IDs are workspace-plan-dependent and defined by the LeanIX platform (e.g.
+	     * `'BTM'`, `'AI_INSIGHTS'`). An unknown or unrecognized `featureId` always resolves
+	     * to `false`.
+	     *
+	     * @param featureId Identifier of the feature to check (e.g. `'BTM'`, `'AI_INSIGHTS'`).
+	     * @return A promise that resolves to `true` if the feature is enabled, `false` otherwise.
 	     */
 	    isFeatureEnabled(featureId: string): Promise<boolean>;
 	    /**
@@ -584,6 +777,11 @@ declare module lxr
 	    formatCurrency(value: number, minimumFractionDigits?: number, compact?: boolean, locale?: string, maximumFractionDigits?: number): string;
 	    /**
 	     * Returns the configured or default meta data for a field at a Fact Sheet.
+	     * Meta data includes display colors (`bgColor`, `color`) and icons for each possible
+	     * field value, as configured in the workspace's view model.
+	     *
+	     * Always use workspace-defined colors rather than hardcoding values, so that reports
+	     * remain visually consistent with the LeanIX application.
 	     *
 	     * @param fsType Fact Sheet type
 	     * @param fieldName Name of a Fact Sheet field or relation
@@ -604,6 +802,8 @@ declare module lxr
 	     * // Getting the actual background color for a field value:
 	     * lx.getFactSheetFieldMetaData('Application', 'functionalSuitability').values['perfect'].bgColor
 	     * ```
+	     *
+	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (View Model Colors section)}
 	     */
 	    getFactSheetFieldMetaData(fsType: string, fieldName: string): FieldViewMetaData | undefined;
 	    /**
@@ -676,7 +876,28 @@ declare module lxr
 	export {};
 
 	export class DataModelHelpers {
+	    /**
+	     * Returns the full relation definition for a given directional relation name
+	     * (e.g. `'relApplicationToITComponent'`) from the enriched data model.
+	     *
+	     * Looks up the canonical (persisted) relation name via `relationMapping`, then
+	     * returns the corresponding entry from `relations`. Returns `null` and logs a
+	     * warning if `directionalRelation` is absent from `relationMapping` or if the
+	     * resolved persisted name is not found in `relations`.
+	     *
+	     * @param enrichedDataModel The enriched data model from `lx.currentSetup.settings.dataModel`
+	     * @param directionalRelation The directional relation name to look up (e.g. `'relApplicationToITComponent'`)
+	     * @returns The {@link RelationDataModel} definition, or `null` if not found
+	     */
 	    getRelationDefinition(enrichedDataModel: EnrichedDataModel, directionalRelation: string): RelationDataModel | null;
+	    /**
+	     * Returns `true` if the given relation has constraining relations defined — i.e. its
+	     * valid targets are restricted by another relation on the same Fact Sheet.
+	     *
+	     * @param enrichedDataModel The enriched data model from `lx.currentSetup.settings.dataModel`
+	     * @param relationName The directional relation name to check (e.g. `'relApplicationToITComponent'`)
+	     * @returns `true` if the relation has at least one constraining relation, `false` otherwise
+	     */
 	    isConstrainingRelation(enrichedDataModel: EnrichedDataModel, relationName: string): boolean;
 	}
 
@@ -765,6 +986,16 @@ declare module lxr
 	    [factSheetName: string]: ReportFactSheetPermission;
 	}
 	export type Language = 'en' | 'de' | 'es' | 'fr' | 'pt' | 'ja';
+	/**
+	 * Describes how a many-to-many relation between two Fact Sheet types is modelled
+	 * via an intermediary Fact Sheet. Used by `lx.getAllFactSheets()` to resolve
+	 * indirect connections through the linking Fact Sheet.
+	 *
+	 * - `relationToParent` — relation name from the linking Fact Sheet to the parent type
+	 * - `relationToChild` — relation name from the linking Fact Sheet to the child type
+	 * - `parentsAttributeName` — key under which parent items are returned in the response node
+	 * - `childrenAttributeName` — key under which child items are returned in the response node
+	 */
 	export interface ManyToManyRelationConfig {
 	    relationToParent: string;
 	    relationToChild: string;
@@ -774,6 +1005,30 @@ declare module lxr
 	export interface ManyToManyRelationsConfig {
 	    [factSheetType: string]: ManyToManyRelationConfig;
 	}
+	/**
+	 * Complete workspace context bundle injected into the report at setup time.
+	 * Delivered as `ReportSetup.settings` in the promise resolved by `lx.init()`.
+	 *
+	 * - `baseUrl` — base URL of the LeanIX workspace (e.g. `https://app.leanix.net/acme`);
+	 *   use to build Fact Sheet deep-links: `` `${baseUrl}/factsheet/Application/${id}` ``
+	 * - `environment` — runtime environment descriptor (`prod`, `dev`, `test`)
+	 * - `viewModel` — workspace-configured colors, icons, and section layouts per Fact Sheet type;
+	 *   consume via `lx.getFactSheetFieldMetaData()` rather than accessing directly
+	 * - `dataModel` — workspace-specific field, relation, and subtype definitions;
+	 *   consume via `lx.dataModelHelpers` rather than accessing directly
+	 * - `tagModel` — all tag groups and their tags defined in the workspace
+	 * - `factSheetPermissions` — CRUD/archive permissions for the current user per Fact Sheet type
+	 * - `translations` — all workspace translations; use via `lx.translate*()` methods
+	 * - `currency` — workspace currency used by `lx.formatCurrency()`
+	 * - `currentUser` — identity of the user viewing the report
+	 * - `language` — active UI language code (e.g. `'en'`, `'de'`)
+	 * - `workspace` — workspace identity (`id`, `name`)
+	 * - `page` — context in which the report is rendered (report, widget, or dashboard page)
+	 * - `mtmWorkspaceSettings` — MTM-level settings such as fiscal year configuration
+	 * - `manyToManyRelationsConfig` — optional many-to-many relation configuration per Fact Sheet type
+	 *
+	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (View Model Colors + Using the Data Model)}
+	 */
 	export interface ReportSetupSettings {
 	    baseUrl: string;
 	    environment: Environment;
@@ -790,10 +1045,25 @@ declare module lxr
 	    mtmWorkspaceSettings: MtmWorkspaceSettings;
 	    manyToManyRelationsConfig?: ManyToManyRelationsConfig;
 	}
+	/**
+	 * Arbitrary key/value bag the container injects when opening the report.
+	 *
+	 * `factSheetType` carries the Fact Sheet type pre-selected in the host page (if any).
+	 * All other keys are report-specific and are configured via LeanIX Administration → Reports.
+	 */
 	export interface ReportSetupConfig {
 	    factSheetType?: string;
 	    [others: string]: any;
 	}
+	/**
+	 * Full translation bundle delivered to the report at init time via
+	 * {@link ReportSetupSettings.translations}.
+	 *
+	 * Prefer the `lx.translate*()` helper methods over accessing this object directly —
+	 * they handle missing keys gracefully and return the raw key as a fallback.
+	 *
+	 * @see {@link https://leanix.github.io/leanix-reporting/classes/lxr.LxCustomReportLib.html | LxCustomReportLib — translate* methods}
+	 */
 	export interface ReportSetupTranslations {
 	    factSheetTypes: {
 	        [key: string]: string;
@@ -826,6 +1096,12 @@ declare module lxr
 	    label: string | null;
 	    fields: Record<string, FieldTranslation>;
 	}
+	/**
+	 * Workspace currency settings used internally by `lx.formatCurrency()`.
+	 *
+	 * - `code` — ISO 4217 currency code (e.g. `'EUR'`, `'USD'`)
+	 * - `symbol` — display symbol (e.g. `'€'`, `'$'`)
+	 */
 	export interface ReportSetupCurrency {
 	    code: string;
 	    symbol: string;
@@ -865,6 +1141,10 @@ declare module lxr
 	export interface MtmWorkspaceSettings {
 	    fiscalYears?: FiscalYears;
 	}
+	/**
+	 * Persisted filter state for one facet context, stored inside {@link ReportingBookmarkState.filters}.
+	 * Restored automatically by the framework when a saved configuration (bookmark) is loaded.
+	 */
 	export interface BookmarkFilter {
 	    /**
 	     *  The FactSheet type can be get and set with:
@@ -877,6 +1157,18 @@ declare module lxr
 	    factSheetIds?: string[];
 	    sorting?: Sorting[];
 	}
+	/**
+	 * Shape of the persisted report state returned as `ReportSetup.savedState` when a
+	 * saved configuration (bookmark) is restored. Produced by `lx.publishState()` and
+	 * automatically serialized by the framework.
+	 *
+	 * - `customState` — the value last passed to `lx.publishState()`; `null` if never set
+	 * - `filters` — saved facet filter states keyed by facet context key
+	 * - `views` — saved view selections per context
+	 * - `customDropdownSelections` — saved legacy dropdown selections (deprecated UI pattern)
+	 *
+	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/features.md#save-and-restore-of-filters-and-internal-state | Save and restore of filters and internal state}
+	 */
 	export interface ReportingBookmarkState<T = any> {
 	    filters: {
 	        [key: string]: BookmarkFilter;
@@ -897,6 +1189,20 @@ declare module lxr
 	     */
 	    timeline?: TimelineBookmarkSelection;
 	}
+	/**
+	 * Top-level object resolved by `lx.init()`. Contains everything the report needs
+	 * to configure itself before calling `lx.ready()`.
+	 *
+	 * - `reportId` — unique identifier of this report in the workspace
+	 * - `bookmarkName` — display name of the currently active saved configuration (bookmark)
+	 * - `config` — arbitrary config passed by the container when opening the report;
+	 *   `factSheetType` is a common key; other keys are report-specific
+	 * - `settings` — full workspace context (data model, view model, translations, user, etc.)
+	 * - `savedState` — state previously persisted via `lx.publishState()`, or `undefined`
+	 *   on first load; use to restore the report to a previously saved configuration
+	 *
+	 * @see {@link https://github.com/leanix/leanix-reporting#init-sequence | Init sequence overview}
+	 */
 	export interface ReportSetup {
 	    reportId: string;
 	    bookmarkName: string;
@@ -904,6 +1210,28 @@ declare module lxr
 	    settings: ReportSetupSettings;
 	    savedState?: ReportingBookmarkState;
 	}
+	/**
+	 * A single filter condition applied to a facet. Used in:
+	 * - `NavigateToInventoryFilters.facetFilters`
+	 * - `ReportFacetsConfig.defaultFilters`
+	 * - `ReportFacetsSelection.facets`
+	 * - `getAllFactSheets` facet selection
+	 *
+	 * - `facetKey` — the field or dimension to filter on (e.g. `'FactSheetTypes'`, `'lifecycle'`,
+	 *   `'lxState'`, or a tag-group UUID). Use `'FactSheetTypes'` to scope to a specific type.
+	 * - `keys` — selected values for this facet. An **empty array** means "no restriction" and
+	 *   is the correct way to override the implicit `lxState` filter that normally excludes `DRAFT`
+	 *   and `REJECTED` Fact Sheets (pass `{ facetKey: 'lxState', keys: [] }`).
+	 * - `operator` — logical operator combining multiple `keys`; defaults to `OR`
+	 * - `dateFilter` — optional date-range scope for lifecycle or date-based facets
+	 * - `subscriptionFilter` — optional subscription-type scope
+	 * - `excludeTransitiveRelations` — when `true`, excludes Fact Sheets matched only via
+	 *   transitive relation traversal
+	 * - `subFilter` — nested filter applied within the result set of this facet
+	 *
+	 * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
+	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (implicit DRAFT filtering)}
+	 */
 	export interface FacetFilter {
 	    facetKey: string;
 	    keys: string[];
@@ -931,6 +1259,10 @@ declare module lxr
 	/** Pseudo-FacetTypes implemented only in front-end; constants defined in facets.const.ts */
 	export type FrontendFacetType = 'FACT_SHEET_ID' | 'FULLTEXTSEARCH' | 'SINGLE_SELECT' | 'UNKNOWN' | 'AGGREGATION';
 	export type FacetType = BackendFacetType | FrontendFacetType;
+	/**
+	 * Logical operator controlling how multiple `keys` within a {@link FacetFilter} are combined.
+	 * `NOR` excludes all Fact Sheets that match any of the given keys.
+	 */
 	export enum FacetKeyOperator {
 	    OR = "OR",
 	    AND = "AND",
@@ -1864,6 +2196,14 @@ declare module lxr
 	 */
 	export interface ReportFacetsConfig {
 	    key: string;
+	    /**
+	     * Called each time the facet result set changes (on filter change and on initial load).
+	     *
+	     * `data` is an array of Fact Sheet objects shaped as GraphQL `BaseFactSheet` nodes
+	     * extended with the fields requested via `attributes`. Access fields directly on each
+	     * element (e.g. `item.businessCriticality`, `item.lifecycle?.asString`).
+	     * This is the primary data delivery mechanism for facet-based reports.
+	     */
 	    callback?: (data: any[]) => void;
 	    label?: string;
 	    /**
@@ -1872,10 +2212,30 @@ declare module lxr
 	     */
 	    fixedFactSheetType?: string;
 	    /**
-	     * The Fact Sheet attributes that should be queried from the backend.
-	     * Example: `attributes: ['type', 'displayName']`
+	     * The Fact Sheet attributes to query from the backend. Strings are **GraphQL
+	     * selection-set fragments**, not plain field names.
 	     *
-	     * Complex attributes need a subquery: `attributes: ['tags \{ \}']
+	     * - Scalar fields: use the field name directly — `'businessCriticality'`
+	     * - Object fields: specify the subfields needed — `'lifecycle { asString phases { phase startDate } }'`
+	     * - Relation targets: use inline fragments to access type-specific fields —
+	     *   `'relApplicationToBusinessCapability { edges { node { factSheet { ... on BusinessCapability { id displayName } } } } }'`
+	     *
+	     * Always verify available field names using `lx.currentSetup.settings.dataModel`
+	     * or the LeanIX MCP tools before writing queries.
+	     *
+	     * @example
+	     * ```ts
+	     * attributes: [
+	     *   'id',
+	     *   'displayName',
+	     *   'businessCriticality',
+	     *   'lifecycle { asString }',
+	     *   'tags { name }',
+	     *   'relApplicationToBusinessCapability { edges { node { factSheet { id displayName } } } }'
+	     * ]
+	     * ```
+	     *
+	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
 	     */
 	    attributes?: string[];
 	    sortings?: Sorting[];
@@ -1896,10 +2256,20 @@ declare module lxr
 	     * If defined this full text search term is applied in initial report loading
 	     */
 	    fullTextSearchTerm?: string;
-	    /** Called whenever a facet has changed
-	     * @deprecated use facetFiltersChangedCallback() instead which is triggered on every facet change.
+	    /** Called whenever a facet has changed.
+	     * @deprecated Use {@link ReportFacetsConfig.facetFiltersChangedCallback} instead.
+	     * Unlike `facetFiltersChangedCallback`, this callback only received the single changed
+	     * {@link FacetFilter}, not the full updated selection.
 	     */
 	    facetChangedCallback?: (facet: FacetFilter) => void;
+	    /**
+	     * Called every time the facet filter selection changes — including the initial load.
+	     * Receives the complete current {@link ReportFacetsSelection} (all active facets,
+	     * direct hits, and full-text search term) so the report can re-render without
+	     * needing to track individual changes.
+	     *
+	     * Prefer this over the deprecated `facetChangedCallback`.
+	     */
 	    facetFiltersChangedCallback?: (data: ReportFacetsSelection) => void;
 	}
 	export interface DirectHit {
@@ -2556,6 +2926,20 @@ declare module lxr
 	    phase: string;
 	    startDate: string;
 	}
+	/**
+	 * Snapshot of all UI element states delivered to the `UIConfiguration.update` callback
+	 * on every user interaction with any toolbar element.
+	 *
+	 * - `elements` — current state of all UI elements; `elements.values[id]` gives the current
+	 *   value for any element keyed by its `UIBaseElement.id`. Type depends on the element
+	 *   variant — see {@link UIElement} for the per-variant value types. `null` if no elements
+	 *   are configured.
+	 * - `facets` — current {@link ReportFacetsSelection} per facet context key. `null` if no
+	 *   facets are configured.
+	 * - `timeline` — current timeline element state. `null` if no timeline is configured.
+	 * - `dropdowns` — current legacy dropdown selections (only populated when
+	 *   `menuActions.customDropdowns` is used). `null` otherwise.
+	 */
 	export interface UISelection {
 	    elements: UIElements | null;
 	    facets: ContextFacetsSelectionState[] | null;
@@ -2579,6 +2963,15 @@ declare module lxr
 	    id: string;
 	    name: string;
 	}
+	/**
+	 * The complete, current facet filter state delivered to {@link ReportFacetsConfig.facetFiltersChangedCallback}
+	 * and accepted by `lx.getAllFactSheets()` as the facet selection argument.
+	 *
+	 * - `facets` — active {@link FacetFilter} conditions
+	 * - `compositeFacets` — optional composite (multi-dimension) filter
+	 * - `directHits` — Fact Sheets pinned by direct ID selection
+	 * - `fullTextSearchTerm` — current free-text search term, if any
+	 */
 	export interface ReportFacetsSelection {
 	    facets: FacetFilter[];
 	    compositeFacets?: CompositeFactSheetFilter;
@@ -3119,6 +3512,10 @@ declare module lxr
 	    clickId: string;
 	}
 	export type ToastrType = 'warning' | 'info' | 'success' | 'error';
+	/**
+	 * Filter parameters passed to `lx.navigateToInventory()` to open the inventory
+	 * with a pre-applied selection.
+	 */
 	export interface NavigateToInventoryFilters {
 	    facetFilters: FacetFilter[];
 	    fullTextSearchTerm?: string;
@@ -3128,17 +3525,50 @@ declare module lxr
 	        order: 'asc' | 'desc';
 	    }[];
 	}
+	/**
+	 * Discriminated union identifying the page type in which the report is currently rendered.
+	 * Available as `lx.currentSetup.settings.page`. Use `page.type` to adapt report behaviour
+	 * to its rendering context (standalone report page, dashboard widget, or dashboard page).
+	 */
 	export type PageContext = ReportPageContext | WidgetPageContext | DashboardPageContext;
 	export type PageContextType = PageContext['type'];
+	/** Report rendered as a standalone report page. */
 	export interface ReportPageContext {
 	    type: 'report';
 	}
+	/** Report rendered as a widget inside a dashboard. */
 	export interface WidgetPageContext {
 	    type: 'widget';
 	}
+	/** Report rendered as a full dashboard page. */
 	export interface DashboardPageContext {
 	    type: 'dashboard';
 	}
+	/**
+	 * Defines the transformation scope for one point of view passed to `lx.getAllFactSheets()`.
+	 *
+	 * - `factSheetIds` — UUIDs of the plan/initiative Fact Sheets whose transformations should
+	 *   be applied. Pass an empty array `[]` to query the **current** workspace state.
+	 * - `pointInTime.date` — ISO date string (e.g. `'2025-12-31'`) for the target point in time.
+	 *   Takes precedence over `milestoneId` if both are non-null. `null` defaults to today.
+	 * - `pointInTime.milestoneId` — UUID of a milestone to use as the point in time.
+	 *   Ignored if `date` is set. `null` defaults to today.
+	 *
+	 * @example
+	 * ```ts
+	 * // Query current state only
+	 * const current: lxr.GraphQLPointOfViewInput = {
+	 *   factSheetIds: [],
+	 *   pointInTime: { date: null, milestoneId: null }
+	 * };
+	 *
+	 * // Project state after applying a specific initiative at end of year
+	 * const projected: lxr.GraphQLPointOfViewInput = {
+	 *   factSheetIds: ['initiative-uuid'],
+	 *   pointInTime: { date: '2025-12-31', milestoneId: null }
+	 * };
+	 * ```
+	 */
 	export interface GraphQLPointOfViewInput {
 	    factSheetIds: string[];
 	    pointInTime: {
@@ -3146,13 +3576,45 @@ declare module lxr
 	        milestoneId: string | null;
 	    };
 	}
+	/**
+	 * Optional query modifier flags for `lx.getAllFactSheets()`.
+	 *
+	 * - `includeInvalidRelations` — when `true`, includes relation edges that violate data
+	 *   model constraints (e.g. wrong Fact Sheet type on a constrained relation). Default: `false`.
+	 * - `excludeConstrainingRelations` — relation names to exclude from constraining-relation
+	 *   logic; useful when querying across constraining boundaries.
+	 * - `trackingKey` — optional analytics identifier for this query; has no effect on results.
+	 * - `getOnlyBaseAttributes` — when `true`, restricts the response to `BaseFactSheet` fields
+	 *   only, ignoring type-specific attributes; useful for performance when type-specific data
+	 *   is not needed.
+	 */
 	export interface GraphQLOptions {
 	    includeInvalidRelations?: boolean;
 	    excludeConstrainingRelations?: string[];
 	    trackingKey?: string;
 	    getOnlyBaseAttributes?: boolean;
 	}
+	/**
+	 * Return type of `lx.getAllFactSheets()`. A record keyed by the same string keys passed
+	 * in the `pointsOfView` argument — each value is a paged Fact Sheet result for that
+	 * point of view.
+	 *
+	 * @example
+	 * ```ts
+	 * const response = await lx.getAllFactSheets('Application', attributes, facetSelection, {
+	 *   current: { factSheetIds: [], pointInTime: { date: null, milestoneId: null } }
+	 * });
+	 * const apps = response['current'].edges.map(e => e.node);
+	 * ```
+	 */
 	export type ReportAllFactSheetsResponse = Record<string, ReportPointOfViewFactSheets>;
+	/**
+	 * Paged Fact Sheet result for one point of view in {@link ReportAllFactSheetsResponse}.
+	 *
+	 * - `totalCount` — total number of matching Fact Sheets; may exceed `edges.length`
+	 *   if the result set is large (the framework paginates internally)
+	 * - `edges` — array of edge wrappers each containing one Fact Sheet node
+	 */
 	export interface ReportPointOfViewFactSheets {
 	    totalCount: number;
 	    edges: ReportPointOfViewFactSheetEdge[];
@@ -3160,6 +3622,15 @@ declare module lxr
 	export interface ReportPointOfViewFactSheetEdge {
 	    node: ReportPointOfViewFactSheetNode;
 	}
+	/**
+	 * A Fact Sheet result node returned by `lx.getAllFactSheets()`.
+	 *
+	 * The fixed fields (`id`, `type`, `category`, `description`) are always present.
+	 * Additional dynamic keys correspond to the {@link AttributeDescription} entries
+	 * passed to `getAllFactSheets()` — each is indexed by the `name` property of the
+	 * descriptor (e.g. if you passed `{ type: 'field', name: 'bizCrit', field: 'businessCriticality', ... }`,
+	 * the value is at `node['bizCrit']`).
+	 */
 	export interface ReportPointOfViewFactSheetNode {
 	    id: string;
 	    type: string;
@@ -3167,13 +3638,50 @@ declare module lxr
 	    description: string;
 	    [key: string]: any;
 	}
+	/**
+	 * Discriminated union describing which Fact Sheet attribute to include in a
+	 * `lx.getAllFactSheets()` response. Choose the variant based on where the data lives:
+	 *
+	 * - `'field'` ({@link FieldDescription}) — a direct scalar/object field on the Fact Sheet
+	 *   (e.g. `businessCriticality`, `lifecycle`)
+	 * - `'relationField'` ({@link RelationFieldDescription}) — a field that lives on the
+	 *   relation edge itself (e.g. `technicalSuitability` on `relApplicationToITComponent`)
+	 * - `'targetField'` ({@link TargetFieldDescription}) — a field on the Fact Sheet at the
+	 *   other end of a relation (e.g. `displayName` of a linked BusinessCapability)
+	 *
+	 * The `name` property of each descriptor becomes the key in the response node under which
+	 * the value is accessible (see {@link ReportPointOfViewFactSheetNode}).
+	 *
+	 * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
+	 */
 	export type AttributeDescription = FieldDescription | RelationFieldDescription | TargetFieldDescription;
+	/**
+	 * {@link AttributeDescription} variant for a direct scalar or object field on the Fact Sheet.
+	 *
+	 * - `type` — discriminant: `'field'`
+	 * - `name` — key used to access this value in the response node
+	 * - `field` — the GraphQL field name on the Fact Sheet (e.g. `'businessCriticality'`)
+	 * - `fieldType` — the data model {@link FieldType} (e.g. `'SINGLE_SELECT'`, `'LIFECYCLE'`)
+	 */
 	export interface FieldDescription {
 	    type: 'field';
 	    name: string;
 	    field: string;
 	    fieldType: FieldType;
 	}
+	/**
+	 * {@link AttributeDescription} variant for a field that lives on a relation edge
+	 * (e.g. `technicalSuitability` on `relApplicationToITComponent`).
+	 *
+	 * - `type` — discriminant: `'relationField'`
+	 * - `name` — key used to access this value in the response node
+	 * - `field` — field name on the relation edge (e.g. `'technicalSuitability'`)
+	 * - `fieldType` — the data model {@link FieldType}
+	 * - `relation` — relation name (e.g. `'relApplicationToITComponent'`)
+	 * - `targetFactSheetType` — Fact Sheet type on the target end of the relation
+	 * - `activeOnly` — when `true`, only includes edges whose target Fact Sheet is
+	 *   in an active lifecycle phase
+	 */
 	export interface RelationFieldDescription {
 	    type: 'relationField';
 	    name: string;
@@ -3183,6 +3691,19 @@ declare module lxr
 	    targetFactSheetType: string;
 	    activeOnly: boolean;
 	}
+	/**
+	 * {@link AttributeDescription} variant for a field on the Fact Sheet at the
+	 * other end of a relation (e.g. `displayName` of a linked BusinessCapability).
+	 *
+	 * - `type` — discriminant: `'targetField'`
+	 * - `name` — key used to access this value in the response node
+	 * - `field` — field name on the target Fact Sheet
+	 * - `fieldType` — the data model {@link FieldType}
+	 * - `relation` — relation to traverse
+	 * - `activeOnly` — when `true`, only includes target Fact Sheets in an active lifecycle phase
+	 * - `targetFactSheetType` — type of the target Fact Sheet; `'*'` means any type is accepted
+	 * - `constrainedBy` — optional list of constraining relation names that further scope the traversal
+	 */
 	export interface TargetFieldDescription {
 	    type: 'targetField';
 	    name: string;
@@ -3194,7 +3715,25 @@ declare module lxr
 	    targetFactSheetType: string;
 	    constrainedBy?: string[];
 	}
+	/**
+	 * Discriminated union for events passed to `lx.trackReportEvent()`.
+	 *
+	 * - Use {@link DataChangeEvent} when the visible data changes (filter applied, view
+	 *   toggled, cluster or drilldown changed).
+	 * - Use {@link SuggestionsDisplayedEvent} when AI-powered suggestions are shown to the user.
+	 */
 	export type ReportEvent = DataChangeEvent | SuggestionsDisplayedEvent;
+	/**
+	 * Tracking event fired when the report's visible data changes.
+	 *
+	 * - `type` — discriminant: `'DataChange'`
+	 * - `reportType` — reverse-DNS report identifier (e.g. `'net.leanix.matrix'`)
+	 * - `baseFactSheetType` — primary Fact Sheet type rendered in the report (e.g. `'Application'`)
+	 * - `view` — key of the currently active view, if any
+	 * - `cluster` — relation names used for grouping/clustering the data
+	 * - `drilldown` — relation names used for hierarchy drill-down
+	 * - `suggestions` — opaque map of suggestion metadata attached to this event
+	 */
 	export interface DataChangeEvent {
 	    type: 'DataChange';
 	    reportType: string;
@@ -3204,12 +3743,30 @@ declare module lxr
 	    drilldown: string[];
 	    suggestions: Record<string, unknown>;
 	}
+	/**
+	 * Tracking event fired when AI-powered suggestions are displayed to the user.
+	 *
+	 * - `type` — discriminant: `'SuggestionsDisplayed'`
+	 * - `reportType` — reverse-DNS report identifier (e.g. `'net.leanix.matrix'`)
+	 * - `hasSuggestions` — whether suggestions are actually visible (`true`) or the panel
+	 *   is shown but empty (`false`)
+	 * - `baseFactSheetType` — primary Fact Sheet type rendered in the report
+	 */
 	export interface SuggestionsDisplayedEvent {
 	    type: 'SuggestionsDisplayed';
 	    reportType: string;
 	    hasSuggestions: boolean;
 	    baseFactSheetType?: string;
 	}
+	/**
+	 * Union of all field type string literals used in {@link AttributeDescription} descriptors
+	 * and relation field descriptions. These mirror {@link DataModelFieldType} but include
+	 * additional reporting-specific types:
+	 * - `'LX_MILESTONES'` — milestone timeline data
+	 * - `'LX_STATE'` — quality seal status
+	 * - `'SEARCH_BASED'` — search-index derived fields
+	 * - `'STATUS'` — generic status field
+	 */
 	export type FieldType = 'AGGREGATED' | 'COMPLETION' | 'DATE_TIME' | 'DOUBLE' | 'EXTERNAL_ID' | 'INTEGER' | 'LIFECYCLE' | 'LOCATION' | 'LX_MILESTONES' | 'LX_STATE' | 'MULTIPLE_SELECT' | 'PROJECT_STATUS' | 'QUALITYSEALSTATUS' | 'READ_ACCESS_CONTROL_LIST' | 'RELATION' | 'SEARCH_BASED' | 'SINGLE_SELECT' | 'STATUS' | 'STRING' | 'SUBSCRIPTIONS' | 'TAGS' | 'WRITE_ACCESS_CONTROL_LIST';
 	export {};
 
