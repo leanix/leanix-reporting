@@ -524,8 +524,6 @@ declare module lxr
 	     *
 	     * @param state Custom report state to persist. Accessible afterwards via
 	     *   {@link LxCustomReportLib.latestPublishedState}.
-	     *
-	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/features.md#save-and-restore-of-filters-and-internal-state | Save and restore of filters and internal state}
 	     */
 	    publishState(state: any): void;
 	    /**
@@ -1166,8 +1164,6 @@ declare module lxr
 	 * - `filters` — saved facet filter states keyed by facet context key
 	 * - `views` — saved view selections per context
 	 * - `customDropdownSelections` — saved legacy dropdown selections (deprecated UI pattern)
-	 *
-	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/features.md#save-and-restore-of-filters-and-internal-state | Save and restore of filters and internal state}
 	 */
 	export interface ReportingBookmarkState<T = any> {
 	    filters: {
