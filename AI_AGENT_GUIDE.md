@@ -89,11 +89,11 @@ Run `npm run dev` to get a **LeanIX-hosted development URL**. Copy the complete 
 In the main folder there is the `lxr.json` which contains an API token for the connected workspace. Do not attempt to access it.
 If the commands like `npm run dev` are not working, the error might be here.
 
-### Verifying Report Rendering (Chrome DevTools MCP)
+### Verifying Report Rendering (Playwright MCP)
 
 **After writing code, verify the report renders before declaring success.**
 
-Use Chrome DevTools MCP to verify reports render without errors. This prevents AI-generated reports from showing blank screens due to small errors (wrong field names, incorrect data access).
+Use Playwright MCP to verify reports render without errors. This prevents AI-generated reports from showing blank screens due to small errors (wrong field names, incorrect data access).
 
 **When to verify:**
 
@@ -109,6 +109,8 @@ Use Chrome DevTools MCP to verify reports render without errors. This prevents A
 4. **Take screenshot** - Verify content displays (not a blank screen)
 5. **Fix if needed** - Correct errors, save, and re-verify
 
+**Scope:** One pass is enough — navigate, scan the console, take one screenshot to confirm something renders. The goal is to catch fully broken reports (blank screen, crash, missing data) before handing off. Deep functional testing is the developer's responsibility.
+
 **Common issues to catch:**
 
 - JavaScript errors (undefined properties, null references)
@@ -117,7 +119,7 @@ Use Chrome DevTools MCP to verify reports render without errors. This prevents A
 
 **Setup:**
 
-Chrome DevTools MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). Configuration files contain actual credentials and are automatically gitignored.
+Playwright MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). The scaffold selects a browser at install time — system Edge on Windows, system Chrome on Mac/Linux when installed, with Playwright's bundled Chromium as a fallback. Configuration files contain actual credentials and are automatically gitignored.
 
 ---
 
@@ -669,7 +671,7 @@ Once your report is ready, upload it to your LeanIX workspace:
 Before uploading your report:
 
 - **Schema verified** - Used LeanIX MCP tools to verify all fact sheet types and field names
-- **Rendering verified** - Chrome DevTools MCP verification passed (no console errors or blank screens)
+- **Rendering verified** - Playwright MCP verification passed (no console errors or blank screens)
 - **Empty states handled** - Code handles null/undefined/empty data gracefully
 - **No hardcoded values** - All chart data, lifecycle phases, and field values derived dynamically
 - **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
@@ -682,7 +684,7 @@ Before uploading your report:
 - **View model colors** - Colors all technical fact sheet types, fields, and values through workspace colors
 - **Translations** - Translates all technical keys (fact sheet types, fields, relations, values) to user-friendly display names
 - **Linting passes** - `npm run lint` succeeds
-- **Browser tested** - `npm run dev` tested in browser with real data (or Chrome DevTools MCP verification passed)
+- **Browser tested** - `npm run dev` tested in browser with real data (or Playwright MCP verification passed)
 
 ---
 
