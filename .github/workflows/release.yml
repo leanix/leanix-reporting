@@ -7,6 +7,8 @@ jobs:
   notify-release:
     name: Notify release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Get release
         id: get_release
