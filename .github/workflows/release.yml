@@ -7,6 +7,8 @@ jobs:
   notify-release:
     name: Notify release
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Get release
         id: get_release
@@ -15,9 +17,11 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Notify Slack
-        uses: archive/github-actions-slack@c643e5093620d65506466f2c9b317d5d29a5e517 # v2.10.1
+        uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v2.1.0
         with:
-          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_TOKEN }}
-          slack-channel: "#team-tornado-deployments"
-          slack-text: |
-            :rocket-snail: *NEW VERSION*: ${{ steps.get_release.outputs.tag_name }} - ${{ steps.get_release.outputs.html_url }}
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": ":rocket-snail: *NEW VERSION*: ${{ steps.get_release.outputs.tag_name }} - ${{ steps.get_release.outputs.html_url }}"
+            }
