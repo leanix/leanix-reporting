@@ -119,7 +119,7 @@ Use Playwright MCP to verify reports render without errors. This prevents AI-gen
 
 **Setup:**
 
-Playwright MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). The scaffold selects a browser at install time — system Edge on Windows, system Chrome on Mac/Linux when installed, with Playwright's bundled Chromium as a fallback. Configuration files contain actual credentials and are automatically gitignored.
+Playwright MCP and LeanIX MCP Server are **pre-configured** in created projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). The creation tool selects a browser at install time — system Edge on Windows, system Chrome on Mac/Linux when installed, with Playwright's bundled Chromium as a fallback. Configuration files contain actual credentials and are automatically gitignored.
 
 ---
 
