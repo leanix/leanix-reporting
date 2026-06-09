@@ -185,9 +185,8 @@ When implementing calculations, classifications, scoring, or any logic NOT defin
 
 In `package.json`:
 
-- `name`: Project/repository name
+- `name`: Package name, the report identity — used together with `version` to uniquely identify a report in a workspace
 - `leanixReport.title`: Report title displayed in LeanIX
-- `leanixReport.id`: Report ID used to identify that two uploads are the same report
 - `leanixReport.description`
 - `leanixReport.author`
 
@@ -195,9 +194,9 @@ In `package.json`:
 
 - `leanixReport.aiAssisted`: Always set to `true`. If the field does not exist, create it.
 
-### Report ID Rules
+### Package name rules
 
-Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), and underscores (`_`), and must not end with a dot.
+Package name may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), underscores (`_`), and minus (`-`).
 
 ---
 
@@ -656,6 +655,8 @@ Translation methods automatically respect the user's current language setting. W
 ---
 
 ## Uploading to LeanIX
+
+> **Identity notice:** The `name` field in `package.json` is the report identity. Uploading the same package name + version twice to the same workspace will be rejected. Always increment `version` before re-uploading.
 
 Once your report is ready, upload it to your LeanIX workspace:
 
