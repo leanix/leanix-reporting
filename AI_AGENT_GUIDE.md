@@ -196,7 +196,7 @@ In `package.json`:
 
 ### Package name rules
 
-Package name may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), underscores (`_`), and minus (`-`).
+Package name may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), hyphens (`-`), underscores (`_`), or a scoped name (e.g. `@scope/name`).
 
 ---
 
