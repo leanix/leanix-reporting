@@ -2,8 +2,10 @@
 
 [![npm version](https://badge.fury.io/js/%40leanix%2Freporting.svg)](https://badge.fury.io/js/%40leanix%2Freporting)
 
-This library allows you to develop your own custom reports for LeanIX EAM Tool (https://www.leanix.net).
-We also provide a command line interface (CLI) that helps you to develop, test and upload your reports easily, see https://github.com/leanix/leanix-reporting-cli.
+This library allows you to develop your own custom reports for SAP LeanIX Enterprise Architecture Management.
+To scaffold, develop, and deploy custom reports, use the [SAP LeanIX custom report tools](https://github.com/SAP/leanix-custom-report-tools/).
+
+For official documentation, see the [Custom Reports](https://help.sap.com/docs/leanix/ea/custom-reports) and [Reporting Library and Custom Report Tools](https://help.sap.com/docs/leanix/ea/reporting-framework-and-cli) pages on the SAP Help Portal.
 
 ## Installation
 
