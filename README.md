@@ -74,9 +74,9 @@ https://leanix.github.io/leanix-reporting/
 
 Sometimes its easier to look at a few code examples than read through lines of documentation. Therefore we provide some snippets with code examples in the `examples` folder.
 
-## Basic concept of the LeanIX reporting framework
+## Basic concept of the SAP LeanIX reporting framework
 
-A report for LeanIX consists of HTML, JavaScript and CSS files, which are loaded into an iframe inside of the application. The report which is running within the iframe and the host application that contains the iframe communicate via a predefined set of messages (see: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
+A report for SAP LeanIX consists of HTML, JavaScript and CSS files, which are loaded into an iframe inside of the application. The report which is running within the iframe and the host application that contains the iframe communicate via a predefined set of messages (see: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
 As a report developer you do not have to know about the messages. This library takes care of the communication with the host application and provides a simple API that you can use to request data, send commands to the host application or be informed about events happening outside of your report.
 
@@ -87,7 +87,7 @@ As a report developer you do not have to know about the messages. This library t
 
 ### Config object
 
-The config object which has to be passed to `lx.ready()` acts as an interface between your report code and the reporting library. It allows you to define the requirements for your report, such as which data you want to fetch from LeanIX backend. In addition to that you have to register callback functions in the config object, which are called by the reporting library once certain events occur (for example when data has been fetched from the backend).
+The config object which has to be passed to `lx.ready()` acts as an interface between your report code and the reporting library. It allows you to define the requirements for your report, such as which data you want to fetch from SAP LeanIX backend. In addition to that you have to register callback functions in the config object, which are called by the reporting library once certain events occur (for example when data has been fetched from the backend).
 
 You can find the interface definition of the config object here: https://leanix.github.io/leanix-reporting/interfaces/lxr.ReportConfiguration.html
 
