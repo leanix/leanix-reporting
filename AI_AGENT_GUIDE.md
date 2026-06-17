@@ -188,8 +188,7 @@ In `package.json`:
 - `name`: Package name, like an npm package name. Only one version can be active in a workspace at a time - the active version can be changed by any user with the required permissions.
 - `version`: The version of the report. Together with `name`, uniquely identifies a release - bump this on every upload to avoid conflicts with existing versions.
 - `leanixReport.title`: Report title displayed in LeanIX
-- `leanixReport.description`
-- `leanixReport.author`
+- `leanixReport.description`: Report description displayed in LeanIX
 
 **You MUST always set or override the following:**
 
