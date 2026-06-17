@@ -119,7 +119,7 @@ Use Playwright MCP to verify reports render without errors. This prevents AI-gen
 
 **Setup:**
 
-Playwright MCP and LeanIX MCP Server are **pre-configured** in scaffolded projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). The scaffold selects a browser at install time — system Edge on Windows, system Chrome on Mac/Linux when installed, with Playwright's bundled Chromium as a fallback. Configuration files contain actual credentials and are automatically gitignored.
+Playwright MCP and LeanIX MCP Server are **pre-configured** in created projects (`.vscode/mcp.json` for GitHub Copilot, `.mcp.json` for Claude Code). The creation tool selects a browser at install time — system Edge on Windows, system Chrome on Mac/Linux when installed, with Playwright's bundled Chromium as a fallback. Configuration files contain actual credentials and are automatically gitignored.
 
 ---
 
@@ -185,19 +185,18 @@ When implementing calculations, classifications, scoring, or any logic NOT defin
 
 In `package.json`:
 
-- `name`: Project/repository name
+- `name`: Package name, like an npm package name. Only one version can be active in a workspace at a time - the active version can be changed by any user with the required permissions.
+- `version`: The version of the report. Together with `name`, uniquely identifies a release - bump this on every upload to avoid conflicts with existing versions.
 - `leanixReport.title`: Report title displayed in LeanIX
-- `leanixReport.id`: Report ID used to identify that two uploads are the same report
-- `leanixReport.description`
-- `leanixReport.author`
+- `leanixReport.description`: Report description displayed in LeanIX
 
 **You MUST always set or override the following:**
 
 - `leanixReport.aiAssisted`: Always set to `true`. If the field does not exist, create it.
 
-### Report ID Rules
+### Package name rules
 
-Report IDs may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), and underscores (`_`), and must not end with a dot.
+Package name may only contain lowercase letters (`a-z`), digits (`0-9`), dots (`.`), hyphens (`-`), underscores (`_`), or a scoped name (e.g. `@scope/name`).
 
 ---
 
@@ -656,6 +655,12 @@ Translation methods automatically respect the user's current language setting. W
 ---
 
 ## Uploading to LeanIX
+
+> **Identity notice:** The `name` and `version` fields in `package.json` identify a report upload. Uploading the same package name + version to the same workspace is subject to these rules:
+
+- If the existing version is still being processed (`QUEUED`, `SCANNING` or `BUILDING`), the upload is rejected with HTTP 409. Wait for processing to finish, then try again.
+- If the existing version is in a terminal failed state (`FAILED`, `VULNERABLE`, or `REVOKED`), the upload succeeds and the old version is automatically replaced.
+- If the existing version succeeded, increment version in package.json before re-uploading.
 
 Once your report is ready, upload it to your LeanIX workspace:
 
