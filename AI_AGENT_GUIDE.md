@@ -656,7 +656,11 @@ Translation methods automatically respect the user's current language setting. W
 
 ## Uploading to LeanIX
 
-> **Identity notice:** The `name` field in `package.json` is the report identity. Uploading the same package name + version twice to the same workspace will be rejected. Always increment `version` before re-uploading.
+> **Identity notice:** The `name` and `version` fields in `package.json` identify a report upload. Uploading the same package name + version to the same workspace is subject to these rules:
+
+- If the existing version is still being processed (`QUEUED`, `SCANNING` or `BUILDING`), the upload is rejected with HTTP 409. Wait for processing to finish, then try again.
+- If the existing version is in a terminal failed state (`FAILED`, `VULNERABLE`, or `REVOKED`), the upload succeeds and the old version is automatically replaced.
+- If the existing version succeeded, increment version in package.json before re-uploading.
 
 Once your report is ready, upload it to your LeanIX workspace:
 
