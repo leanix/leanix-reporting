@@ -464,7 +464,6 @@ declare module lxr
 	     * whenever a link is opened via a message coming from an iframe.
 	     *
 	     * @param url Link-URL
-	     * @param @deprecated _target (target is ignored due to new popup behavior)
 	     * @example
 	     * ```js
 	     * lx.openLink(this.baseUrl + '/factsheet/Application/28fe4aa2-6e46-41a1-a131-72afb3acf256');
@@ -472,7 +471,9 @@ declare module lxr
 	     * // lx.init().then(setup => { this.baseUrl = setup.settings.baseUrl });
 	     * ```
 	     */
-	    openLink(url: string, _target?: string): void;
+	    openLink(url: string): void;
+	    /** @deprecated target is ignored due to new popup behavior */
+	    openLink(url: string, _target: string): void;
 	    /**
 	     * Navigate to a route within the LeanIX single-page app.
 	     *
