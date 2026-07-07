@@ -591,16 +591,22 @@ declare module lxr
 	     * Display a custom legend for a given number of items. If a legend from a view is currently
 	     * displayed, the calls to this function are ignored.
 	     *
-	     * @param items Legend items to be displayed
+	     * @param items Legend items to display. Each item supports an optional `description` shown
+	     *   as a hover tooltip on that row.
+	     * @param config Optional legend-level config. Pass `infoTooltip` to show a hint icon at the
+	     *   end of the legend with a shared explanation for all items.
 	     * @example
 	     * ```js
-	     * lx.showLegend([
-	     *   { label: 'foo', bgColor: '#ff0000' },
-	     *   { label: 'bar', bgColor: '#0000ff' }
-	     * ])
+	     * lx.showLegend(
+	     *   [
+	     *     { label: 'foo', bgColor: '#ff0000', description: 'foo or greater, but less than bar' },
+	     *     { label: 'bar', bgColor: '#0000ff' }
+	     *   ],
+	     *   { infoTooltip: 'Ranges include the lower bound and exclude the upper bound' }
+	     * )
 	     * ```
 	     */
-	    showLegend(items: LegendItem[]): void;
+	    showLegend(items: LegendItem[], config?: LegendConfig): void;
 	    /**
 	     * Show toastr of different types, with a custom message and a optional title.
 	     *
@@ -2648,6 +2654,11 @@ declare module lxr
 	    label: string;
 	    description?: string;
 	    bgColor: string;
+	}
+	/** Optional configuration for {@link LxCustomReportLib.showLegend}. */
+	export interface LegendConfig {
+	    /** Text shown in a hint icon at the end of the legend. Shared across all items, use to explain semantics that apply to the legend as a whole. */
+	    infoTooltip?: string;
 	}
 	/**
 	 * ReportRequirements are sent from the custom report via report-lib
