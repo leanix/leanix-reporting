@@ -249,6 +249,7 @@ This implicit filtering happens automatically and can cause **incomplete data** 
 To show **all fact sheets** in a faceted report (including `DRAFT` and `REJECTED`), explicitly set `defaultFilters` with an **empty `keys` array**:
 
 ```typescript
+reportViewFactSheetType: "Initiative",
 facets: [
   {
     key: "initiatives",
@@ -309,6 +310,7 @@ A loading spinner is automatically displayed when the facets fetch data.
 class MyReport {
   createConfig(): lxr.ReportConfiguration {
     return {
+      reportViewFactSheetType: "Application",
       facets: [
         {
           key: "main",
@@ -488,6 +490,15 @@ const legendItems = Object.keys(fieldMeta?.values || {}).map((key) => ({
 }));
 // If your data includes null/undefined/n/a values that aren't in field metadata, add them to the legend manually with label 'n/a' and bgColor '#555555'
 lx.showLegend(legendItems);
+```
+
+**Widget view legend type badge:** When a report is rendered as a widget (in LeanIX dashboards, presentation slides, or HTML iframe exports), the legend header shows a fact sheet type icon and name (e.g. "A Application"). Without `reportViewFactSheetType`, it falls back to a generic "Fact Sheet" label. Always set it in `lx.ready()` to show the correct type:
+
+```typescript
+lx.ready({
+  reportViewFactSheetType: 'Application', // controls the type badge in widget legend header
+  facets: [ ... ]
+});
 ```
 
 There are many more UI components in `lxr.LxCustomReportLib`.
