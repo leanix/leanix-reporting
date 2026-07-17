@@ -586,7 +586,7 @@ declare module lxr
 	     *
 	     * @param excludedFactSheets List of excluded Fact Sheets
 	     */
-	    sendExcludedFactSheets(excludedFactSheets: any[]): void;
+	    sendExcludedFactSheets(excludedFactSheets: FactSheet[]): void;
 	    /**
 	     * Display a custom legend for a given number of items. If a legend from a view is currently
 	     * displayed, the calls to this function are ignored.
