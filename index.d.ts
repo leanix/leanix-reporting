@@ -50,6 +50,8 @@ declare module lxr
 	 */
 	export class LxCustomReportLib {
 	    table: ReportLibTable;
+	    /** Ensures the getProjections() deprecation warning is only logged once per page load. */
+	    private getProjectionsDeprecationWarned;
 	    /**
 	     * Returns the last value that was passed to {@link LxCustomReportLib.publishState}.
 	     * Useful for reading the current report state synchronously without subscribing to events.
@@ -178,12 +180,136 @@ declare module lxr
 	     */
 	    executeGraphQL(query: string, variables?: string, trackingKey?: string): Promise<any>;
 	    /**
-	     * Get projections from the impact service.
+	     * @deprecated Use {@link LxCustomReportLib.getAllFactSheets} instead.
+	     * `getProjections` will be removed in the next minor release.
 	     *
-	     * A "point of view" represents a specific point in time — either the current state of the
-	     * workspace or the projected state after a set of planned changes (e.g. an initiative or
-	     * transformation) has been applied. Requesting multiple points of view returns one result
-	     * set per POV, enabling before/after comparisons.
+	     * `getAllFactSheets` provides the same point-of-view projection capabilities via the
+	     * standard GraphQL endpoint. Key differences in the call signature:
+	     *
+	     * - `getAllFactSheets` requires the fact sheet type as a dedicated first argument. In
+	     *   `getProjections` the type was implicit in the filters or facet selection; here it must
+	     *   be declared explicitly before the attributes and facet selection.
+	     * - `filters` becomes the `facetSelection` argument. When a report already uses
+	     *   `facetFiltersChangedCallback`, the `ReportFacetsSelection` it receives can be passed
+	     *   through directly with no conversion.
+	     * - `pointsOfView` (positional array) becomes a named record — each POV is accessed by
+	     *   key instead of `response.data[i]`. `changeSet.planId` maps to `factSheetIds: [planId]`.
+	     * - Field attribute descriptors now require a `fieldType` property (e.g. `fieldType: 'LIFECYCLE'`).
+	     *
+	     * ### Example 1 — current state, single field, one filter
+	     *
+	     * ```js
+	     * // Before (deprecated):
+	     * lx.getProjections(
+	     *   [{ type: 'field', name: 'lifecycle', field: 'lifecycle' }],
+	     *   [
+	     *     { type: 'factSheetType', types: ['Application'] },
+	     *     { type: 'equals', fieldName: 'businessCriticality', fieldValue: 'businessCritical' }
+	     *   ],
+	     *   [{ id: 'current', changeSet: {type: 'dateOnly', date: '2025-06-01'} }]  // date only change set
+	     * ).then(response => {
+	     *   const items = response.data[0].items;  // positional — index matches POV order above
+	     * });
+	     *
+	     * // After:
+	     * lx.getAllFactSheets(
+	     *   'Application',
+	     *   [{ type: 'field', name: 'lifecycle', field: 'lifecycle', fieldType: 'LIFECYCLE' }],
+	     *   { facets: [{ facetKey: 'businessCriticality', keys: ['businessCritical'], operator: 'OR' }], directHits: [] },
+	     *   {
+	     *     'current': {
+	     *       factSheetIds: [],                                    // empty = no plan filter
+	     *       pointInTime: { date: '2025-06-01', milestoneId: null } // project state as of this date
+	     *     }
+	     *   }
+	     * ).then(response => {
+	     *   const items = response['current'].edges.map(e => e.node);  // named key, not positional
+	     * });
+	     * ```
+	     *
+	     * ### Example 2 — relation fields + multi-POV comparison (plan + date)
+	     *
+	     * ```js
+	     * let currentFacetSelection = { facets: [], directHits: [] };
+	     *
+	     * lx.ready({
+	     *   facets: [{
+	     *     key: 'main',
+	     *     fixedFactSheetType: 'Application',
+	     *     attributes: ['lifecycle { asString }'],
+	     *     facetFiltersChangedCallback: (facetSelection) => {
+	     *       currentFacetSelection = facetSelection;
+	     *       loadData();
+	     *     }
+	     *   }]
+	     * });
+	     *
+	     * function loadData() {
+	     *   // Before (deprecated):
+	     *   lx.getProjections(
+	     *     [
+	     *       { type: 'field',         name: 'lifecycle',       field: 'lifecycle' },
+	     *       {
+	     *         type: 'path',
+	     *         name: 'relApplicationToUserGroup.functionalSuitability',
+	     *         path: {
+	     *           type: 'relation',
+	     *           relation: 'relApplicationToUserGroup',
+	     *           path: { type: 'field', field: 'functionalSuitability' }
+	     *         }
+	     *       },
+	     *       {
+	     *         type: 'path',
+	     *         name: 'relApplicationToDataObject.DataObject.id',
+	     *         path: {
+	     *           type: 'relation',
+	     *           relation: 'relApplicationToDataObject',
+	     *           path: { type: 'factSheet', path: { type: 'field', field: 'id' } }
+	     *         }
+	     *       }
+	     *     ],
+	     *     [
+	     *       { type: 'factSheetType', types: ['Application'] },
+	     *       {
+	     *         type: 'all',
+	     *         filters: [
+	     *           {
+	     *             type: 'forAnyRelation',
+	     *             relation: 'relApplicationToUserGroup',
+	     *             filters: [
+	     *               { type: 'in', fieldName: 'functionalSuitability', fieldValue: ['unreasonable'] }
+	     *             ]
+	     *           }
+	     *         ]
+	     *       }
+	     *     ],
+	     *     [
+	     *       { id: 'cloud-migration-q1-2027', changeSet: { type: 'plan', planId: 'plan-uuid-123', date: '2027-01-01' } }
+	     *     ]
+	     *   ).then(response => {
+	     *     const items = response.data[0].items;
+	     *   });
+	     *
+	     *   // After:
+	     *   lx.getAllFactSheets(
+	     *     'Application',
+	     *     [
+	     *       { type: 'field',         name: 'lifecycle',                                       field: 'lifecycle',             fieldType: 'LIFECYCLE' },
+	     *       { type: 'relationField', name: 'relApplicationToUserGroup.functionalSuitability',  field: 'functionalSuitability', fieldType: 'SINGLE_SELECT',
+	     *         relation: 'relApplicationToUserGroup', targetFactSheetType: 'UserGroup', activeOnly: false },
+	     *       { type: 'targetField',   name: 'relApplicationToDataObject.DataObject.id',         field: 'id',                    fieldType: 'STRING',
+	     *         relation: 'relApplicationToDataObject', targetFactSheetType: 'DataObject', activeOnly: false }
+	     *     ],
+	     *     currentFacetSelection,  // forwarded from facetFiltersChangedCallback; replaces manual filter array
+	     *     {
+	     *       // changeSet.planId → factSheetIds, changeSet.date → pointInTime.date
+	     *       'cloud-migration-q1-2027': { factSheetIds: ['plan-uuid-123'], pointInTime: { date: '2027-01-01', milestoneId: null } }
+	     *     }
+	     *   ).then(response => {
+	     *     const items = response['cloud-migration-q1-2027'].edges.map(e => e.node);
+	     *   });
+	     * }
+	     * ```
 	     *
 	     * @param attributes Descriptors for the Fact Sheet attributes to include in each projection
 	     *   item. Each descriptor has a `type` discriminator: `'field'` for direct Fact Sheet fields,
@@ -198,21 +324,9 @@ declare module lxr
 	     *   `PointOfViewResponse` objects, one per requested point of view, each containing the
 	     *   projected Fact Sheet items with the requested attributes.
 	     *
-	     * @beta
-	     *
-	     * @example
-	     * ```js
-	     * lx.getProjections(
-	     *   [{ type: 'field', name: 'lifecycle', field: 'lifecycle' }],
-	     *   [{ type: 'factSheetType', types: ['Application'] }],
-	     *   [{ id: 'current' }, { id: 'after-plan', changeSet: { type: 'plan', planId: 'uuid' } }]
-	     * ).then(response => {
-	     *   response.data.forEach(pov => console.log(pov.id, pov.items));
-	     * });
-	     * ```
-	     *
+	     * @see {@link https://leanix.github.io/leanix-reporting/types/lxr.ReportAllFactSheetsResponse.html | ReportAllFactSheetsResponse type reference}
+	     * @see {@link https://leanix.github.io/leanix-reporting/interfaces/lxr.GraphQLPointOfViewInput.html | GraphQLPointOfViewInput type reference}
 	     * @see {@link https://leanix.github.io/leanix-reporting/interfaces/lxr.ProjectionsResponse.html | ProjectionsResponse type reference}
-	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
 	     */
 	    getProjections(attributes: ProjectionAttribute[], filters: ProjectionFilter[], pointsOfView: PointOfViewInput[]): Promise<ProjectionsResponse>;
 	    /**
