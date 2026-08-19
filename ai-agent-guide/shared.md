@@ -362,8 +362,6 @@ console.log(result.createTag.id);
 
 **Data aggregation:** Charts should summarize **fact sheet-level data** by default (e.g., count applications by lifecycle phase). Only explore relations when the user explicitly requests relationship analysis (e.g., "show which applications use which IT components").
 
-> Which chart libraries are available (and whether they can be installed on demand) depends on the environment — see the operational guide for your solution.
-
 ---
 
 ## Default Styling Rules
@@ -465,8 +463,6 @@ import '@ui5/webcomponents-icons/dist/action.js';
   ))}
 </Table>
 ```
-
-> How UI5 and other packages are made available (pre-installed vs installed on demand) depends on the environment — see the operational guide for your solution.
 
 ---
 
