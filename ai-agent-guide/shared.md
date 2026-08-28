@@ -354,6 +354,28 @@ console.log(result.createTag.id);
 
 **Only create code that is running mutations, if the user explicitly asked for it.**
 
+### Pattern 3: REST via `executeParentOriginXHR` (Escape Hatch)
+
+`lx.executeParentOriginXHR()` lets a report call LeanIX first-party REST services from inside the report iframe, bypassing the iframe's same-origin restriction. It reaches services the reporting lib does not surface, such as Documents (Architecture Decisions), To-Do (Todos), or Metrics.
+
+**Use this ONLY when the task cannot be done with the reporting lib itself.** Facets (Pattern 1) and `lx.executeGraphQL()` (Pattern 2) are always preferred. Do NOT use `executeParentOriginXHR` for anything the reporting lib already covers: for example, never use it to fetch fact sheets, relations, or tags. Fetch those with facets or GraphQL.
+
+**Discovering available services:** The LeanIX REST APIs are documented in the OpenAPI Explorer at https://app.leanix.net/openapi-explorer. An index of every service and its OpenAPI spec URL is served at https://app.leanix.net/openapi-explorer/services.json. Fetch that index to find the right service, then read its OpenAPI spec to learn the exact paths, parameters, and payloads. Some entries carry a short `description` where the service name alone is not self-explanatory (for example, Documents provides Architecture Decisions).
+
+**Usage notes:**
+
+- Pass a **relative** path (e.g. `/services/documents/v2/...`); it resolves against the current workspace host. Do not pass absolute URLs.
+- `GET` is permitted for any endpoint. `POST` and `PUT` are permitted only for a restricted subset of paths; unsupported paths return an error response.
+- Responses are returned as a string (or a `Blob` with `responseType: 'blob'`). Treat every response as untrusted when rendering it (see Security Principles).
+
+```typescript
+// Use only when facets / GraphQL cannot provide the data.
+// Example: fetch Architecture Decisions, which the reporting lib does not expose.
+// Consult the service's OpenAPI spec (via the explorer index) for exact paths.
+const response = await lx.executeParentOriginXHR("GET", "/services/documents/v2/documents");
+const documents = JSON.parse(response);
+```
+
 ---
 
 ## Chart Integration
@@ -586,6 +608,8 @@ Custom reports run inside the LeanIX platform with access to workspace data and 
 - Do **not** fetch data from third-party APIs, CDNs, or arbitrary endpoints
 - Do **not** load scripts, styles, or assets from external URLs (e.g., `<script src="https://...">`, `fetch("https://...")`)
 - **All data must come from** `lx.executeGraphQL()` or the facets API; all assets must be bundled locally or come from `@leanix/reporting` / UI5
+
+**Exception for LeanIX first-party services:** `lx.executeParentOriginXHR()` is allowed for calling LeanIX REST services on relative `/services/...` paths, because the request goes through the platform host rather than a third party. This is an escape hatch for data the reporting lib does not expose (see "Pattern 3: REST via `executeParentOriginXHR`"). It does not relax the rule against third-party or external URLs.
 
 ### No Dynamic Code Execution & Safe DOM Rendering
 
