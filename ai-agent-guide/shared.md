@@ -366,14 +366,24 @@ console.log(result.createTag.id);
 
 - Pass a **relative** path (e.g. `/services/documents/v2/...`); it resolves against the current workspace host. Do not pass absolute URLs.
 - `GET` is permitted for any endpoint. `POST` and `PUT` are permitted only for a restricted subset of paths; unsupported paths return an error response.
-- Responses are returned as a string (or a `Blob` with `responseType: 'blob'`). Treat every response as untrusted when rendering it (see Security Principles).
+- The return type is typed as `Promise<any>`. In practice the resolved value varies: the TypeScript docs describe a `string | Blob`, but at runtime the value may be an object `{ body: string, headers, status, statusText }`. Always use a defensive helper to extract the body regardless of which shape is returned:
 
 ```typescript
+function parseXhrResponse(response: unknown): unknown {
+  const raw =
+    typeof response === 'string'
+      ? response
+      : typeof (response as { body?: unknown }).body === 'string'
+        ? (response as { body: string }).body
+        : JSON.stringify(response);
+  return JSON.parse(raw);
+}
+
 // Use only when facets / GraphQL cannot provide the data.
 // Example: fetch Architecture Decisions, which the reporting lib does not expose.
 // Consult the service's OpenAPI spec (via the explorer index) for exact paths.
-const response = await lx.executeParentOriginXHR("GET", "/services/documents/v2/documents");
-const documents = JSON.parse(response);
+const raw = await lx.executeParentOriginXHR("GET", "/services/documents/v2/documents");
+const documents = parseXhrResponse(raw);
 ```
 
 ---
