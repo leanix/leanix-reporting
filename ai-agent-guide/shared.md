@@ -384,6 +384,11 @@ function parseXhrResponse(response: unknown): unknown {
 // Consult the service's OpenAPI spec (via the explorer index) for exact paths.
 const raw = await lx.executeParentOriginXHR("GET", "/services/documents/v2/documents");
 const documents = parseXhrResponse(raw);
+
+// Example: POST with a JSON body (e.g. to upsert a todo state)
+await lx.executeParentOriginXHR('POST', '/services/todo/v1/to-do/upsert', [
+  { query: { todoIds: ['<uuid>'] }, todo: { state: 'IN_PROGRESS' } }
+]);
 ```
 
 ---
@@ -457,6 +462,8 @@ To explore all available methods and properties, search for `LxCustomReportLib` 
 **Why mandatory:** Ensures visual consistency with SAP LeanIX design language, provides accessibility (WCAG 2.1), automatic theming, and follows SAP LeanIX design system standards.
 
 **Never use plain HTML elements** (`<button>`, `<table>`, etc.) for interactive components. Always import and use the corresponding UI5 component.
+
+**Verify component availability before importing** - Not every UI5 component is re-exported by `@ui5/webcomponents-react`. Before using a component, confirm it exists in `node_modules/@ui5/webcomponents-react/dist/index.d.ts`. If a component you need (e.g. a badge or chip) is not available, use a styled `<span>` or `<div>` for non-interactive display elements rather than failing with a bad import.
 
 **Avoid vague asset imports**, they are unnecessary. Use specific imports only when needed (e.g., icons)
 
@@ -653,7 +660,7 @@ These quality criteria apply regardless of how the report is built or shipped. Y
 - **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
 - **Business logic documented** - Code comments explain any classification schemes, formulas, or thresholds
 - **UI components** - Uses @ui5/webcomponents-react for all interactive components (buttons, inputs, tables, cards, etc.) instead of plain HTML elements
-- **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
+- **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries. Note: `lx.showSpinner()` can only be called after `lx.init()` has resolved. For the initial data load in a Pattern 3 (REST-only) report, either call `lx.showSpinner()` inside the `useEffect` after `await lx.init()`, or use a local React loading state for content that loads before `lx.ready()` fires.
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
 - **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
