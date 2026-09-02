@@ -354,7 +354,7 @@ console.log(result.createTag.id);
 
 **Only create code that is running mutations, if the user explicitly asked for it.**
 
-### Pattern 3: REST via `executeParentOriginXHR` (Escape Hatch)
+### Pattern 3: REST via `executeParentOriginXHR` (Controlled Gateway)
 
 `lx.executeParentOriginXHR()` lets a report call LeanIX first-party REST services from inside the report iframe, bypassing the iframe's same-origin restriction. It reaches services the reporting lib does not surface, such as Documents (Architecture Decisions), To-Do (Todos), or Metrics.
 
@@ -366,6 +366,8 @@ console.log(result.createTag.id);
 
 - Pass a **relative** path (e.g. `/services/documents/v2/...`); it resolves against the current workspace host. Do not pass absolute URLs.
 - `GET` is permitted for any endpoint. `POST` and `PUT` are permitted only for a restricted subset of paths; unsupported paths return an error response.
+- **Paginate REST calls** — services use different pagination schemes (e.g. documents uses `limit`/`cursor`, todos uses `first`/`after`). Check the service's OpenAPI spec for its specific parameters and response shape. Never assume a single response contains all data — always loop until the response indicates no further pages.
+- **Avoid per-item requests** — do not call the API once per fact sheet (or per item in a list). Batch lookups or collect all IDs first and fetch in bulk. A single missing facet filter can return thousands of fact sheets and trigger thousands of individual requests, which will break the report.
 - The return type is typed as `Promise<any>`. In practice the resolved value varies: the TypeScript docs describe a `string | Blob`, but at runtime the value may be an object `{ body: string, headers, status, statusText }`. Always use a defensive helper to extract the body regardless of which shape is returned:
 
 ```typescript
@@ -626,7 +628,7 @@ Custom reports run inside the LeanIX platform with access to workspace data and 
 - Do **not** load scripts, styles, or assets from external URLs (e.g., `<script src="https://...">`, `fetch("https://...")`)
 - **All data must come from** `lx.executeGraphQL()` or the facets API; all assets must be bundled locally or come from `@leanix/reporting` / UI5
 
-**Exception for LeanIX first-party services:** `lx.executeParentOriginXHR()` is allowed for calling LeanIX REST services on relative `/services/...` paths, because the request goes through the platform host rather than a third party. This is an escape hatch for data the reporting lib does not expose (see "Pattern 3: REST via `executeParentOriginXHR`"). It does not relax the rule against third-party or external URLs.
+**Exception for LeanIX first-party services:** `lx.executeParentOriginXHR()` is allowed for calling LeanIX REST services on relative `/services/...` paths, because the request goes through the platform host rather than a third party. This is a controlled gateway for data the reporting lib does not expose (see "Pattern 3: REST via `executeParentOriginXHR`"). It does not relax the rule against third-party or external URLs.
 
 ### No Dynamic Code Execution & Safe DOM Rendering
 
