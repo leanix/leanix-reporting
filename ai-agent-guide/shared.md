@@ -354,6 +354,45 @@ console.log(result.createTag.id);
 
 **Only create code that is running mutations, if the user explicitly asked for it.**
 
+### Pattern 3: REST via `executeParentOriginXHR` (Controlled Gateway)
+
+`lx.executeParentOriginXHR()` lets a report call LeanIX first-party REST services from inside the report iframe, bypassing the iframe's same-origin restriction. It reaches services the reporting lib does not surface, such as Documents (Architecture Decisions), To-Do (Todos), or Metrics.
+
+**Use this ONLY when the task cannot be done with the reporting lib itself.** Facets (Pattern 1) and `lx.executeGraphQL()` (Pattern 2) are always preferred. Do NOT use `executeParentOriginXHR` for anything the reporting lib already covers: for example, never use it to fetch fact sheets, relations, or tags. Fetch those with facets or GraphQL.
+
+**Discovering available services:** The LeanIX REST APIs are documented in the OpenAPI Explorer at https://app.leanix.net/openapi-explorer. An index of every service and its OpenAPI spec URL is served at https://app.leanix.net/openapi-explorer/services.json. Fetch that index to find the right service, then read its OpenAPI spec to learn the exact paths, parameters, and payloads. Some entries carry a short `description` where the service name alone is not self-explanatory (for example, Documents provides Architecture Decisions).
+
+**Usage notes:**
+
+- Pass a **relative** path (e.g. `/services/documents/v2/...`); it resolves against the current workspace host. Do not pass absolute URLs.
+- `GET` is permitted for any endpoint. `POST` and `PUT` are permitted only for a restricted subset of paths; unsupported paths return an error response.
+- **Paginate REST calls** — services use different pagination schemes (e.g. documents uses `limit`/`cursor`, todos uses `first`/`after`). Check the service's OpenAPI spec for its specific parameters and response shape. Never assume a single response contains all data — always loop until the response indicates no further pages.
+- **Avoid per-item requests** — do not call the API once per fact sheet (or per item in a list). Batch lookups or collect all IDs first and fetch in bulk. A single missing facet filter can return thousands of fact sheets and trigger thousands of individual requests, which will break the report.
+- The return type is typed as `Promise<any>`. In practice the resolved value varies: the TypeScript docs describe a `string | Blob`, but at runtime the value may be an object `{ body: string, headers, status, statusText }`. Always use a defensive helper to extract the body regardless of which shape is returned:
+
+```typescript
+function parseXhrResponse(response: unknown): unknown {
+  const raw =
+    typeof response === 'string'
+      ? response
+      : typeof (response as { body?: unknown }).body === 'string'
+        ? (response as { body: string }).body
+        : JSON.stringify(response);
+  return JSON.parse(raw);
+}
+
+// Use only when facets / GraphQL cannot provide the data.
+// Example: fetch Architecture Decisions, which the reporting lib does not expose.
+// Consult the service's OpenAPI spec (via the explorer index) for exact paths.
+const raw = await lx.executeParentOriginXHR("GET", "/services/documents/v2/documents");
+const documents = parseXhrResponse(raw);
+
+// Example: POST with a JSON body (e.g. to upsert a todo state)
+await lx.executeParentOriginXHR('POST', '/services/todo/v1/to-do/upsert', [
+  { query: { todoIds: ['<uuid>'] }, todo: { state: 'IN_PROGRESS' } }
+]);
+```
+
 ---
 
 ## Chart Integration
@@ -425,6 +464,8 @@ To explore all available methods and properties, search for `LxCustomReportLib` 
 **Why mandatory:** Ensures visual consistency with SAP LeanIX design language, provides accessibility (WCAG 2.1), automatic theming, and follows SAP LeanIX design system standards.
 
 **Never use plain HTML elements** (`<button>`, `<table>`, etc.) for interactive components. Always import and use the corresponding UI5 component.
+
+**Verify component availability before importing** - Not every UI5 component is re-exported by `@ui5/webcomponents-react`. Before using a component, confirm it exists in `node_modules/@ui5/webcomponents-react/dist/index.d.ts`. If a component you need (e.g. a badge or chip) is not available, use a styled `<span>` or `<div>` for non-interactive display elements rather than failing with a bad import.
 
 **Avoid vague asset imports**, they are unnecessary. Use specific imports only when needed (e.g., icons)
 
@@ -587,6 +628,8 @@ Custom reports run inside the LeanIX platform with access to workspace data and 
 - Do **not** load scripts, styles, or assets from external URLs (e.g., `<script src="https://...">`, `fetch("https://...")`)
 - **All data must come from** `lx.executeGraphQL()` or the facets API; all assets must be bundled locally or come from `@leanix/reporting` / UI5
 
+**Exception for LeanIX first-party services:** `lx.executeParentOriginXHR()` is allowed for calling LeanIX REST services on relative `/services/...` paths, because the request goes through the platform host rather than a third party. This is a controlled gateway for data the reporting lib does not expose (see "Pattern 3: REST via `executeParentOriginXHR`"). It does not relax the rule against third-party or external URLs.
+
 ### No Dynamic Code Execution & Safe DOM Rendering
 
 **NEVER execute code constructed at runtime:**
@@ -619,7 +662,7 @@ These quality criteria apply regardless of how the report is built or shipped. Y
 - **No assumptions** - Asked user for clarification on any uncertain business logic, classifications, or calculations
 - **Business logic documented** - Code comments explain any classification schemes, formulas, or thresholds
 - **UI components** - Uses @ui5/webcomponents-react for all interactive components (buttons, inputs, tables, cards, etc.) instead of plain HTML elements
-- **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries
+- **Loading states** - Uses `lx.showSpinner()` / `lx.hideSpinner()` when doing raw GraphQL queries. Note: `lx.showSpinner()` can only be called after `lx.init()` has resolved. For the initial data load in a Pattern 3 (REST-only) report, either call `lx.showSpinner()` inside the `useEffect` after `await lx.init()`, or use a local React loading state for content that loads before `lx.ready()` fires.
 - **User feedback** - Uses `lx.showToastr()` for important success/error messages
 - **Navigation** - Uses `lx.openLink()` for single fact sheets or `lx.navigateToInventory()` for multiple fact sheets
 - **TypeScript types** - Uses no `any` types, instead uses types from `lxr` namespace
