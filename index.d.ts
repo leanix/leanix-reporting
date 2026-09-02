@@ -176,7 +176,7 @@ declare module lxr
 	     * ```
 	     *
 	     * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
-	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (data retrieval patterns)}
+	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/ai-agent-guide/shared.md | AI Agent Development Guide (data retrieval patterns)}
 	     */
 	    executeGraphQL(query: string, variables?: string, trackingKey?: string): Promise<any>;
 	    /**
@@ -395,6 +395,14 @@ declare module lxr
 	    /**
 	     * Allows making XHR requests through the parent frame's origin, bypassing the
 	     * same-origin restriction that applies to code running inside a report iframe.
+	     *
+	     * To discover which LeanIX REST services can be called, see the OpenAPI Explorer
+	     * (https://app.leanix.net/openapi-explorer) and its service index
+	     * (https://app.leanix.net/openapi-explorer/services.json), which lists every service
+	     * and its OpenAPI spec URL.
+	     *
+	     * Prefer the reporting lib's own data access (facets, `executeGraphQL`) whenever
+	     * possible; use this method only for services the reporting lib does not expose.
 	     *
 	     * @param method The HTTP method. `GET` is always permitted. `POST` and `PUT` are
 	     *   permitted only for a restricted subset of workspace REST API paths — not every
@@ -922,7 +930,7 @@ declare module lxr
 	     * lx.getFactSheetFieldMetaData('Application', 'functionalSuitability').values['perfect'].bgColor
 	     * ```
 	     *
-	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (View Model Colors section)}
+	     * @see {@link https://github.com/leanix/leanix-reporting/blob/main/ai-agent-guide/shared.md | AI Agent Development Guide (View Model Colors section)}
 	     */
 	    getFactSheetFieldMetaData(fsType: string, fieldName: string): FieldViewMetaData | undefined;
 	    /**
@@ -1146,7 +1154,7 @@ declare module lxr
 	 * - `mtmWorkspaceSettings` — MTM-level settings such as fiscal year configuration
 	 * - `manyToManyRelationsConfig` — optional many-to-many relation configuration per Fact Sheet type
 	 *
-	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (View Model Colors + Using the Data Model)}
+	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/ai-agent-guide/shared.md | AI Agent Development Guide (View Model Colors + Using the Data Model)}
 	 */
 	export interface ReportSetupSettings {
 	    baseUrl: string;
@@ -1347,7 +1355,7 @@ declare module lxr
 	 * - `subFilter` — nested filter applied within the result set of this facet
 	 *
 	 * @see {@link https://help.sap.com/docs/leanix/ea/graphql-api | LeanIX GraphQL API reference}
-	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/AI_AGENT_GUIDE.md | AI Agent Development Guide (implicit DRAFT filtering)}
+	 * @see {@link https://github.com/leanix/leanix-reporting/blob/main/ai-agent-guide/shared.md | AI Agent Development Guide (implicit DRAFT filtering)}
 	 */
 	export interface FacetFilter {
 	    facetKey: string;
