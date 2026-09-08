@@ -63,7 +63,7 @@ lx.init().then(function (setupInfo) {
 
 ### AI Agent Development Guide
 
-**For AI agents assisting with custom report development:** See [AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md) for comprehensive instructions, best practices, and workflows.
+**For AI agents assisting with custom report development:** See [./ai_agent_guide](https://github.com/leanix/leanix-reporting/tree/main/ai-agent-guide) for comprehensive instructions, best practices, and workflows.
 
 ### Typedoc
 
