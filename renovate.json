@@ -4,6 +4,6 @@
     "renovate"
   ],
   "extends": [
-    "github>leanix/.github"
+    "local>leanix/.github"
   ]
 }
