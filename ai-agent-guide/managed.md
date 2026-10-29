@@ -27,6 +27,7 @@ If a conversation already has an active report, read the relevant existing files
 
 The managed starter is maintained in `leanix/reports`, under `apps/reports-service/managed-template`. A new version receives these editable files:
 
+- `src/index.html` is published unchanged as `dist/index.html` and loads `./main.js` through a module script.
 - `src/main.tsx` mounts the default React export from `src/App.tsx`.
 - `src/App.tsx` initializes the reporting runtime and renders the report.
 - `src/App.css` contains starter styling.
