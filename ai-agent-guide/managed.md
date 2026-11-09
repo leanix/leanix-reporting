@@ -65,3 +65,15 @@ Do not assume a Playwright MCP server is configured. -->
 - On `build_failed`, inspect `buildLog`, correct the relevant files, and build again.
 - Continue through the requested work and verification while the available run budget permits. Stop for a genuine missing user decision or an actionable blocker, rather than ending with a promise to perform another tool call later.
 - A successful build confirms lint/type checks and bundling. It does not confirm reporting-host initialization, visual layout, or correct business results. Use a preview/browser tool only when one is available, and distinguish checks you performed from checks still needed.
+
+---
+
+## Publishing
+
+A report stays editable while you build and preview it; building never publishes it. When the user confirms the report is finished and wants to use or enable it, call `custom_reports_report_submit` to publish it.
+
+- Build the report successfully first. An unbuilt report cannot be published.
+- Publish only on the user's go-ahead, as a distinct final step — not automatically after a build. A report is built and previewed many times but published once.
+- Publishing freezes the current version. Any later edit automatically starts a new editable copy, so the published report never changes under its users. Publish again once those changes are built and the user confirms.
+- On `not_ready`, the report is either not built yet (build it, then publish again) or was already published; read the returned `message`.
+- After a successful publish, tell the user the report is published and an administrator can now enable it in the Administrator panel.
