@@ -75,12 +75,59 @@ If a requested visualization cannot be built with the available libraries, say s
 
 ## Preview & Verification
 
-After completing file edits, call `custom_reports_report_build`. It builds the active version synchronously and returns success or failure with a `buildLog`; polling is not required. Keep verification terminal-free, using the tools exposed by the platform.
+After editing source files, always call `custom_reports_build_and_preview` before handing off to the user.
+Keep verification terminal-free, using the tools exposed by the platform.
 
-<!-- TODO: Document the embedded Playwright/preview workflow once available:
-open/reload the report, wait for readiness, and inspect screenshots and console errors.
-Do not assume a Playwright MCP server is configured. -->
+### Build and preview with `custom_reports_build_and_preview`
 
-- On `build_failed`, inspect `buildLog`, correct the relevant files, and build again.
+`custom_reports_build_and_preview` first runs the full build pipeline on the
+server (lint → TypeScript type-check → esbuild bundle). It builds the active version
+synchronously and returns success or failure with a `buildLog`; polling is not required.
+
+On `build_failed`, read `buildLog` to identify the errors (lint violations, type errors, or esbuild resolution
+failures), fix them with `custom_reports_file_tree_editor`, then call `custom_reports_build_and_preview` again.
+
+Never call `custom_reports_execute_js` or `custom_reports_screenshot` before a successful `custom_reports_build_and_preview`.
+Those tools only interact with the already-open report and never trigger a build.
+
+After a successful build, inspect the screenshot returned by `custom_reports_build_and_preview`:
+
+- **Still loading or partially rendered** — choose an appropriate wait duration and
+  call `custom_reports_execute_js` with a Promise expression, for example
+  `new Promise(resolve => setTimeout(() => resolve('waited'), 400))` (400 milliseconds).
+  Wait for the tool to finish, then call `custom_reports_screenshot` and inspect
+  the fresh screenshot. Repeat if it still appears to be loading; do not rebuild
+  just to wait or treat unfinished rendering as a report defect.
+- **Blank or white screen** — the report may have thrown a runtime error. Call
+  `custom_reports_execute_js` with `"document.body.innerHTML"` to read the rendered HTML
+- check for visible error text in the screenshot.
+- **Correct rendering** — charts, tables, and text should match what the user requested.
+  If the report renders but looks wrong, make targeted edits with
+  `custom_reports_file_tree_editor` and rebuild.
+
+### JavaScript execution with `custom_reports_execute_js`
+
+The `js` input is evaluated directly inside the report iframe; the tool does not wrap
+it in an async function. Returned Promises are awaited automatically. Bare top-level
+`await` and `return` are not supported. For asynchronous steps, pass an immediately
+invoked async function (async IIFE):
+
+```js
+(async () => {
+  await new Promise(resolve => setTimeout(resolve, 400));
+  return 'waited';
+})()
+```
+
+### The edit → build → preview loop
+
+```
+custom_reports_file_tree_editor (edit files)
+  ↓
+custom_reports_build_and_preview (build; open + screenshot)
+  ↓  (if not correct)
+custom_reports_file_tree_editor → custom_reports_build_and_preview  (repeat)
+```
+
 - Continue through the requested work and verification while the available run budget permits. Stop for a genuine missing user decision or an actionable blocker, rather than ending with a promise to perform another tool call later.
-- A successful build confirms lint/type checks and bundling. It does not confirm reporting-host initialization, visual layout, or correct business results. Use a preview/browser tool only when one is available, and distinguish checks you performed from checks still needed.
+- A successful build confirms lint/type checks and bundling. It does not confirm reporting-host initialization, visual layout, or correct business results.
